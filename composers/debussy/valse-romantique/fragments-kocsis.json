@@ -1,0 +1,89 @@
+{
+  "videoUrl": "https://www.youtube.com/watch?v=DGYGRtnYX0c",
+  "fragments": [
+    {
+      "startSec": 8,
+      "endSec": 12.4
+    },
+    {
+      "startSec": 12.5,
+      "endSec": 20.5
+    },
+    {
+      "startSec": 20.5,
+      "endSec": 25.1
+    },
+    {
+      "startSec": 25.2,
+      "endSec": 33.9
+    },
+    {
+      "startSec": 33.9,
+      "endSec": 38.4
+    },
+    {
+      "startSec": 38.4,
+      "endSec": 48.4
+    },
+    {
+      "startSec": 48.4,
+      "endSec": 57.6
+    },
+    {
+      "startSec": 57.7,
+      "endSec": 67.2
+    },
+    {
+      "startSec": 66.2,
+      "endSec": 74
+    },
+    {
+      "startSec": 74.9,
+      "endSec": 83.2
+    },
+    {
+      "startSec": 83.2,
+      "endSec": 95.7
+    },
+    {
+      "startSec": 95.4,
+      "endSec": 101.5
+    },
+    {
+      "startSec": 100.8,
+      "endSec": 108.1
+    },
+    {
+      "startSec": 107.7,
+      "endSec": 117.1
+    },
+    {
+      "startSec": 116.8,
+      "endSec": 129.5
+    },
+    {
+      "startSec": 129,
+      "endSec": 141.1
+    },
+    {
+      "startSec": 140.8,
+      "endSec": 145.5
+    },
+    {
+      "startSec": 145,
+      "endSec": 153.9
+    },
+    {
+      "startSec": 153.7,
+      "endSec": 164.5
+    },
+    {
+      "startSec": 164,
+      "endSec": 172.6
+    },
+    {
+      "startSec": 172.1,
+      "endSec": 182.5
+    }
+  ]
+}
