@@ -444,23 +444,23 @@ if (document.getElementById('playerPlaceholder')) {
           ],
           "pages": [
               {
-                  "url": "https://github.com/stillwaiting/emptybars/raw/main/debussy/childrens-corner-1-doctor/notes-images/d14f484a79853cb003ee61d42486313d-1.jpg",
+                  "url": "https://raw.githubusercontent.com/stillwaiting/emptybars/main/composers/debussy/childrens-corner-1-doctor/notes-images/d14f484a79853cb003ee61d42486313d-1.jpg",
                   "id": 1602829105573
               },
               {
-                  "url": "https://github.com/stillwaiting/emptybars/raw/main/debussy/childrens-corner-1-doctor/notes-images/d14f484a79853cb003ee61d42486313d-2.jpg",
+                  "url": "https://raw.githubusercontent.com/stillwaiting/emptybars/main/composers/debussy/childrens-corner-1-doctor/notes-images/d14f484a79853cb003ee61d42486313d-2.jpg",
                   "id": 1602829114898
               },
               {
-                  "url": "https://github.com/stillwaiting/emptybars/raw/main/debussy/childrens-corner-1-doctor/notes-images/d14f484a79853cb003ee61d42486313d-3.jpg",
+                  "url": "https://raw.githubusercontent.com/stillwaiting/emptybars/main/composers/debussy/childrens-corner-1-doctor/notes-images/d14f484a79853cb003ee61d42486313d-3.jpg",
                   "id": 1602829121156
               },
               {
-                  "url": "https://github.com/stillwaiting/emptybars/raw/main/debussy/childrens-corner-1-doctor/notes-images/d14f484a79853cb003ee61d42486313d-4.jpg",
+                  "url": "https://raw.githubusercontent.com/stillwaiting/emptybars/main/composers/debussy/childrens-corner-1-doctor/notes-images/d14f484a79853cb003ee61d42486313d-4.jpg",
                   "id": 1602829125201
               },
               {
-                  "url": "https://github.com/stillwaiting/emptybars/raw/main/debussy/childrens-corner-1-doctor/notes-images/d14f484a79853cb003ee61d42486313d-5.jpg",
+                  "url": "https://raw.githubusercontent.com/stillwaiting/emptybars/main/composers/debussy/childrens-corner-1-doctor/notes-images/d14f484a79853cb003ee61d42486313d-5.jpg",
                   "id": 1602829130363
               }
           ],
