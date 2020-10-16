@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { secsToString } from "./utils";
+import React, { useState } from 'react';
+import { secsToString } from "../utils";
 
-function FragmentsListEditor({ fragments, onFragmentSelected, onFragmentsChanged}) {
+function Fragments({ fragments, onFragmentSelected, onFragmentsChanged}) {
     var [fragment, setFragment] = useState(-1);
 
     const handleClickFragment = (key) => {
@@ -42,4 +42,4 @@ function FragmentsListEditor({ fragments, onFragmentSelected, onFragmentsChanged
     </div>);
 }
 
-export default FragmentsListEditor;
+export default Fragments;

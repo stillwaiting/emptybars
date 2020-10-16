@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import EditorLoader from './EditorLoader';
+import EditorDisplayingState from './EditorDisplayingState';
 
 InitEditor('editorPlaceholder',
 
@@ -469,7 +469,7 @@ function InitEditor($element, video) {
 
     ReactDOM.render(
         <React.StrictMode>
-          <EditorLoader fragments={fragments} pages={pages} videoUrl={videoUrl} />
+          <EditorDisplayingState fragments={fragments} pages={pages} videoUrl={videoUrl} />
         </React.StrictMode>,
         document.getElementById($element)
     );

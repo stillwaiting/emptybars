@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 
-function PagesList({ pages, onPagesUpdated }) {
+function Pages({ pages, onPagesUpdated }) {
     const handleAddPage = () => {
         const url = prompt("Please enter page's image URL")
         if (url) {
@@ -24,4 +24,4 @@ function PagesList({ pages, onPagesUpdated }) {
     </div>
 }
 
-export default PagesList;
+export default Pages;

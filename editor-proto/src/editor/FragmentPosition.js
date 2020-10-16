@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { secsToString } from "./utils";
+import React from 'react';
+import { secsToString } from "../utils";
 
-function FragmentPosEditor({ $player, fragment, progress, onFragmentChanged}) {
+function FragmentPosition({ $player, fragment, progress, onFragmentChanged}) {
     const handlePlayCurrentFragment = () => {
         $player.playFragment(fragment.startSec, fragment.endSec, 'STAY_AT_START');
     }
@@ -63,4 +63,4 @@ function FragmentPosEditor({ $player, fragment, progress, onFragmentChanged}) {
     </div>;
 }
 
-export default FragmentPosEditor;
+export default FragmentPosition;

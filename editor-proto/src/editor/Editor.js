@@ -1,12 +1,11 @@
-import React, { useState, useRef, useEffect } from 'react';
-import PlayerWithNavButtons from './PlayerWithNavButtons';
-import FragmentPosEditor from './FragmentPosEditor';
-import FragmentsListEditor from './FragmentsListEditor';
-import { secsToString } from "./utils";
+import React, { useState, useRef } from 'react';
+import PlayerWithNavButtons from '../PlayerWithNavButtons';
+import FragmentPosition from './FragmentPosition';
+import Fragments from './Fragments';
 
-import './Player.css';
-import PagesList from "./PagesList";
-import FragmentPagesSelector from "./FragmentPagesSelector";
+import '../Player.css';
+import Pages from "./Pages";
+import FragmentPages from "./FragmentPages";
 
 function Editor({ fragments, pages, videoUrl, onDataUpdated }) {
     const [currentFragmentIdx, setCurrentFragmentIdx] = useState(-1);
@@ -54,23 +53,23 @@ function Editor({ fragments, pages, videoUrl, onDataUpdated }) {
                 </div>
 
                 <div className='app__C'>
-                        <PagesList pages={pages} onPagesUpdated={handleOnPagesUpdated} />
+                        <Pages pages={pages} onPagesUpdated={handleOnPagesUpdated} />
                 </div>
 
                 <div className='app__C'>
-                    <FragmentsListEditor fragments={fragments} onFragmentSelected={handleFragmentSelected} onFragmentsChanged={onFragmentsChanged} />
+                    <Fragments fragments={fragments} onFragmentSelected={handleFragmentSelected} onFragmentsChanged={onFragmentsChanged} />
                 </div>
             </div>
 
             {currentFragmentIdx >= 0
                 ?
                 <div>
-                    <FragmentPosEditor $player={$player.current} fragment={fragments[currentFragmentIdx]} onFragmentChanged={onFragmentChanged} progress={videoPlayerPos} />
-                    <FragmentPagesSelector pages={pages}
-                                           fragmentPages={fragments[currentFragmentIdx].pages || {}}
-                                           fragmentPageAreas={fragments[currentFragmentIdx].pageAreas || {}}
-                                           onFragmentPagesChanges={onFragmentPagesChanged}
-                                           onFragmentPageAreasChanged={onFragmentPageAreasChanged}
+                    <FragmentPosition $player={$player.current} fragment={fragments[currentFragmentIdx]} onFragmentChanged={onFragmentChanged} progress={videoPlayerPos} />
+                    <FragmentPages pages={pages}
+                                   fragmentPages={fragments[currentFragmentIdx].pages || {}}
+                                   fragmentPageAreas={fragments[currentFragmentIdx].pageAreas || {}}
+                                   onFragmentPagesChanges={onFragmentPagesChanged}
+                                   onFragmentPageAreasChanged={onFragmentPageAreasChanged}
                     />
                 </div>
                 : ''

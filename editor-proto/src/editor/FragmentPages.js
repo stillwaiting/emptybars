@@ -1,8 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { secsToString } from "./utils";
-import ImageAreaSelector from "./ImageAreaSelector";
+import React from 'react';
+import ImageAreas from "./ImageAreas";
 
-function FragmentPagesSelector({ pages, fragmentPages, fragmentPageAreas, onFragmentPagesChanges, onFragmentPageAreasChanged }) {
+function FragmentPages({ pages, fragmentPages, fragmentPageAreas, onFragmentPagesChanges, onFragmentPageAreasChanged }) {
     const handleOnChange = (e, pageIdx) => {
         const newFragmentPages = JSON.parse(JSON.stringify(fragmentPages));
         const page = pages[pageIdx];
@@ -42,9 +41,9 @@ function FragmentPagesSelector({ pages, fragmentPages, fragmentPageAreas, onFrag
             return fragmentPages[p.id] ?
                     <div>
                         Page #{idx+1}
-                    <ImageAreaSelector imgUrl={p.url} width = {500} areas={fragmentPageAreas[p.id] || [] }
-                                       onNewAreaAdded={((area) => handleOnNewAreaAdded(p.id, area)).bind(this)}
-                                       onDeleteArea={((areaIdx) => handleOnDeleteArea(p.id, areaIdx)).bind(this)}
+                    <ImageAreas imgUrl={p.url} width = {500} areas={fragmentPageAreas[p.id] || [] }
+                                onNewAreaAdded={((area) => handleOnNewAreaAdded(p.id, area)).bind(this)}
+                                onDeleteArea={((areaIdx) => handleOnDeleteArea(p.id, areaIdx)).bind(this)}
                     />
                     </div>
                     : '';
@@ -52,4 +51,4 @@ function FragmentPagesSelector({ pages, fragmentPages, fragmentPageAreas, onFrag
     </div>;
 };
 
-export default FragmentPagesSelector;
+export default FragmentPages;

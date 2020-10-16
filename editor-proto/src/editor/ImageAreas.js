@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 
-function ImageAreaSelector({ imgUrl, width, areas, onNewAreaAdded, onDeleteArea }) {
+function ImageAreas({ imgUrl, width, areas, onNewAreaAdded, onDeleteArea }) {
     // var [height, setHeight] = useState(100);
     var [image, setImage] = useState(null);
     var [imageLoaded, setImageLoaded] = useState(false);
@@ -122,4 +122,4 @@ function ImageAreaSelector({ imgUrl, width, areas, onNewAreaAdded, onDeleteArea 
     );
 }
 
-export default ImageAreaSelector;
+export default ImageAreas;

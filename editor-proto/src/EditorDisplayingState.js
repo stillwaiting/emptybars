@@ -1,9 +1,8 @@
 
-import React, { useState, useRef, useEffect } from 'react';
-import Editor from './Editor';
-import PagesList from "./PagesList";
+import React, { useState } from 'react';
+import Editor from './editor/Editor';
 
-function EditorLoader(initialData) {
+function EditorDisplayingState(initialData) {
     var [data, setData] = useState(initialData);
     const handleOnDataUpdated = (newData) => {
         setData(newData);
@@ -15,4 +14,4 @@ function EditorLoader(initialData) {
     </div>;
 }
 
-export default EditorLoader;
+export default EditorDisplayingState;
