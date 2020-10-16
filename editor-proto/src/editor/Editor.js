@@ -3,7 +3,7 @@ import PlayerWithNavButtons from '../PlayerWithNavButtons';
 import FragmentPosition from './FragmentPosition';
 import Fragments from './Fragments';
 
-import '../Player.css';
+import '../Editor.css';
 import Pages from "./Pages";
 import FragmentPages from "./FragmentPages";
 

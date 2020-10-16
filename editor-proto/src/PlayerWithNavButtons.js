@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import ReactPlayer from 'react-player';
 
 import { secsToString } from './utils'
-import './Player.css';
+import './Editor.css';
 
 class PlayerWithNavButtons extends React.Component {
 
