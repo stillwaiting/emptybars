@@ -3,12 +3,12 @@ import ImageAreas from "./ImageAreas";
 
 function FragmentPages({ pages, fragmentPages, fragmentPageAreas, onFragmentPagesChanges, onFragmentPageAreasChanged }) {
     const handleOnChange = (e, pageIdx) => {
-        const newFragmentPages = JSON.parse(JSON.stringify(fragmentPages));
+        var newFragmentPages = JSON.parse(JSON.stringify(fragmentPages));
         const page = pages[pageIdx];
         if (e.target.checked) {
-            newFragmentPages[page.id] = true;
+            newFragmentPages.push(page.id);
         } else {
-            delete newFragmentPages[page.id];
+            newFragmentPages = newFragmentPages.filter(it => it != page.id);
         }
         onFragmentPagesChanges(newFragmentPages);
     }
@@ -32,13 +32,13 @@ function FragmentPages({ pages, fragmentPages, fragmentPageAreas, onFragmentPage
     return <div>
         {pages.map((p, idx) => {
             return <div>
-                <input type="checkbox" checked={fragmentPages[p.id] ? true : false} onChange={((e) => handleOnChange(e, idx)).bind(this)} /> Page #{idx + 1}
+                <input type="checkbox" checked={(fragmentPages.indexOf(p.id)) >= 0 ? true : false} onChange={((e) => handleOnChange(e, idx)).bind(this)} /> Page #{idx + 1}
             </div>
         })}
 
 
         {pages.map((p, idx) => {
-            return fragmentPages[p.id] ?
+            return (fragmentPages.indexOf(p.id) >= 0) ?
                     <div>
                         Page #{idx+1}
                     <ImageAreas imgUrl={p.url} width = {500} areas={fragmentPageAreas[p.id] || [] }

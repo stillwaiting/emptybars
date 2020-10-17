@@ -8,9 +8,9 @@ InitEditor('editorPlaceholder',
     {
         "fragments": [
             {
-                "pages": {
-                    "1602829105573": true
-                },
+                "pages": [
+                    "1602829105573"
+                ],
                 "pageAreas": {
                     "1602829105573": [
                         {
@@ -31,9 +31,9 @@ InitEditor('editorPlaceholder',
                 "end": "00:4.7"
             },
             {
-                "pages": {
-                    "1602829105573": true
-                },
+                "pages": [
+                    "1602829105573"
+                ],
                 "pageAreas": {
                     "1602829105573": [
                         {
@@ -54,9 +54,9 @@ InitEditor('editorPlaceholder',
                 "end": "00:11.6"
             },
             {
-                "pages": {
-                    "1602829105573": true
-                },
+                "pages": [
+                    "1602829105573"
+                ],
                 "pageAreas": {
                     "1602829105573": [
                         {
@@ -77,10 +77,10 @@ InitEditor('editorPlaceholder',
                 "end": "00:17.8"
             },
             {
-                "pages": {
-                    "1602829105573": true,
-                    "1602829114898": true
-                },
+                "pages": [
+                    "1602829105573",
+                    "1602829114898"
+                ],
                 "pageAreas": {
                     "1602829105573": [
                         {
@@ -103,9 +103,9 @@ InitEditor('editorPlaceholder',
                 "end": "00:20.7"
             },
             {
-                "pages": {
-                    "1602829114898": true
-                },
+                "pages": [
+                    "1602829114898"
+                ],
                 "pageAreas": {
                     "1602829114898": [
                         {
@@ -126,9 +126,9 @@ InitEditor('editorPlaceholder',
                 "end": "00:26.7"
             },
             {
-                "pages": {
-                    "1602829114898": true
-                },
+                "pages": [
+                    "1602829114898"
+                ],
                 "pageAreas": {
                     "1602829114898": [
                         {
@@ -155,9 +155,9 @@ InitEditor('editorPlaceholder',
                 "end": "00:35.3"
             },
             {
-                "pages": {
-                    "1602829114898": true
-                },
+                "pages": [
+                    "1602829114898"
+                ],
                 "pageAreas": {
                     "1602829114898": [
                         {
@@ -178,10 +178,10 @@ InitEditor('editorPlaceholder',
                 "end": "00:39.6"
             },
             {
-                "pages": {
-                    "1602829114898": true,
-                    "1602829121156": true
-                },
+                "pages": [
+                    "1602829114898",
+                    "1602829121156"
+                ],
                 "pageAreas": {
                     "1602829114898": [
                         {
@@ -210,9 +210,9 @@ InitEditor('editorPlaceholder',
                 "end": "00:58.6"
             },
             {
-                "pages": {
-                    "1602829121156": true
-                },
+                "pages": [
+                    "1602829121156"
+                ],
                 "pageAreas": {
                     "1602829121156": [
                         {
@@ -227,9 +227,9 @@ InitEditor('editorPlaceholder',
                 "end": "01:10.4"
             },
             {
-                "pages": {
-                    "1602829121156": true
-                },
+                "pages": [
+                    "1602829121156"
+                ],
                 "pageAreas": {
                     "1602829121156": [
                         {
@@ -244,9 +244,9 @@ InitEditor('editorPlaceholder',
                 "end": "01:28.4"
             },
             {
-                "pages": {
-                    "1602829125201": true
-                },
+                "pages": [
+                    "1602829125201"
+                ],
                 "pageAreas": {
                     "1602829125201": [
                         {
@@ -261,9 +261,9 @@ InitEditor('editorPlaceholder',
                 "end": "01:32.7"
             },
             {
-                "pages": {
-                    "1602829125201": true
-                },
+                "pages": [
+                    "1602829125201"
+                ],
                 "pageAreas": {
                     "1602829125201": [
                         {
@@ -284,9 +284,9 @@ InitEditor('editorPlaceholder',
                 "end": "01:39.8"
             },
             {
-                "pages": {
-                    "1602829125201": true
-                },
+                "pages": [
+                    "1602829125201"
+                ],
                 "pageAreas": {
                     "1602829125201": [
                         {
@@ -307,9 +307,9 @@ InitEditor('editorPlaceholder',
                 "end": "01:45.8"
             },
             {
-                "pages": {
-                    "1602829125201": true
-                },
+                "pages": [
+                    "1602829125201"
+                ],
                 "pageAreas": {
                     "1602829125201": [
                         {
@@ -324,10 +324,10 @@ InitEditor('editorPlaceholder',
                 "end": "01:49.1"
             },
             {
-                "pages": {
-                    "1602829125201": true,
-                    "1602829130363": true
-                },
+                "pages": [
+                    "1602829125201",
+                    "1602829130363"
+                ],
                 "pageAreas": {
                     "1602829125201": [
                         {
@@ -362,9 +362,9 @@ InitEditor('editorPlaceholder',
                 "end": "02:0.3"
             },
             {
-                "pages": {
-                    "1602829130363": true
-                },
+                "pages": [
+                    "1602829130363"
+                ],
                 "pageAreas": {
                     "1602829130363": [
                         {
@@ -385,9 +385,9 @@ InitEditor('editorPlaceholder',
                 "end": "02:3.6"
             },
             {
-                "pages": {
-                    "1602829130363": true
-                },
+                "pages": [
+                    "1602829130363"
+                ],
                 "pageAreas": {
                     "1602829130363": [
                         {
@@ -408,9 +408,9 @@ InitEditor('editorPlaceholder',
                 "end": "02:8.7"
             },
             {
-                "pages": {
-                    "1602829130363": true
-                },
+                "pages": [
+                    "1602829130363"
+                ],
                 "pageAreas": {
                     "1602829130363": [
                         {
@@ -440,23 +440,23 @@ InitEditor('editorPlaceholder',
         "pages": [
             {
                 "url": "https://raw.githubusercontent.com/stillwaiting/emptybars/main/composers/debussy/childrens-corner-1-doctor/notes-images/d14f484a79853cb003ee61d42486313d-1.jpg",
-                "id": 1602829105573
+                "id": "1602829105573"
             },
             {
                 "url": "https://raw.githubusercontent.com/stillwaiting/emptybars/main/composers/debussy/childrens-corner-1-doctor/notes-images/d14f484a79853cb003ee61d42486313d-2.jpg",
-                "id": 1602829114898
+                "id": "1602829114898"
             },
             {
                 "url": "https://raw.githubusercontent.com/stillwaiting/emptybars/main/composers/debussy/childrens-corner-1-doctor/notes-images/d14f484a79853cb003ee61d42486313d-3.jpg",
-                "id": 1602829121156
+                "id": "1602829121156"
             },
             {
                 "url": "https://raw.githubusercontent.com/stillwaiting/emptybars/main/composers/debussy/childrens-corner-1-doctor/notes-images/d14f484a79853cb003ee61d42486313d-4.jpg",
-                "id": 1602829125201
+                "id": "1602829125201"
             },
             {
                 "url": "https://raw.githubusercontent.com/stillwaiting/emptybars/main/composers/debussy/childrens-corner-1-doctor/notes-images/d14f484a79853cb003ee61d42486313d-5.jpg",
-                "id": 1602829130363
+                "id": "1602829130363"
             }
         ],
         "videoUrl": "https://www.youtube.com/watch?v=1k_OLrK4ZuE"

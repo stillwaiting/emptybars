@@ -4,7 +4,7 @@ function Pages({ pages, onPagesUpdated }) {
     const handleAddPage = () => {
         const url = prompt("Please enter page's image URL")
         if (url) {
-            const id = new Date().getTime();
+            const id = "" + new Date().getTime();
             onPagesUpdated(pages.push({
                 url,
                 id
