@@ -1,4 +1,13 @@
 
-export const secsToString = (progress) => {
-    return (progress/60 < 10 ? '0' : '') + (parseInt(progress/60)) + ':' + (parseFloat(progress - parseInt(progress/60)*60).toFixed(1));
+export const secsToString = (secs) => {
+    const mins = parseInt(secs / 60);
+    const minsStr = (mins < 10 ? '0' : '') + mins;
+    const secsStr = (secs - mins * 60).toFixed(1);
+    return `${minsStr}:${secsStr}`;
+}
+
+export const stringToSecs = (str) => {
+    var [mins, secs] = str.split(':', 2);
+    console.log(parseInt(mins), parseFloat(secs), parseInt(mins) * 60 + parseFloat(secs));
+    return parseInt(mins) * 60 + parseFloat(secs);
 }

@@ -1,89 +1,89 @@
 {
-  "videoUrl": "https://www.youtube.com/watch?v=DGYGRtnYX0c",
   "fragments": [
     {
-      "startSec": 8,
-      "endSec": 12.4
+      "start": "00:8.0",
+      "end": "00:12.4"
     },
     {
-      "startSec": 12.5,
-      "endSec": 20.5
+      "start": "00:12.5",
+      "end": "00:20.5"
     },
     {
-      "startSec": 20.5,
-      "endSec": 25.1
+      "start": "00:20.5",
+      "end": "00:25.1"
     },
     {
-      "startSec": 25.2,
-      "endSec": 33.9
+      "start": "00:25.2",
+      "end": "00:33.9"
     },
     {
-      "startSec": 33.9,
-      "endSec": 38.4
+      "start": "00:33.9",
+      "end": "00:38.4"
     },
     {
-      "startSec": 38.4,
-      "endSec": 48.4
+      "start": "00:38.4",
+      "end": "00:48.4"
     },
     {
-      "startSec": 48.4,
-      "endSec": 57.6
+      "start": "00:48.4",
+      "end": "00:57.6"
     },
     {
-      "startSec": 57.7,
-      "endSec": 67.2
+      "start": "00:57.7",
+      "end": "01:7.2"
     },
     {
-      "startSec": 66.2,
-      "endSec": 74
+      "start": "01:6.2",
+      "end": "01:14.0"
     },
     {
-      "startSec": 74.9,
-      "endSec": 83.2
+      "start": "01:14.9",
+      "end": "01:23.2"
     },
     {
-      "startSec": 83.2,
-      "endSec": 95.7
+      "start": "01:23.2",
+      "end": "01:35.7"
     },
     {
-      "startSec": 95.4,
-      "endSec": 101.5
+      "start": "01:35.4",
+      "end": "01:41.5"
     },
     {
-      "startSec": 100.8,
-      "endSec": 108.1
+      "start": "01:40.8",
+      "end": "01:48.1"
     },
     {
-      "startSec": 107.7,
-      "endSec": 117.1
+      "start": "01:47.7",
+      "end": "01:57.1"
     },
     {
-      "startSec": 116.8,
-      "endSec": 129.5
+      "start": "01:56.8",
+      "end": "02:9.5"
     },
     {
-      "startSec": 129,
-      "endSec": 141.1
+      "start": "02:9.0",
+      "end": "02:21.1"
     },
     {
-      "startSec": 140.8,
-      "endSec": 145.5
+      "start": "02:20.8",
+      "end": "02:25.5"
     },
     {
-      "startSec": 145,
-      "endSec": 153.9
+      "start": "02:25.0",
+      "end": "02:33.9"
     },
     {
-      "startSec": 153.7,
-      "endSec": 164.5
+      "start": "02:33.7",
+      "end": "02:44.5"
     },
     {
-      "startSec": 164,
-      "endSec": 172.6
+      "start": "02:44.0",
+      "end": "02:52.6"
     },
     {
-      "startSec": 172.1,
-      "endSec": 182.5
+      "start": "02:52.1",
+      "end": "03:2.5"
     }
-  ]
+  ],
+  "videoUrl": "https://www.youtube.com/watch?v=DGYGRtnYX0c"
 }
