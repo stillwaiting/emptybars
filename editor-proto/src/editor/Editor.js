@@ -3,9 +3,10 @@ import PlayerWithNavButtons from '../PlayerWithNavButtons';
 import FragmentPosition from './FragmentPosition';
 import Fragments from './Fragments';
 
-import '../Editor.css';
 import Pages from "./Pages";
 import FragmentPages from "./FragmentPages";
+
+import './Editor.css';
 
 function Editor({ fragments, pages, videoUrl, onDataUpdated }) {
     const [currentFragmentIdx, setCurrentFragmentIdx] = useState(-1);
@@ -56,9 +57,7 @@ function Editor({ fragments, pages, videoUrl, onDataUpdated }) {
                         <Pages pages={pages || []} onPagesUpdated={handleOnPagesUpdated} />
                 </div>
 
-                <div className='app__C'>
-                    <Fragments fragments={fragments} onFragmentSelected={handleFragmentSelected} onFragmentsChanged={onFragmentsChanged} />
-                </div>
+                <Fragments fragments={fragments} onFragmentSelected={handleFragmentSelected} onFragmentsChanged={onFragmentsChanged} />
             </div>
 
             {currentFragmentIdx >= 0

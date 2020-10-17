@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { secsToString } from "../utils";
 
+import './Fragments.scss';
+
 function Fragments({ fragments, onFragmentSelected, onFragmentsChanged}) {
     var [fragment, setFragment] = useState(-1);
 
@@ -24,19 +26,20 @@ function Fragments({ fragments, onFragmentSelected, onFragmentsChanged}) {
         onFragmentsChanged(JSON.parse(JSON.stringify(fragments)));
     }
 
-    return (<div>
-        <div onClick={handleAddFragmentClick.bind(null)} className='player__fragment'>
-            <span className='player__fragment-title'>Add fragment</span>
+    return (<div className='fragments'>
+        <div className='addButton' onClick={handleAddFragmentClick.bind(null)}>
+            Add fragment
         </div>
 
         {fragments.map(({ startSec, endSec }, key) => (
             <div
+                className={`fragmentButton ${
+                    fragment === key ? 'active' : ''
+                }`}
                 key={key}
                 onClick={handleClickFragment.bind(null, key)}
-                className={`player__fragment ${
-                    fragment === key ? 'player__fragment-active' : ''
-                }`}>
-                <span className='player__fragment-title'>Fragment {key+1}: {secsToString(startSec)} - {secsToString(endSec)}</span>
+            >
+                <span className='title'>Fragment {key+1}: {secsToString(startSec)} - {secsToString(endSec)}</span>
             </div>
         ))}
     </div>);

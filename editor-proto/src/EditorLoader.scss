@@ -1,0 +1,13 @@
+@import "./mixins/blueButton";
+
+.editorLoader {
+  textarea {
+    width: 500px;
+    height: 200px;
+    background-color: lightgrey;
+  }
+
+  .copyButton {
+    @include blueButton;
+  }
+}

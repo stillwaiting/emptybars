@@ -1,7 +1,8 @@
-
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Editor from './editor/Editor';
 import {secsToString, stringToSecs} from "./utils";
+
+import './EditorLoader.scss';
 
 const transformToHumanReadable = (data) => {
     const transformedData = JSON.parse(JSON.stringify(data));
@@ -27,13 +28,21 @@ const transformFromHumanReadable = (data) => {
 
 function EditorLoader(initialData) {
     var [data, setData] = useState(transformFromHumanReadable(initialData));
+    const textareaRef = useRef(null);
     const handleOnDataUpdated = (newData) => {
         setData(newData);
     }
 
-    return <div>
+    const handleCopyClick = () => {
+        textareaRef.current.select();
+        document.execCommand('copy');
+        alert('Copied!');
+    }
+
+    return <div className="editorLoader">
         <Editor {...data} onDataUpdated={handleOnDataUpdated} />
-        <textarea readOnly={true} value={JSON.stringify(transformToHumanReadable(data), null, 2)} />
+        <textarea readOnly={true} value={JSON.stringify(transformToHumanReadable(data), null, 2)} ref={textareaRef} />
+        <div className="copyButton"  onClick={handleCopyClick}>copy</div>
     </div>;
 }
 
