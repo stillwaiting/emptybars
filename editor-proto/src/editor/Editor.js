@@ -51,28 +51,30 @@ function Editor({ fragments, pages, videoUrl, onDataUpdated }) {
             <div className='app'>
                 <div className='app__B'>
                     <PlayerWithNavButtons videoUrl={videoUrl} onProgressUpdate={onProgressUpdate} ref={$player} />
+
+                    {currentFragmentIdx >= 0
+                        ?
+                        <div>
+                            <FragmentPosition $player={$player.current} fragment={fragments[currentFragmentIdx]} onFragmentChanged={onFragmentChanged} progress={videoPlayerPos} />
+                            <FragmentPages pages={pages || []}
+                                           fragmentPages={fragments[currentFragmentIdx].pages || []}
+                                           fragmentPageAreas={fragments[currentFragmentIdx].pageAreas || {}}
+                                           onFragmentPagesChanges={onFragmentPagesChanged}
+                                           onFragmentPageAreasChanged={onFragmentPageAreasChanged}
+                            />
+                        </div>
+                        : ''
+                    }
+
                 </div>
+
+                <Fragments fragments={fragments} onFragmentSelected={handleFragmentSelected} onFragmentsChanged={onFragmentsChanged} />
 
                 <div className='app__C'>
                         <Pages pages={pages || []} onPagesUpdated={handleOnPagesUpdated} />
                 </div>
 
-                <Fragments fragments={fragments} onFragmentSelected={handleFragmentSelected} onFragmentsChanged={onFragmentsChanged} />
             </div>
-
-            {currentFragmentIdx >= 0
-                ?
-                <div>
-                    <FragmentPosition $player={$player.current} fragment={fragments[currentFragmentIdx]} onFragmentChanged={onFragmentChanged} progress={videoPlayerPos} />
-                    <FragmentPages pages={pages || []}
-                                   fragmentPages={fragments[currentFragmentIdx].pages || []}
-                                   fragmentPageAreas={fragments[currentFragmentIdx].pageAreas || {}}
-                                   onFragmentPagesChanges={onFragmentPagesChanged}
-                                   onFragmentPageAreasChanged={onFragmentPageAreasChanged}
-                    />
-                </div>
-                : ''
-            }
         </div>
     );
 }
