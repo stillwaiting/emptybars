@@ -1,26 +1,16 @@
 @import "../mixins/blueButton";
+@import "../mixins/squareButton";
 
 .fragments {
   height:500px;
   overflow-y: auto;
   overflow-x: hidden;
 
-  .fragmentButton {
-    width: 100%;
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid black;
-    background-color: rgb(212, 212, 212);
-    cursor: pointer;
+  .button {
+    @include squareButton;
 
     .title {
       white-space: nowrap;
-    }
-
-    &.active {
-      background-color: rgb(161, 161, 161);
     }
   }
 

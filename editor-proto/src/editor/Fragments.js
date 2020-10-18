@@ -35,7 +35,7 @@ function Fragments({ fragments, onFragmentSelected, onFragmentsChanged}) {
 
         {fragments.map(({ startSec, endSec }, key) => (
             <div
-                className={`fragmentButton ${
+                className={`button ${
                     selectedFragmentIdx === key ? 'active' : ''
                 }`}
                 key={key}
