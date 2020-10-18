@@ -1,4 +1,10 @@
+@import "../mixins/blueButton";
+
 .pages {
+  .addPage {
+    @include blueButton;
+  }
+
   img {
     width:100px;
   }
