@@ -65,7 +65,7 @@ function Editor({ fragments, pages, videoUrl, onDataUpdated }) {
                 <div>
                     <FragmentPosition $player={$player.current} fragment={fragments[currentFragmentIdx]} onFragmentChanged={onFragmentChanged} progress={videoPlayerPos} />
                     <FragmentPages pages={pages || []}
-                                   fragmentPages={fragments[currentFragmentIdx].pages || {}}
+                                   fragmentPages={fragments[currentFragmentIdx].pages || []}
                                    fragmentPageAreas={fragments[currentFragmentIdx].pageAreas || {}}
                                    onFragmentPagesChanges={onFragmentPagesChanged}
                                    onFragmentPageAreasChanged={onFragmentPageAreasChanged}

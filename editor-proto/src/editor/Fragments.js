@@ -4,11 +4,11 @@ import { secsToString } from "../utils";
 import './Fragments.scss';
 
 function Fragments({ fragments, onFragmentSelected, onFragmentsChanged}) {
-    var [fragment, setFragment] = useState(-1);
+    var [selectedFragmentIdx, setSelectedFragmentIdx] = useState(-1);
 
-    const handleClickFragment = (key) => {
-        setFragment(key);
-        onFragmentSelected(key);
+    const handleClickFragment = (fragmentIdx) => {
+        setSelectedFragmentIdx(fragmentIdx);
+        onFragmentSelected(fragmentIdx);
     };
 
     const handleAddFragmentClick = () => {
@@ -23,6 +23,8 @@ function Fragments({ fragments, onFragmentSelected, onFragmentsChanged}) {
                 endSec: 10
             });
         }
+        // TODO: scroll to it
+        handleClickFragment(fragments.length - 1);
         onFragmentsChanged(JSON.parse(JSON.stringify(fragments)));
     }
 
@@ -34,7 +36,7 @@ function Fragments({ fragments, onFragmentSelected, onFragmentsChanged}) {
         {fragments.map(({ startSec, endSec }, key) => (
             <div
                 className={`fragmentButton ${
-                    fragment === key ? 'active' : ''
+                    selectedFragmentIdx === key ? 'active' : ''
                 }`}
                 key={key}
                 onClick={handleClickFragment.bind(null, key)}
