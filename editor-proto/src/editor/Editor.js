@@ -10,7 +10,7 @@ import './Editor.css';
 
 function Editor({ fragments, pages, videoUrl, onDataUpdated }) {
     const [currentFragmentIdx, setCurrentFragmentIdx] = useState(-1);
-    const [videoPlayerPos, setVideoPlayerPos] = useState(0);
+    const [videoPlayerPosSecs, setVideoPlayerPosSecs] = useState(0);
 
     const $player = useRef(null);
 
@@ -24,7 +24,7 @@ function Editor({ fragments, pages, videoUrl, onDataUpdated }) {
     }
 
     const onProgressUpdate = (playedSeconds) => {
-        setVideoPlayerPos(parseFloat(playedSeconds.toFixed(1)));
+        setVideoPlayerPosSecs(parseFloat(playedSeconds.toFixed(1)));
     };
 
     const onFragmentChanged = (updatedFragment) => {
@@ -47,20 +47,26 @@ function Editor({ fragments, pages, videoUrl, onDataUpdated }) {
     };
 
     return (
-        <div>
-            <div className='app'>
-                <div className='app__B'>
+            <div className='editor'>
+                <div>
                     <PlayerWithNavButtons videoUrl={videoUrl} onProgressUpdate={onProgressUpdate} ref={$player} />
 
                     {currentFragmentIdx >= 0
                         ?
                         <div>
-                            <FragmentPosition $player={$player.current} fragment={fragments[currentFragmentIdx]} onFragmentChanged={onFragmentChanged} progress={videoPlayerPos} />
-                            <FragmentPages pages={pages || []}
-                                           fragmentPages={fragments[currentFragmentIdx].pages || []}
-                                           fragmentPageAreas={fragments[currentFragmentIdx].pageAreas || {}}
-                                           onFragmentPagesChanges={onFragmentPagesChanged}
-                                           onFragmentPageAreasChanged={onFragmentPageAreasChanged}
+                            <FragmentPosition
+                                $player={$player.current}
+                                fragment={fragments[currentFragmentIdx]}
+                                fragmentIdx={currentFragmentIdx}
+                                onFragmentChanged={onFragmentChanged}
+                                videoPlayerPosSecs={videoPlayerPosSecs}
+                            />
+                            <FragmentPages
+                                pages={pages || []}
+                                fragmentPages={fragments[currentFragmentIdx].pages || []}
+                                fragmentPageAreas={fragments[currentFragmentIdx].pageAreas || {}}
+                                onFragmentPagesChanges={onFragmentPagesChanged}
+                                onFragmentPageAreasChanged={onFragmentPageAreasChanged}
                             />
                         </div>
                         : ''
@@ -70,12 +76,9 @@ function Editor({ fragments, pages, videoUrl, onDataUpdated }) {
 
                 <Fragments fragments={fragments} onFragmentSelected={handleFragmentSelected} onFragmentsChanged={onFragmentsChanged} />
 
-                <div className='app__C'>
-                        <Pages pages={pages || []} onPagesUpdated={handleOnPagesUpdated} />
-                </div>
+                <Pages pages={pages || []} onPagesUpdated={handleOnPagesUpdated} />
 
             </div>
-        </div>
     );
 }
 

@@ -3,7 +3,7 @@ import { secsToString } from "../utils";
 
 import './FragmentPosition.scss';
 
-function FragmentPosition({ $player, fragment, progress, onFragmentChanged}) {
+function FragmentPosition({ $player, fragment, fragmentIdx, videoPlayerPosSecs, onFragmentChanged}) {
     const handlePlayCurrentFragment = () => {
         $player.playFragment(fragment.startSec, fragment.endSec, 'STAY_AT_START');
     }
@@ -17,34 +17,34 @@ function FragmentPosition({ $player, fragment, progress, onFragmentChanged}) {
     }
 
     const hanleSetCurrentTimeAsFragmentStart = () => {
-        fragment.startSec = parseFloat(progress.toFixed(1));
+        fragment.startSec = parseFloat(videoPlayerPosSecs.toFixed(1));
         onFragmentChanged(fragment);
     }
 
     const hanleSetCurrentTimeAsFragmentEnd = () => {
-        fragment.endSec = parseFloat(progress.toFixed(1));
+        fragment.endSec = parseFloat(videoPlayerPosSecs.toFixed(1));
         onFragmentChanged(fragment);
     }
 
     const renderFragmentPos = () => {
-        const deltaBefore = (progress - fragment.startSec).toFixed(1);
-        const deltaInFragment = (fragment.endSec - progress).toFixed(1);
-        const deltaInAfter = (progress - fragment.endSec).toFixed(1);
-        if (progress < fragment.startSec) {
+        const deltaBefore = (videoPlayerPosSecs - fragment.startSec).toFixed(1);
+        const deltaInFragment = (fragment.endSec - videoPlayerPosSecs).toFixed(1);
+        const deltaInAfter = (videoPlayerPosSecs - fragment.endSec).toFixed(1);
+        if (videoPlayerPosSecs < fragment.startSec) {
             return <span className='before'>Before start <span>{deltaBefore}</span></span>
         }
-        if (progress > fragment.endSec) {
+        if (videoPlayerPosSecs > fragment.endSec) {
             return <span className='after'>After END <span>{deltaInAfter}</span></span>
         }
 
-        if (progress >= fragment.startSec && progress <= fragment.endSec) {
+        if (videoPlayerPosSecs >= fragment.startSec && videoPlayerPosSecs <= fragment.endSec) {
             return <span className='inside'>In fragment. After start {deltaBefore}; before end {deltaInFragment}</span>
         }
     }
 
     return (
         <div className='fragmentPosition'>
-            <div class='title'>Fragment ({secsToString(fragment.startSec)} - {secsToString(fragment.endSec)})</div>
+            <div class='title'>Selected Fragment #{fragmentIdx + 1} ({secsToString(fragment.startSec)} - {secsToString(fragment.endSec)})</div>
             <div class='playerPosition'>{renderFragmentPos()}</div>
             <div className='controls'>
                 <div className='button' onClick={handlePlayCurrentFragment}>

@@ -1,0 +1,20 @@
+.imageAreas {
+  display: flex;
+
+  .canvas {
+    cursor: crosshair;
+    border: 1px solid grey;
+  }
+
+  .controls {
+    .item {
+      padding-left:10px;
+
+      img {
+        margin-bottom:-10px;
+        padding: 8px;
+        cursor: pointer;
+      }
+    }
+  }
+}

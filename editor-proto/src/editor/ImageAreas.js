@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 
+import './ImageAreas.scss';
+
 function ImageAreas({ imgUrl, width, areas, onNewAreaAdded, onDeleteArea }) {
     // var [height, setHeight] = useState(100);
     var [image, setImage] = useState(null);
@@ -102,20 +104,24 @@ function ImageAreas({ imgUrl, width, areas, onNewAreaAdded, onDeleteArea }) {
     });
 
     return (
-        <div className="fragment_area_selector">
-            <div className="canvas">
+        <div className='imageAreas'>
+            <div className='canvas'>
                 <canvas width={width} height={height} ref={canvasRef} onMouseMove={handleMouseMove} onMouseOut={handleMouseOut} onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
                 </canvas>
             </div>
-            <div className="area_controls">
-            {areas.map((area, idx) => {
-                return (<div className="item"
-                             onMouseOver={(() => handleMouseOverArea(idx)).bind(this)}
-                             onMouseOut={(() => handleMouseOutArea(idx)).bind(this)}
-                            >
-                            <div onClick={() => handleDelete(idx)}>Area {idx+1}<img src="https://github.com/stillwaiting/emptybars/raw/main/Delete-Button.png" width={16} /></div>
-                    </div>)
-            })}
+            <div className='controls'>
+                {areas.map((area, idx) => {
+                    return (
+                        <div className='item'
+                                 onMouseOver={(() => handleMouseOverArea(idx)).bind(this)}
+                                 onMouseOut={(() => handleMouseOutArea(idx)).bind(this)}
+                                >
+                                <div onClick={() => handleDelete(idx)}>
+                                    Area {idx+1}
+                                    <img src='https://github.com/stillwaiting/emptybars/raw/main/Delete-Button.png' width={16} />
+                                </div>
+                        </div>)
+                })}
             </div>
 
         </div>

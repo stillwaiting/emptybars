@@ -4,7 +4,7 @@ import './Pages.scss';
 
 function Pages({ pages, onPagesUpdated }) {
     const handleAddPage = () => {
-        const url = prompt("Please enter page's image URL");
+        const url = prompt('Please enter page`s image URL');
         // TODO: add validation
         if (url) {
             const id = new Date().getTime().toString();
@@ -17,13 +17,15 @@ function Pages({ pages, onPagesUpdated }) {
     }
 
     return <div className='pages'>
+            <div className='scrolling'>
                 <div className='addPage' onClick={handleAddPage}>Add page (jpg/png)</div>
                 {pages.map((p, idx) =>
                     <div className='page'>
-                        Page #{idx + 1}
-                        <img src={p.url} />
+                        <div>Page #{idx + 1}</div>
+                        <div><img src={p.url} /></div>
                     </div>
                 )}
+            </div>
     </div>
 }
 

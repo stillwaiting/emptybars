@@ -28,23 +28,26 @@ function Fragments({ fragments, onFragmentSelected, onFragmentsChanged}) {
         onFragmentsChanged(JSON.parse(JSON.stringify(fragments)));
     }
 
-    return (<div className='fragments'>
-        <div className='addButton' onClick={handleAddFragmentClick.bind(null)}>
-            Add fragment
-        </div>
+    return (
+        <div className='fragments'>
+            <div className='scrolling'>
+                <div className='addButton' onClick={handleAddFragmentClick.bind(null)}>
+                    Add fragment
+                </div>
 
-        {fragments.map(({ startSec, endSec }, key) => (
-            <div
-                className={`button ${
-                    selectedFragmentIdx === key ? 'active' : ''
-                }`}
-                key={key}
-                onClick={handleClickFragment.bind(null, key)}
-            >
-                <span className='title'>Fragment {key+1}: {secsToString(startSec)} - {secsToString(endSec)}</span>
+                {fragments.map(({ startSec, endSec }, key) => (
+                    <div
+                        className={`button ${
+                            selectedFragmentIdx === key ? 'active' : ''
+                        }`}
+                        key={key}
+                        onClick={handleClickFragment.bind(null, key)}
+                    >
+                        Fragment {key+1}: {secsToString(startSec)} - {secsToString(endSec)}
+                    </div>
+                ))}
             </div>
-        ))}
-    </div>);
+         </div>);
 }
 
 export default Fragments;
