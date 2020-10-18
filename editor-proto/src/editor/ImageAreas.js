@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 
 import './ImageAreas.scss';
 
-function ImageAreas({ imgUrl, width, areas, onNewAreaAdded, onDeleteArea }) {
+function ImageAreas({ title, imgUrl, width, areas, onNewAreaAdded, onDeleteArea }) {
     // var [height, setHeight] = useState(100);
     var [image, setImage] = useState(null);
     var [imageLoaded, setImageLoaded] = useState(false);
@@ -33,12 +33,12 @@ function ImageAreas({ imgUrl, width, areas, onNewAreaAdded, onDeleteArea }) {
             context.drawImage(image, 0, 0, image.width, image.height, 0, 0, width, height);
 
             areas.forEach((a, idx) => {
-                context.fillStyle = idx == highlightedArea ? 'rgba(255, 255, 0, 0.7)' : 'rgba(255, 255, 0, 0.5)';
+                context.fillStyle = idx == highlightedArea ? 'rgba(255, 0, 0, 0.7)' : 'rgba(255, 255, 0, 0.5)';
                 context.fillRect(a.x*coeffOrigImageToScreenCoords, a.y*coeffOrigImageToScreenCoords, a.width*coeffOrigImageToScreenCoords, a.height*coeffOrigImageToScreenCoords);
             });
 
             if (isMouseDown) {
-                context.fillStyle = 'rgba(255, 255, 255, 0.5)';
+                context.fillStyle = 'rgba(255, 0, 0, 0.5)';
                 context.fillRect(selectionX, selectionY, selectionWidth, selectionHeight);
             }
         }
@@ -106,6 +106,7 @@ function ImageAreas({ imgUrl, width, areas, onNewAreaAdded, onDeleteArea }) {
     return (
         <div className='imageAreas'>
             <div className='canvas'>
+                <div className='title'>{title}</div>
                 <canvas width={width} height={height} ref={canvasRef} onMouseMove={handleMouseMove} onMouseOut={handleMouseOut} onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
                 </canvas>
             </div>

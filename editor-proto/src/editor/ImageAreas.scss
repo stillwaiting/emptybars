@@ -2,8 +2,16 @@
   display: flex;
 
   .canvas {
-    cursor: crosshair;
     border: 1px solid grey;
+
+    canvas {
+      cursor: crosshair;
+    }
+  }
+
+  .title {
+    text-align: center;
+    padding: 10px;
   }
 
   .controls {
