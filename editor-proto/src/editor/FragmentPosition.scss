@@ -1,0 +1,29 @@
+.fragmentPosition{
+  .title {
+
+  }
+
+  .playerPosition {
+
+
+    .before, .after {
+      color: red;
+    }
+
+    .inside {
+      color: green;
+    }
+  }
+
+  .controls {
+    .button {
+      /* TODO: extract to mixin with Fragments buttons */
+      padding:10px;
+      align-items: center;
+      border: 1px solid black;
+      background-color: rgb(212, 212, 212);
+      cursor: pointer;
+      margin:10px;
+    }
+  }
+}

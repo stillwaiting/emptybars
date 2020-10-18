@@ -2,7 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import ReactPlayer from 'react-player';
 
 import { secsToString } from './utils'
-import './EditorLoader.scss';
+
+import './PlayerWithNavButtons.scss';
 
 class PlayerWithNavButtons extends React.Component {
 
@@ -55,6 +56,7 @@ class PlayerWithNavButtons extends React.Component {
     playFragment(startSec, endSec, mode) {
         this.$player.current.seekTo(startSec, 'seconds');
         this.setState({
+            // TODO: remove magic strings
             gotoAfterStopSec: Math.max(mode === 'STAY_AT_END' ? endSec : startSec, 0),
             endSec: Math.max(endSec, 0.01),
             playing: true
@@ -105,7 +107,7 @@ class PlayerWithNavButtons extends React.Component {
             const moveTo = [-5, -1, -0.5, -0.1, 0.1, 0.5, 1, 5];
 
             return (
-                <div className='PlayWithNavButtons'>
+                <div className='playWithNavButtons'>
                     <ReactPlayer
                         ref={this.$player}
                         url={this.props.videoUrl}
@@ -121,14 +123,14 @@ class PlayerWithNavButtons extends React.Component {
                         playing={this.state.playing}
                         controls={true}
                     />
-                    <div>
-                        Current position: <span>{secsToString(this.state.progress)}</span>
-                        <div className="move_buttons_parent">
+                    <div className='positionAndControls'>
+                        Current position: <span className='position'>{secsToString(this.state.progress)}</span>
+                        <div className='controls'>
                             {
-                                moveTo.map(item => <div className="move_button" onClick={(() => this.onMoveToClick(item)).bind(this)}>{item > 0 ? '+' + item : item}</div>)
+                                moveTo.map(item => <div className='gotoButton' onClick={(() => this.onMoveToClick(item)).bind(this)}>{item > 0 ? '+' + item : item}</div>)
                             }
-                            <div className="move_button" onClick={this.handlePlayOneSecBefore.bind(this)} >Play 1 sec before</div>
-                            <div className="move_button" onClick={this.handlePlayOneSecAfter.bind(this)} >Play 1 sec after</div>
+                            <div className='gotoButton' onClick={this.handlePlayOneSecBefore.bind(this)} >Play 1 sec before</div>
+                            <div className='gotoButton' onClick={this.handlePlayOneSecAfter.bind(this)} >Play 1 sec after</div>
                         </div>
                     </div>
                 </div>
