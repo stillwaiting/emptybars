@@ -38,7 +38,6 @@ function FragmentPages({ pages, fragmentPages, fragmentPageAreas, onFragmentPage
             </div>
         })}
 
-
         {pages.map((p, idx) => {
             return (fragmentPages.indexOf(p.id) >= 0) ?
                     <div className='page'>
