@@ -2,7 +2,10 @@
 export const secsToString = (secs) => {
     const mins = parseInt(secs / 60);
     const minsStr = (mins < 10 ? '0' : '') + mins;
-    const secsStr = (secs - mins * 60).toFixed(1);
+    const secsWithoutMins = (secs - mins * 60);
+    const secsStr = (secsWithoutMins < 10)
+        ? ('0' + secsWithoutMins.toFixed(1))
+        : secsWithoutMins.toFixed(1);
     return `${minsStr}:${secsStr}`;
 }
 

@@ -20,8 +20,8 @@ InitEditor('editorPlaceholder',
                         }
                     ]
                 },
-                "start": "00:9.1",
-                "end": "00:13.7"
+                "start": "00:9.8",
+                "end": "00:16.9"
             },
             {
                 "pages": [
@@ -43,8 +43,8 @@ InitEditor('editorPlaceholder',
                         }
                     ]
                 },
-                "start": "00:13.7",
-                "end": "00:18.6"
+                "start": "00:17.1",
+                "end": "00:24.4"
             },
             {
                 "pages": [
@@ -66,8 +66,8 @@ InitEditor('editorPlaceholder',
                         }
                     ]
                 },
-                "start": "00:18.6",
-                "end": "00:23.5"
+                "start": "00:24.4",
+                "end": "00:31.8"
             },
             {
                 "pages": [
@@ -89,8 +89,8 @@ InitEditor('editorPlaceholder',
                         }
                     ]
                 },
-                "start": "00:23.3",
-                "end": "00:28.1"
+                "start": "00:31.8",
+                "end": "00:39.2"
             },
             {
                 "pages": [
@@ -115,8 +115,8 @@ InitEditor('editorPlaceholder',
                         }
                     ]
                 },
-                "start": "00:28.1",
-                "end": "00:32.8"
+                "start": "00:39.2",
+                "end": "00:46.7"
             },
             {
                 "pages": [
@@ -141,8 +141,8 @@ InitEditor('editorPlaceholder',
                         }
                     ]
                 },
-                "start": "00:32.8",
-                "end": "00:37.6"
+                "start": "00:46.7",
+                "end": "00:54.1"
             },
             {
                 "pages": [
@@ -164,8 +164,8 @@ InitEditor('editorPlaceholder',
                         }
                     ]
                 },
-                "start": "00:37.6",
-                "end": "00:42.6"
+                "start": "00:54.1",
+                "end": "01:1.6"
             },
             {
                 "pages": [
@@ -744,7 +744,7 @@ InitEditor('editorPlaceholder',
                 "id": "1603488094313"
             }
         ],
-        "videoUrl": "https://www.youtube.com/watch?v=RMnlu50CBb8"
+        "videoUrl": "https://www.youtube.com/watch?v=e01ulR5KMWI"
     }
 );
 
