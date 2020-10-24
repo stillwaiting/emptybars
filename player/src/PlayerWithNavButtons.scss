@@ -1,0 +1,15 @@
+@import "./mixins/squareButton";
+
+.playWithNavButtons {
+  .positionAndControls {
+    .controls {
+
+      display: flex;
+      flex-direction: row;
+
+      .gotoButton {
+        @include squareButton;
+      }
+    }
+  }
+}
