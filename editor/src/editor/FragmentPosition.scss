@@ -23,5 +23,14 @@
     .button {
       @include squareButton;
     }
+
+    .group {
+      display: flex;
+      flex-direction: row;
+      .button {
+        margin-top: 0px;
+        margin-bottom: 0px;
+      }
+    }
   }
 }

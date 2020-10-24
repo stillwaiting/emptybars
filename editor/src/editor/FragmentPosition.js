@@ -3,7 +3,7 @@ import { secsToString } from "../utils";
 
 import './FragmentPosition.scss';
 
-function FragmentPosition({ $player, fragment, fragmentIdx, videoPlayerPosSecs, onFragmentChanged}) {
+function FragmentPosition({ $player, fragment, fragmentIdx, videoPlayerPosSecs, onFragmentChanged, getPrevFragmentEndSec}) {
     const handlePlayCurrentFragment = () => {
         $player.playFragment(fragment.startSec, fragment.endSec, 'STAY_AT_START');
     }
@@ -21,25 +21,30 @@ function FragmentPosition({ $player, fragment, fragmentIdx, videoPlayerPosSecs, 
         onFragmentChanged(fragment);
     }
 
+    const handleSetFragmentStartToLastFragmentEnd = () => {
+        fragment.startSec = getPrevFragmentEndSec();
+        onFragmentChanged(fragment);
+    }
+
     const hanleSetCurrentTimeAsFragmentEnd = () => {
         fragment.endSec = parseFloat(videoPlayerPosSecs.toFixed(1));
         onFragmentChanged(fragment);
     }
 
     const renderFragmentPos = () => {
-        const deltaBefore = (videoPlayerPosSecs - fragment.startSec).toFixed(1);
-        const deltaInFragment = (fragment.endSec - videoPlayerPosSecs).toFixed(1);
-        const deltaInAfter = (videoPlayerPosSecs - fragment.endSec).toFixed(1);
-        if (videoPlayerPosSecs < fragment.startSec) {
-            return <span className='before'>Before start <span>{deltaBefore}</span></span>
-        }
-        if (videoPlayerPosSecs > fragment.endSec) {
-            return <span className='after'>After END <span>{deltaInAfter}</span></span>
+        const deltaStart = (videoPlayerPosSecs - fragment.startSec);
+        const deltaEnd = (videoPlayerPosSecs - fragment.endSec);
+
+        var className;
+        if (deltaStart >= 0 && deltaEnd <= 0) {
+            className = 'inside';
+        } else if (deltaStart < 0) {
+            className = 'before';
+        } else if (deltaEnd > 0) {
+            className =  'after';
         }
 
-        if (videoPlayerPosSecs >= fragment.startSec && videoPlayerPosSecs <= fragment.endSec) {
-            return <span className='inside'>In fragment. After start {deltaBefore}; before end {deltaInFragment}</span>
-        }
+        return <span className={className}>Fragment start delta={deltaStart.toFixed(1)}, delta end delta={deltaEnd.toFixed(1)}</span>;
     }
 
     return (
@@ -50,17 +55,24 @@ function FragmentPosition({ $player, fragment, fragmentIdx, videoPlayerPosSecs, 
                 <div className='button' onClick={handlePlayCurrentFragment}>
                     Play the whole fragment
                 </div>
-                <div className='button'  onClick={handleJumpFragmentStart}>
-                    Jump to fragment start
+                <div className='group'>
+                    <div className='button'  onClick={handleJumpFragmentStart}>
+                        Jump to fragment start
+                    </div>
+                    <div className='button'  onClick={handleJumpFragmentEnd}>
+                        Jump to fragment end
+                    </div>
                 </div>
-                <div className='button'  onClick={handleJumpFragmentEnd}>
-                    Jump to fragment end
+                <div className='button'  onClick={handleSetFragmentStartToLastFragmentEnd}>
+                    Set fragment start at prev. fragment end
                 </div>
-                <div className='button'  onClick={hanleSetCurrentTimeAsFragmentStart}>
-                    Set current time as start time of the fragment
-                </div>
-                <div className='button'  onClick={hanleSetCurrentTimeAsFragmentEnd}>
-                    Set current time as end time of the fragment
+                <div className='group'>
+                    <div className='button'  onClick={hanleSetCurrentTimeAsFragmentStart}>
+                        Set as fragment's start time
+                    </div>
+                    <div className='button'  onClick={hanleSetCurrentTimeAsFragmentEnd}>
+                        Set as fragment's end time
+                    </div>
                 </div>
             </div>
         </div>

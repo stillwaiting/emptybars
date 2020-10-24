@@ -46,6 +46,13 @@ function Editor({ fragments, pages, videoUrl, onDataUpdated }) {
         onDataUpdated({ fragments, pages, videoUrl });
     };
 
+    const getPrevFragmentEndSec = () => {
+        if (currentFragmentIdx == 0) {
+            return 0;
+        }
+        return fragments[currentFragmentIdx-1].endSec;
+    }
+
     return (
             <div className='editor'>
                 <div>
@@ -60,6 +67,7 @@ function Editor({ fragments, pages, videoUrl, onDataUpdated }) {
                                 fragmentIdx={currentFragmentIdx}
                                 onFragmentChanged={onFragmentChanged}
                                 videoPlayerPosSecs={videoPlayerPosSecs}
+                                getPrevFragmentEndSec={getPrevFragmentEndSec}
                             />
                             <FragmentPages
                                 pages={pages || []}
