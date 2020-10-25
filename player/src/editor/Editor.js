@@ -3,7 +3,6 @@ import PlayerWithNavButtons from '../PlayerWithNavButtons';
 import FragmentPosition from './FragmentPosition';
 import Fragments from './Fragments';
 
-import Pages from "./Pages";
 import FragmentPages from "./FragmentPages";
 
 import './Editor.css';
@@ -83,8 +82,6 @@ function Editor({ fragments, pages, videoUrl, onDataUpdated }) {
                 </div>
 
                 <Fragments fragments={fragments} onFragmentSelected={handleFragmentSelected} onFragmentsChanged={onFragmentsChanged} />
-
-                <Pages pages={pages || []} onPagesUpdated={handleOnPagesUpdated} />
 
             </div>
     );

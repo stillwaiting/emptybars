@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import EditorLoader from './EditorLoader';
+import Editor from './editor/Editor';
+import {secsToString, stringToSecs, transformFromHumanReadable} from "emptybars-common/utils";
 
 InitPlayer('playerPlaceholder',
     {
@@ -750,11 +751,10 @@ InitPlayer('playerPlaceholder',
 
 
 function InitPlayer($element, data) {
-    const {fragments, pages, videoUrl, videoTitle} = data;
 
     ReactDOM.render(
         <React.StrictMode>
-          <EditorLoader fragments={fragments || []} pages={pages || []} videoUrl={videoUrl} />
+          <Editor {...transformFromHumanReadable(data)} />
         </React.StrictMode>,
         document.getElementById($element)
     );
