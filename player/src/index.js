@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Editor from './player/Editor';
+import Player from './player/Player';
 import {secsToString, stringToSecs, transformFromHumanReadable} from "emptybars-common/utils";
 
 InitPlayer('playerPlaceholder',
@@ -754,7 +754,7 @@ function InitPlayer($element, data) {
 
     ReactDOM.render(
         <React.StrictMode>
-          <Editor {...transformFromHumanReadable(data)} />
+          <Player {...transformFromHumanReadable(data)} />
         </React.StrictMode>,
         document.getElementById($element)
     );

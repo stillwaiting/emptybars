@@ -5,9 +5,9 @@ import Fragments from './Fragments';
 
 import FragmentPages from "./FragmentPages";
 
-import './Editor.css';
+import './Player.css';
 
-function Editor({ fragments, pages, videoUrl, onDataUpdated }) {
+function Player({ fragments, pages, videoUrl, onDataUpdated }) {
     const [currentFragmentIdx, setCurrentFragmentIdx] = useState(-1);
     const [videoPlayerPosSecs, setVideoPlayerPosSecs] = useState(0);
 
@@ -87,4 +87,4 @@ function Editor({ fragments, pages, videoUrl, onDataUpdated }) {
     );
 }
 
-export default Editor;
+export default Player;
