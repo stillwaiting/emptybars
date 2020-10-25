@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Editor from './editor/Editor';
+import Editor from './player/Editor';
 import {secsToString, stringToSecs, transformFromHumanReadable} from "emptybars-common/utils";
 
 InitPlayer('playerPlaceholder',
