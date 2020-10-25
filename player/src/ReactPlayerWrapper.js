@@ -3,9 +3,9 @@ import ReactPlayer from 'react-player';
 
 import { secsToString } from 'emptybars-common/utils'
 
-import './PlayerWithNavButtons.scss';
+import './ReactPlayerWrapper.scss';
 
-class PlayerWithNavButtons extends React.Component {
+class ReactPlayerWrapper extends React.Component {
 
     constructor(props) {
         super(props);
@@ -19,11 +19,11 @@ class PlayerWithNavButtons extends React.Component {
         this.$player = React.createRef();
     }
 
-    handleDuration(duration) {
+    _handleDuration(duration) {
         this.setState({duration: duration});
     }
 
-    stopAndReturn() {
+    _stopAndReturn() {
         const gotoAfterStopSec = this.state.gotoAfterStopSec;
         this.setState({
             endSec: -1,
@@ -33,23 +33,19 @@ class PlayerWithNavButtons extends React.Component {
         this.$player.current.seekTo(gotoAfterStopSec, 'seconds');
     }
 
-    handleProgress({ playedSeconds }) {
+    _handleProgress({ playedSeconds }) {
         if (this.state.endSec > 0 && playedSeconds > this.state.endSec) {
-            this.stopAndReturn();
+            this._stopAndReturn();
         }
         this.setState({progress: playedSeconds});
         this.props.onProgressUpdate(playedSeconds);
     };
 
-    handleOnPlay() {
+    _handleOnPlay() {
         this.setState({playing: true});
     }
 
-    handleOnReady() {
-        console.log('ready!');
-    }
-
-    handleStop() {
+    _handleStop() {
         this.setState({playing: false});
     }
 
@@ -63,44 +59,11 @@ class PlayerWithNavButtons extends React.Component {
         });
     }
 
-    seekTo(pos) {
-        this.$player.current.seekTo(pos, 'seconds');
-    }
-
     seekToAndStop(pos) {
         this.setState({
             playing: false
         });
         this.$player.current.seekTo(pos, 'seconds');
-    }
-
-    maybeStop1SecPlaying(callback) {
-        if (this.state.playing && this.state.gotoAfterStopSec > 0) {
-            this.stopAndReturn();
-            // We need timeout to give player time to stop and update progress
-            setTimeout(callback.bind(this), 100);
-        } else {
-            callback();
-        }
-    }
-
-    onMoveToClick(shift) {
-        this.maybeStop1SecPlaying(() => {
-            this.$player.current.seekTo(Math.max(this.state.progress + shift, 0), 'seconds');
-        });
-    };
-
-
-    handlePlayOneSecBefore() {
-        this.maybeStop1SecPlaying(() => {
-            this.playFragment(this.state.progress - 1, this.state.progress, 'STAY_AT_END');
-        });
-    }
-
-    handlePlayOneSecAfter() {
-        this.maybeStop1SecPlaying(() => {
-            this.playFragment(this.state.progress, this.state.progress + 1, 'STAY_AT_START');
-        });
     }
 
     render() {
@@ -113,29 +76,21 @@ class PlayerWithNavButtons extends React.Component {
                         url={this.props.videoUrl}
                         width='100%'
                         height='100%'
-                        onDuration={this.handleDuration.bind(this)}
-                        onProgress={this.handleProgress.bind(this)}
-                        onPlay={this.handleOnPlay.bind(this)}
-                        onReady={this.handleOnReady.bind(this)}
+                        onDuration={this._handleDuration.bind(this)}
+                        onProgress={this._handleProgress.bind(this)}
+                        onPlay={this._handleOnPlay.bind(this)}
                         progressInterval={100}
-                        onPause={this.handleStop.bind(this)}
-                        onEnded={this.handleStop.bind(this)}
+                        onPause={this._handleStop.bind(this)}
+                        onEnded={this._handleStop.bind(this)}
                         playing={this.state.playing}
                         controls={true}
                     />
                     <div className='positionAndControls'>
                         Current position: <span className='position'>{secsToString(this.state.progress)}</span>
-                        <div className='controls'>
-                            {
-                                moveTo.map(item => <div className='gotoButton' onClick={(() => this.onMoveToClick(item)).bind(this)}>{item > 0 ? '+' + item : item}</div>)
-                            }
-                            <div className='gotoButton' onClick={this.handlePlayOneSecBefore.bind(this)} >Play 1 sec before</div>
-                            <div className='gotoButton' onClick={this.handlePlayOneSecAfter.bind(this)} >Play 1 sec after</div>
-                        </div>
                     </div>
                 </div>
             );
     }
 }
 
-export default PlayerWithNavButtons;
+export default ReactPlayerWrapper;

@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import PlayerWithNavButtons from '../PlayerWithNavButtons';
+import ReactPlayerWrapper from '../ReactPlayerWrapper';
 import Fragments from './Fragments';
 
 import FragmentPages from "./FragmentPages";
@@ -35,7 +35,7 @@ function Player({ fragments, pages, videoUrl, onDataUpdated }) {
     return (
             <div className='editor'>
                 <div>
-                    <PlayerWithNavButtons videoUrl={videoUrl} onProgressUpdate={onProgressUpdate} ref={$player} />
+                    <ReactPlayerWrapper videoUrl={videoUrl} onProgressUpdate={onProgressUpdate} ref={$player} />
 
                     {currentFragmentIdx >= 0
                         ?
