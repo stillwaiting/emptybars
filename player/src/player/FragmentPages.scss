@@ -1,3 +1,11 @@
+.fragmentPages {
+  overflow-y:scroll;
+
+  .scrollArea {
+    border: 1px solid #000;
+  }
+}
+
 .page {
   padding: 10px;
 }

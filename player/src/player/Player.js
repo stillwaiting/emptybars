@@ -6,7 +6,7 @@ import FragmentPages from "./FragmentPages";
 
 import './Player.css';
 
-function Player({ fragments, pages, videoUrl, onDataUpdated }) {
+function Player({ fragments, images, pages, videoUrl, onDataUpdated }) {
     const [activeFragments, setActiveFragments] = useState([]);
     const [videoPlayerPosSecs, setVideoPlayerPosSecs] = useState(0);
 
@@ -23,6 +23,13 @@ function Player({ fragments, pages, videoUrl, onDataUpdated }) {
 
     const onProgressUpdate = (playedSeconds) => {
         setVideoPlayerPosSecs(parseFloat(playedSeconds.toFixed(1)));
+        var newActiveFragments = [];
+        fragments.forEach((fragment, idx) => {
+            if (fragment.startSec <= playedSeconds && fragment.endSec >= playedSeconds) {
+                newActiveFragments.push(idx);
+            }
+        });
+        setActiveFragments(newActiveFragments);
     };
 
     const getActivePages = () => {
@@ -57,6 +64,7 @@ function Player({ fragments, pages, videoUrl, onDataUpdated }) {
                         ?
                         <div>
                             <FragmentPages
+                                images={images}
                                 pages={pages || []}
                                 fragmentPages={getActivePages()}
                                 fragmentPageAreas={getActivePageAreas()}

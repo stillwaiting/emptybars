@@ -60,8 +60,6 @@ class ReactPlayerWrapper extends React.Component {
     }
 
     render() {
-            const moveTo = [-5, -1, -0.5, -0.1, 0.1, 0.5, 1, 5];
-
             return (
                 <div className='playWithNavButtons'>
                     <ReactPlayer

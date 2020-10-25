@@ -752,11 +752,29 @@ InitPlayer('playerPlaceholder',
 
 function InitPlayer($element, data) {
 
-    ReactDOM.render(
-        <React.StrictMode>
-          <Player {...transformFromHumanReadable(data)} />
-        </React.StrictMode>,
-        document.getElementById($element)
-    );
+    var imagesCount = 0;
+    const images = [];
+    document.getElementById($element).innerText = "Loading, please wait...";
+
+    const setImageLoaded = (error) => {
+        imagesCount += 1;
+
+        if (imagesCount == data.pages.length) {
+            ReactDOM.render(
+                <React.StrictMode>
+                    <Player images={images} {...transformFromHumanReadable(data)} />
+                </React.StrictMode>,
+                document.getElementById($element)
+            );
+        }
+    };
+
+    data.pages.forEach((page, pageIdx) => {
+        const image = new Image();
+        image.src=page.url;
+        image.onload = () => { setImageLoaded() }
+        image.onerror = (e) => { console.error(e); setImageLoaded() }
+        images.push(image);
+    });
 }
 
