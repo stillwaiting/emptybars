@@ -7,13 +7,13 @@ import FragmentPages from "./FragmentPages";
 import './Player.css';
 
 function Player({ fragments, pages, videoUrl, onDataUpdated }) {
-    const [currentFragmentIdx, setCurrentFragmentIdx] = useState(-1);
+    const [activeFragments, setActiveFragments] = useState([]);
     const [videoPlayerPosSecs, setVideoPlayerPosSecs] = useState(0);
 
     const $player = useRef(null);
 
     const handleFragmentSelected = (fragmentIdx) => {
-        setCurrentFragmentIdx(fragmentIdx);
+        setActiveFragments([fragmentIdx]);
         $player.current.playFragment(fragments[fragmentIdx].startSec, fragments[fragmentIdx].endSec)
     };
 
@@ -25,11 +25,27 @@ function Player({ fragments, pages, videoUrl, onDataUpdated }) {
         setVideoPlayerPosSecs(parseFloat(playedSeconds.toFixed(1)));
     };
 
-    const getPrevFragmentEndSec = () => {
-        if (currentFragmentIdx == 0) {
-            return 0;
-        }
-        return fragments[currentFragmentIdx-1].endSec;
+    const getActivePages = () => {
+        var activePages = [];
+        activeFragments.forEach(fragmentIdx => {
+            activePages = activePages.concat(fragments[fragmentIdx].pages);
+        });
+        return activePages;
+    }
+
+    const getActivePageAreas = () => {
+        var areas = {};
+        activeFragments.forEach(fragmentIdx => {
+            for (const pageId in fragments[fragmentIdx].pageAreas) {
+                const pageAreas = fragments[fragmentIdx].pageAreas[pageId];
+                if (areas[pageId]) {
+                    areas[pageId] = areas[pageId].concat(pageAreas)
+                } else {
+                    areas[pageId] = pageAreas;
+                }
+            }
+        });
+        return areas;
     }
 
     return (
@@ -37,13 +53,13 @@ function Player({ fragments, pages, videoUrl, onDataUpdated }) {
                 <div>
                     <ReactPlayerWrapper videoUrl={videoUrl} onProgressUpdate={onProgressUpdate} ref={$player} />
 
-                    {currentFragmentIdx >= 0
+                    {activeFragments.length >= 0
                         ?
                         <div>
                             <FragmentPages
                                 pages={pages || []}
-                                fragmentPages={fragments[currentFragmentIdx].pages || []}
-                                fragmentPageAreas={fragments[currentFragmentIdx].pageAreas || {}}
+                                fragmentPages={getActivePages()}
+                                fragmentPageAreas={getActivePageAreas()}
                             />
                         </div>
                         : ''
@@ -51,7 +67,7 @@ function Player({ fragments, pages, videoUrl, onDataUpdated }) {
 
                 </div>
 
-                <Fragments fragments={fragments} onFragmentSelected={handleFragmentSelected}  />
+                <Fragments fragments={fragments} onFragmentSelected={handleFragmentSelected} activeFragments={activeFragments}/>
 
             </div>
     );

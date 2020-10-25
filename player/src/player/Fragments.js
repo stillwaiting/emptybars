@@ -3,22 +3,10 @@ import { secsToString } from "emptybars-common/utils";
 
 import './Fragments.scss';
 
-function Fragments({ fragments, onFragmentSelected }) {
-    var [selectedFragmentIdx, setSelectedFragmentIdx] = useState(-1);
-    var [lastCreatedFragmentIdx, setLastCreatedFragmentIdx] = useState(-1);
-    const lastCreatedFragmentRef = useRef(null);
-
+function Fragments({ fragments, onFragmentSelected: onFragmentClicked, activeFragments }) {
     const handleClickFragment = (fragmentIdx) => {
-        setSelectedFragmentIdx(fragmentIdx);
-        onFragmentSelected(fragmentIdx);
+        onFragmentClicked(fragmentIdx);
     };
-
-    useEffect(() => {
-        if (lastCreatedFragmentRef.current && lastCreatedFragmentIdx >= 0) {
-            lastCreatedFragmentRef.current.scrollIntoView();
-            setLastCreatedFragmentIdx(-1);
-        }
-    });
 
     return (
         <div className='fragments'>
@@ -28,11 +16,10 @@ function Fragments({ fragments, onFragmentSelected }) {
                 {fragments.map(({ startSec, endSec }, key) => (
                     <div
                         className={`button ${
-                            selectedFragmentIdx === key ? 'active' : ''
+                            (activeFragments.indexOf(key) >= 0) ? 'active' : ''
                         }`}
                         key={key}
                         onClick={handleClickFragment.bind(null, key)}
-                        ref={(key == lastCreatedFragmentIdx) ? lastCreatedFragmentRef : null}
                     >
                         #{key+1}
                     </div>
