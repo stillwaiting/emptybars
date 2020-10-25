@@ -1,30 +1,8 @@
 import React, { useState, useRef } from 'react';
 import Editor from './editor/Editor';
-import {secsToString, stringToSecs} from "./utils";
+import { transformFromHumanReadable, transformToHumanReadable} from "emptybars-common/utils";
 
 import './EditorLoader.scss';
-
-const transformToHumanReadable = (data) => {
-    const transformedData = JSON.parse(JSON.stringify(data));
-    transformedData.fragments.forEach(f => {
-        f.start = secsToString(f.startSec);
-        f.end = secsToString(f.endSec);
-        delete f.startSec;
-        delete f.endSec;
-    });
-    return transformedData;
-}
-
-const transformFromHumanReadable = (data) => {
-    const transformedData = JSON.parse(JSON.stringify(data));
-    transformedData.fragments.forEach(f => {
-        f.startSec = stringToSecs(f.start);
-        f.endSec = stringToSecs(f.end);
-        delete f.start;
-        delete f.end;
-    });
-    return transformedData;
-}
 
 function EditorLoader(initialData) {
     var [data, setData] = useState(transformFromHumanReadable(initialData));

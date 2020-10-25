@@ -1,5 +1,5 @@
 import React, {useState, useRef, useEffect} from 'react';
-import { secsToString } from "../utils";
+import { secsToString } from "emptybars-common/utils";
 
 import './Fragments.scss';
 

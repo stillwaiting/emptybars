@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ReactPlayer from 'react-player';
 
-import { secsToString } from './utils'
+import { secsToString } from 'emptybars-common/utils'
 
 import './PlayerWithNavButtons.scss';
 

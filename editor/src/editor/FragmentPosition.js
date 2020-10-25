@@ -1,5 +1,5 @@
 import React from 'react';
-import { secsToString } from "../utils";
+import { secsToString } from "emptybars-common/utils";
 
 import './FragmentPosition.scss';
 
