@@ -6,14 +6,19 @@
   overflow-y: scroll;
   overflow-x: hidden;
   padding: 0px 5px;
+
   .scrolling {
-    padding: 5px;
+    display:flex;
+    flex-wrap: wrap;
+    width:300px;
+    padding: 2px;
     border: 1px solid darkred;
   }
   .button {
     @include squareButton;
 
     white-space: nowrap;
+    margin:1px;
   }
 
   .addButton {

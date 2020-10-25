@@ -22,6 +22,7 @@ function Fragments({ fragments, onFragmentSelected }) {
 
     return (
         <div className='fragments'>
+            <div>Fragments:</div>
             <div className='scrolling'>
 
                 {fragments.map(({ startSec, endSec }, key) => (
@@ -33,7 +34,7 @@ function Fragments({ fragments, onFragmentSelected }) {
                         onClick={handleClickFragment.bind(null, key)}
                         ref={(key == lastCreatedFragmentIdx) ? lastCreatedFragmentRef : null}
                     >
-                        Fragment {key+1}: {secsToString(startSec)} - {secsToString(endSec)}
+                        #{key+1}
                     </div>
                 ))}
             </div>
