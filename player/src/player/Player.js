@@ -14,7 +14,7 @@ function Player({ fragments, pages, videoUrl, onDataUpdated }) {
 
     const handleFragmentSelected = (fragmentIdx) => {
         setCurrentFragmentIdx(fragmentIdx);
-        $player.current.seekToAndStop(fragments[fragmentIdx].startSec)
+        $player.current.playFragment(fragments[fragmentIdx].startSec, fragments[fragmentIdx].endSec)
     };
 
     const handleOnPagesUpdated = (pages) => {

@@ -59,13 +59,6 @@ class ReactPlayerWrapper extends React.Component {
         });
     }
 
-    seekToAndStop(pos) {
-        this.setState({
-            playing: false
-        });
-        this.$player.current.seekTo(pos, 'seconds');
-    }
-
     render() {
             const moveTo = [-5, -1, -0.5, -0.1, 0.1, 0.5, 1, 5];
 
