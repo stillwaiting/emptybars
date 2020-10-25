@@ -49,7 +49,7 @@ function Player({ fragments, pages, videoUrl, onDataUpdated }) {
     }
 
     return (
-            <div className='editor'>
+            <div className='player'>
                 <div>
                     <ReactPlayerWrapper videoUrl={videoUrl} onProgressUpdate={onProgressUpdate} ref={$player} />
 
