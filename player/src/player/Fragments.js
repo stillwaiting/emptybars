@@ -13,7 +13,7 @@ function Fragments({ fragments, playInterval, activeFragments }) {
     const handleClickFragment = (fragmentIdx) => {
         onPlayInputChange({
             target: {
-                value: fragmentIdx + ':' + fragmentIdx
+                value: (fragmentIdx+1) + ':' + (fragmentIdx+1)
             }
         });
         playInterval(fragments[fragmentIdx].startSec, fragments[fragmentIdx].endSec);
@@ -22,8 +22,8 @@ function Fragments({ fragments, playInterval, activeFragments }) {
     const handlePlayClick = () => {
         const [startFragmentIdx, startFragmentIdxDelta, stopFragmentIdx, stopFragmentIdxDelta] = parsePlayInput(playInput);
         playInterval(
-            fragments[startFragmentIdx].startSec + startFragmentIdxDelta,
-            fragments[stopFragmentIdx].startSec + stopFragmentIdxDelta
+            fragments[startFragmentIdx-1].startSec + startFragmentIdxDelta,
+            fragments[stopFragmentIdx-1].endSec + stopFragmentIdxDelta
         )
     }
 
