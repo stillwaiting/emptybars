@@ -17,9 +17,7 @@
     white-space: nowrap;
     margin:1px;
   }
-
-  .addButton {
-    @include blueButton;
-    text-align: center;
+  .error {
+    color: red;
   }
 }

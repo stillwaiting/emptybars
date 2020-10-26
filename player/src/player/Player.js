@@ -6,20 +6,15 @@ import FragmentPages from "./FragmentPages";
 
 import './Player.css';
 
-function Player({ fragments, images, pages, videoUrl, onDataUpdated }) {
+function Player({ fragments, images, pages, videoUrl }) {
     const [activeFragments, setActiveFragments] = useState([]);
     const [videoPlayerPosSecs, setVideoPlayerPosSecs] = useState(0);
 
     const $player = useRef(null);
 
-    const handleFragmentSelected = (fragmentIdx) => {
-        setActiveFragments([fragmentIdx]);
-        $player.current.playFragment(fragments[fragmentIdx].startSec, fragments[fragmentIdx].endSec)
+    const handlePlayInterval = (from, until) => {
+        $player.current.playFragment(from, until)
     };
-
-    const handleOnPagesUpdated = (pages) => {
-        onDataUpdated({ fragments, pages, videoUrl });
-    }
 
     const onProgressUpdate = (playedSeconds) => {
         setVideoPlayerPosSecs(parseFloat(playedSeconds.toFixed(1)));
@@ -75,7 +70,7 @@ function Player({ fragments, images, pages, videoUrl, onDataUpdated }) {
 
                 </div>
 
-                <Fragments fragments={fragments} onFragmentSelected={handleFragmentSelected} activeFragments={activeFragments}/>
+                <Fragments fragments={fragments} playInterval={handlePlayInterval} activeFragments={activeFragments}/>
 
             </div>
     );
