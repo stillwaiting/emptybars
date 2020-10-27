@@ -75,6 +75,11 @@ class ReactPlayerWrapper extends React.Component {
                         onEnded={this._handleStop.bind(this)}
                         playing={this.state.playing}
                         controls={true}
+                        config={{
+                            youtube: {
+                                playerVars: {origin: window.location.origin}
+                            }
+                        }}
                     />
                     <div className='positionAndControls'>
                         Current position: <span className='position'>{secsToString(this.state.progress)}</span>

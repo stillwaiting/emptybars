@@ -11,7 +11,6 @@ export const secsToString = (secs) => {
 
 export const stringToSecs = (str) => {
     var [mins, secs] = str.split(':', 2);
-    console.log(parseInt(mins), parseFloat(secs), parseInt(mins) * 60 + parseFloat(secs));
     return parseInt(mins) * 60 + parseFloat(secs);
 }
 
