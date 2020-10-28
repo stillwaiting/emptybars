@@ -5,20 +5,11 @@ import Layout from "../components/layout"
 import Image from "../components/image"
 import SEO from "../components/seo"
 
-
-function isComposerName(node) {
-    return (node.relativeDirectory.split('/').length == 1 && node.internal.type == 'File' && node.name === 'name');
-}
-
 function addComposer(indexedData, node) {
     indexedData[node.relativeDirectory] = {
         name: node.fields.content,
         compositions: {},
     };
-}
-
-function isCompositionName(node) {
-    return (node.relativeDirectory.split('/').length == 2 && node.internal.type == 'File' && node.name === 'name');
 }
 
 function addComposition(indexedData, node) {
@@ -28,10 +19,6 @@ function addComposition(indexedData, node) {
         name: node.fields.content,
         performers: {},
     };
-}
-
-function isPerformerName(node) {
-    return (node.relativeDirectory.split('/').length == 3 && node.internal.type == 'File' && node.name === 'name');
 }
 
 function addPerformer(indexedData, node) {
@@ -45,21 +32,21 @@ function addPerformer(indexedData, node) {
 
 const IndexPage = ({ data }) => {
     const indexedData = {};
-    data.allFile.nodes.forEach(node => {
-        if (isComposerName(node)) {
-            addComposer(indexedData, node);
-        }
+    data.composers.nodes.forEach(node => {
+        addComposer(indexedData, node);
     });
-    data.allFile.nodes.forEach(node => {
-        if (isCompositionName(node)) {
-            addComposition(indexedData, node);
-        }
+    data.compositions.nodes.forEach(node => {
+        addComposition(indexedData, node);
     });
-    data.allFile.nodes.forEach(node => {
-        if (isPerformerName(node)) {
-            addPerformer(indexedData, node);
-        }
+    data.performers.nodes.forEach(node => {
+        addPerformer(indexedData, node);
     });
+
+    // data.allFile.nodes.forEach(node => {
+    //     if (isPerformerName(node)) {
+    //         addPerformer(indexedData, node);
+    //     }
+    // });
 
     return <Layout>
         <SEO title="Home"/>
@@ -79,19 +66,30 @@ export default IndexPage
 
 export const query = graphql`
     query MyQuery {
-      allFile(sort: {fields: absolutePath}) {
-        nodes {
-          absolutePath
-          id
-          name
-          extension
-          relativeDirectory
-          relativePath
-          internal {
-            type
-          }
-          fields { content }
+        composers: allFile(filter: {fields: {type: {eq: "composerName"}}}) {
+            nodes {
+              relativeDirectory
+              fields {
+                content
+              }
+            }
         }
-      }
-    }
+        compositions: allFile(filter: {fields: {type: {eq: "compositionName"}}}) {
+            nodes {
+              relativeDirectory
+              fields {
+                content
+              }
+            }
+        }
+        performers: allFile(filter: {fields: {type: {eq: "performerName"}}}) {
+            nodes {
+              relativeDirectory
+              fields {
+                content
+              }
+            }
+        }
+    } 
+
 `
