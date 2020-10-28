@@ -6,6 +6,7 @@ import './FragmentPages.scss';
 
 function FragmentPages({ images, pages, fragmentPages, fragmentPageAreas }) {
     const [zoom, setZoom] = useState(1);
+    const [lastScrollHash, setLastScrollHash] = useState("");
     const fragmentPagesRef = useRef();
 
     const handleZoomIn = () => {
@@ -18,6 +19,34 @@ function FragmentPages({ images, pages, fragmentPages, fragmentPageAreas }) {
 
     const handleReset = () => {
         setZoom(1);
+    }
+
+    const hash = JSON.stringify(fragmentPageAreas);
+    if (lastScrollHash != hash && fragmentPagesRef.current) {
+        setLastScrollHash(hash);
+        var selectedPage = -1;
+        for (var idx = 0; idx < pages.length; idx++) {
+            const puid = pages[idx].id;
+            if (fragmentPageAreas[puid] && fragmentPageAreas[puid].length) {
+                selectedPage = idx;
+                break;
+            }
+        }
+        if (selectedPage >= 0) {
+            var page = null;
+            var container = fragmentPagesRef.current.firstChild;
+            var invariant = 0;
+            for (var i = 0; i < container.childNodes.length; i++) {
+                if (container.childNodes[i].className == "page") {
+                    if (invariant == selectedPage) {
+                        page = container.childNodes[i];
+                        break;
+                    }
+                    invariant ++;
+                }
+            }
+            page.scrollIntoView();
+        }
     }
 
     // if (fragmentPagesRef && fragmentPagesRef.current) {
