@@ -38,20 +38,48 @@ const IndexPage = ({ data }) => {
     data.compositions.nodes.forEach(node => {
         addComposition(indexedData, node);
     });
-    data.performers.nodes.forEach(node => {
+    data.
+    performers.nodes.forEach(node => {
         addPerformer(indexedData, node);
     });
 
-    // data.allFile.nodes.forEach(node => {
-    //     if (isPerformerName(node)) {
-    //         addPerformer(indexedData, node);
-    //     }
-    // });
+    const composerSlugsSorted = data.composers.nodes.map(node => node.relativeDirectory);
+    composerSlugsSorted.sort();
+
+    const renderPerformer = (composerSlug, compositionSlug, performerSlug) => {
+        return <li key={performerSlug}>
+            <Link to={`${composerSlug}/${compositionSlug}/${performerSlug}`}>{indexedData[composerSlug].compositions[compositionSlug].performers[performerSlug].name}</Link>
+        </li>
+    }
+
+    const renderComposition = (composerSlug, compositionSlug) => {
+        const performersSorted = Object.keys(indexedData[composerSlug].compositions[compositionSlug].performers);
+        performersSorted.sort();
+        return <li key={compositionSlug}>
+            {indexedData[composerSlug].compositions[compositionSlug].name}
+            <ul>
+                {performersSorted.map(performerSlug => renderPerformer(composerSlug, compositionSlug, performerSlug))}
+            </ul>
+        </li>
+    }
+
+    const renderComposer = (composerSlug) => {
+        const compositionsSorted = Object.keys(indexedData[composerSlug].compositions);
+        compositionsSorted.sort();
+        return <li key={composerSlug}>
+            {indexedData[composerSlug].name}
+            <ul>
+                {compositionsSorted.map(compositionSlug => renderComposition(composerSlug, compositionSlug))}
+            </ul>
+        </li>;
+    }
 
     return <Layout>
         <SEO title="Home"/>
         <h1>Hi people</h1>
-        <pre>{JSON.stringify(indexedData, null, 3)}</pre>
+        <ul>
+        {composerSlugsSorted.map(renderComposer)}
+        </ul>
         <p>Welcome to your new Gatsby site.</p>
         <p>Now go build something great.</p>
         <div style={{maxWidth: `300px`, marginBottom: `1.45rem`}}>
