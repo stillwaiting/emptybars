@@ -30,10 +30,11 @@ function InitPlayer($element, data) {
     const images = [];
     $element.innerText = "Loading, please wait...";
 
-    const setImageLoaded = (error) => {
+    const setImageLoaded = () => {
+
         imagesCount += 1;
 
-        if (imagesCount == data.pages.length) {
+        if (imagesCount >= data.pages.length) {
             ReactDOM.render(
                 <React.StrictMode>
                     <Player images={images} {...transformFromHumanReadable(data)} />
@@ -42,6 +43,10 @@ function InitPlayer($element, data) {
             );
         }
     };
+
+    if (data.pages.length == 0) {
+        setImageLoaded();
+    }
 
     data.pages.forEach((page, pageIdx) => {
         const image = new Image();
