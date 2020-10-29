@@ -1,6 +1,7 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
+import Image from "./image";
 
 const Header = ({ siteTitle }) => (
   <header
@@ -17,6 +18,8 @@ const Header = ({ siteTitle }) => (
       }}
     >
       <h1 style={{ margin: 0 }}>
+          <Image />
+
         <Link
           to="/"
           style={{
