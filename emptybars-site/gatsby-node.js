@@ -23,11 +23,12 @@ function isPerformerName(node) {
 exports.onCreateNode = async ({ node, loadNodeContent, actions }) => {
     const { createNode, createNodeField } = actions
 
-    if (node.name == 'playerIndex') {
+    if (node.name == 'playerIndexHtml') {
         const content = await loadNodeContent(node);
         const baseUrl = node.url.split('index.html')[0];
         const dom = new jsdom.JSDOM(content);
         const cssNodes = [...dom.window.document.querySelectorAll('link')];
+        console.log('Player css files found: ' + cssNodes.length);
         createNode({
             id: "playerCss",
             urls: cssNodes.map(node => baseUrl + node.href),
@@ -38,6 +39,7 @@ exports.onCreateNode = async ({ node, loadNodeContent, actions }) => {
         });
 
         const jsNodes = [...dom.window.document.querySelectorAll('script')].filter(node => node.src);
+        console.log('Player js files found: ' + jsNodes.length);
         createNode({
             id: "playerJs",
             urls: jsNodes.map(node => baseUrl + node.src),

@@ -38,7 +38,7 @@ module.exports = {
       resolve: 'gatsby-source-remote-file',
       options: {
         url: 'https://lucid-mestorf-8474c9.netlify.app/player/build/index.html',
-        name: 'playerIndex',
+        name: 'playerIndexHtml',
       },
     }
     // this (optional) plugin enables Progressive Web App + Offline functionality
