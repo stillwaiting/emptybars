@@ -4,7 +4,8 @@
  * See: https://www.gatsbyjs.com/docs/node-apis/
  */
 
-fs = require('fs');
+const fs = require('fs');
+const jsdom = require("jsdom");
 
 function isComposerName(node) {
     return (node.relativeDirectory && node.relativeDirectory.split('/').length == 1 && node.internal.type == 'File' && node.name === 'name');
@@ -19,8 +20,33 @@ function isPerformerName(node) {
 }
 
 // You can delete this file if you're not using it
-exports.onCreateNode = ({ node, actions }) => {
+exports.onCreateNode = async ({ node, loadNodeContent, actions }) => {
     const { createNode, createNodeField } = actions
+
+    if (node.name == 'playerIndex') {
+        const content = await loadNodeContent(node);
+        const baseUrl = node.url.split('index.html')[0];
+        const dom = new jsdom.JSDOM(content);
+        const cssNodes = [...dom.window.document.querySelectorAll('link')];
+        createNode({
+            id: "playerCss",
+            urls: cssNodes.map(node => baseUrl + node.href),
+            internal: {
+                type: 'playerCss',
+                contentDigest: "html"
+            }
+        });
+
+        const jsNodes = [...dom.window.document.querySelectorAll('script')].filter(node => node.src);
+        createNode({
+            id: "playerJs",
+            urls: jsNodes.map(node => baseUrl + node.src),
+            internal: {
+                type: 'playerJs',
+                contentDigest: "html"
+            }
+        });
+    }
 
     if (node.internal.type === `File` && (node.extension === 'json' || node.extension === 'txt')) {
         fs.readFile(node.absolutePath, undefined, (_err, buf) => {

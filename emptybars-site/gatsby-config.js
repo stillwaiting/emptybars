@@ -34,6 +34,13 @@ module.exports = {
         path: `${__dirname}/../composers`,
       },
     },
+    {
+      resolve: 'gatsby-source-remote-file',
+      options: {
+        url: 'https://lucid-mestorf-8474c9.netlify.app/player/build/index.html',
+        name: 'playerIndex',
+      },
+    }
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
