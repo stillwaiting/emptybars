@@ -53,24 +53,18 @@ function Player({ fragments, images, pages, videoUrl }) {
     return (
             <div className='player'>
                 <div>
-                    <ReactPlayerWrapper videoUrl={videoUrl} onProgressUpdate={onProgressUpdate} ref={$player} />
-
-                    {activeFragments.length >= 0
-                        ?
-                        <div>
-                            <FragmentPages
-                                images={images}
-                                pages={pages || []}
-                                fragmentPages={getActivePages()}
-                                fragmentPageAreas={getActivePageAreas()}
-                            />
-                        </div>
-                        : ''
-                    }
-
+                    <FragmentPages
+                        images={images}
+                        pages={pages || []}
+                        fragmentPages={getActivePages()}
+                        fragmentPageAreas={getActivePageAreas()}
+                        />
                 </div>
 
-                <Fragments fragments={fragments} playInterval={handlePlayInterval} activeFragments={activeFragments}/>
+                <div>
+                    <ReactPlayerWrapper videoUrl={videoUrl} onProgressUpdate={onProgressUpdate} ref={$player} />
+                    <Fragments fragments={fragments} playInterval={handlePlayInterval} activeFragments={activeFragments}/>
+                </div>
 
             </div>
     );

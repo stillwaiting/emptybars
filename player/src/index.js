@@ -4,13 +4,31 @@ import ReactDOM from 'react-dom';
 import Player from './player/Player';
 import { transformFromHumanReadable} from "emptybars-common/utils";
 
-InitPlayer('playerPlaceholder', window.playerData);
+window.fragmentsPlayer = {
+    initialized: false,
+    interval: false
+};
+
+window.fragmentsPlayer.interval = setInterval(() => {
+    if (document.getElementById('playerData')) {
+        if (window.fragmentsPlayer.initialized) {
+            clearInterval(window.fragmentsPlayer.interval);
+            window.location.reload();
+            return;
+        }
+        window.fragmentsPlayer.initialized = true;
+        const data = JSON.parse(document.getElementById('playerData').innerHTML);
+        const parent = document.getElementById('playerData').parentNode;
+        document.getElementById('playerData').remove();
+        InitPlayer(parent, data);
+    }
+}, 100);
 
 function InitPlayer($element, data) {
 
     var imagesCount = 0;
     const images = [];
-    document.getElementById($element).innerText = "Loading, please wait...";
+    $element.innerText = "Loading, please wait...";
 
     const setImageLoaded = (error) => {
         imagesCount += 1;
@@ -20,7 +38,7 @@ function InitPlayer($element, data) {
                 <React.StrictMode>
                     <Player images={images} {...transformFromHumanReadable(data)} />
                 </React.StrictMode>,
-                document.getElementById($element)
+                $element
             );
         }
     };
