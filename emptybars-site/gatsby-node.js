@@ -78,6 +78,7 @@ exports.createPages = ({graphql, actions}) => {
           jsons: allFile(filter: {extension: {eq: "json"}}) {
             nodes {
               relativeDirectory
+              relativePath
               fields {
                 content
               }
@@ -91,12 +92,18 @@ exports.createPages = ({graphql, actions}) => {
 
         // Create blog post pages.
         result.data.jsons.nodes.forEach(node => {
+            const composer = node.relativePath.split('/')[0];
+            const composition = node.relativePath.split('/')[1];
+            const performer = node.relativePath.split('/')[2];
             createPage({
                 // Path for this page — required
                 path: `${node.relativeDirectory}`,
                 component: fragmentPlayerTemplate,
                 context: {
-                    fragments: JSON.parse(node.fields.content)
+                    fragments: JSON.parse(node.fields.content),
+                    composerNamePath: `${composer}/name.txt`,
+                    compositionNamePath: `${composer}/${composition}/name.txt`,
+                    performerNamePath: `${composer}/${composition}/${performer}/name.txt`,
                 },
             })
         })
