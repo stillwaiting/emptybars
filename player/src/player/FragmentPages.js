@@ -21,37 +21,41 @@ function FragmentPages({ images, pages, fragmentPages, fragmentPageAreas }) {
         setZoom(1);
     }
 
-    const hash = JSON.stringify(fragmentPageAreas);
-    if (lastScrollHash != hash && fragmentPagesRef.current) {
-        setLastScrollHash(hash);
-        var selectedPage = -1;
+    const findFirstSelectedPageIdx = () => {
+        var selectedPageIdx = -1;
         for (var idx = 0; idx < pages.length; idx++) {
             const puid = pages[idx].id;
             if (fragmentPageAreas[puid] && fragmentPageAreas[puid].length) {
-                selectedPage = idx;
+                selectedPageIdx = idx;
                 break;
             }
         }
-        if (selectedPage >= 0) {
-            var page = null;
-            var container = fragmentPagesRef.current.firstChild;
-            var invariant = 0;
-            for (var i = 0; i < container.childNodes.length; i++) {
-                if (container.childNodes[i].className == "page") {
-                    if (invariant == selectedPage) {
-                        page = container.childNodes[i];
-                        break;
-                    }
-                    invariant ++;
-                }
-            }
-            page.scrollIntoView();
-        }
+        return selectedPageIdx;
     }
 
-    // if (fragmentPagesRef && fragmentPagesRef.current) {
-    //     fragmentPagesRef.current.scrollTop = 100;
-    // }
+    const findPageNode = (selectedPageIdx) => {
+        var container = fragmentPagesRef.current.firstChild;
+        var invariant = 0;
+        for (var i = 0; i < container.childNodes.length; i++) {
+            if (container.childNodes[i].className == "page") {
+                if (invariant == selectedPageIdx) {
+                    return container.childNodes[i];
+                }
+                invariant ++;
+            }
+        }
+        throw "cannot page page " + selectedPageIdx;
+    }
+
+    const hash = JSON.stringify(fragmentPageAreas);
+    if (lastScrollHash != hash && fragmentPagesRef.current) {
+        setLastScrollHash(hash);
+        const selectedPageIdx = findFirstSelectedPageIdx();
+        if (selectedPageIdx >= 0) {
+            var page = findPageNode(selectedPageIdx);
+            fragmentPagesRef.current.scrollTop = page.offsetTop - fragmentPagesRef.current.firstChild.offsetTop;
+        }
+    }
 
     const fragmentPagesStyles = {
         height: parseInt(500*zoom*297/210 + 20) + "px"
