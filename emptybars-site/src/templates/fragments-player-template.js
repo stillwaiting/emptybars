@@ -11,11 +11,11 @@ const SecondPage = ( {pageContext, data} ) => {
         <h1>{data.composition.edges[0].node.fields.content} ({data.composer.edges[0].node.fields.content})</h1>
         <div><p>Performed by: {data.performer.edges[0].node.fields.content}</p></div>
         <div>
+            Initialising...
             <script id='playerData' type="application/json"
                     dangerouslySetInnerHTML={{__html: JSON.stringify(pageContext.fragments, null, 3)}}>
             </script>
         </div>
-        <p>Welcome to page 2</p>
         <Link to="/">Go back to the homepage</Link>
         <Helmet>
             {data.playerCss.urls.map((url, idx) =>

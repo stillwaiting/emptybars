@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom';
 import Player from './player/Player';
 import { transformFromHumanReadable} from "emptybars-common/utils";
 
+import ImagesLoader from './ImagesLoader';
+
 window.fragmentsPlayer = {
     initialized: false,
     interval: false
@@ -26,34 +28,20 @@ window.fragmentsPlayer.interval = setInterval(() => {
 
 function InitPlayer($element, data) {
 
-    var imagesCount = 0;
-    const images = [];
-    $element.innerText = "Loading, please wait...";
-
-    const setImageLoaded = () => {
-
-        imagesCount += 1;
-
-        if (imagesCount >= data.pages.length) {
-            ReactDOM.render(
-                <React.StrictMode>
-                    <Player images={images} {...transformFromHumanReadable(data)} />
-                </React.StrictMode>,
-                $element
-            );
-        }
-    };
-
-    if (data.pages.length == 0) {
-        setImageLoaded();
+    const onImagesLoaded = (images) => {
+        return ReactDOM.render(
+                    <React.StrictMode>
+                        <Player images={images} {...transformFromHumanReadable(data)} />
+                    </React.StrictMode>,
+                    $element
+                );
     }
 
-    data.pages.forEach((page, pageIdx) => {
-        const image = new Image();
-        image.src=page.url;
-        image.onload = () => { setImageLoaded() }
-        image.onerror = (e) => { console.error(e); setImageLoaded() }
-        images.push(image);
-    });
+    ReactDOM.render(
+        <React.StrictMode>
+            <ImagesLoader imageUrls={data.pages.map(p => p.url)} onImagesLoaded={onImagesLoaded} />
+        </React.StrictMode>,
+        $element
+    );
 }
 
