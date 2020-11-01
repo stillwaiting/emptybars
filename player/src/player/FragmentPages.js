@@ -47,6 +47,9 @@ function FragmentPages({ images, pages, fragmentPages, fragmentPageAreas }) {
         throw "cannot page page " + selectedPageIdx;
     }
 
+    const calculatePageHeight = () =>
+        parseInt(500*zoom*297/210 + 20);
+
     const hash = JSON.stringify(fragmentPageAreas);
     if (lastScrollHash != hash && fragmentPagesRef.current) {
         setLastScrollHash(hash);
@@ -54,11 +57,14 @@ function FragmentPages({ images, pages, fragmentPages, fragmentPageAreas }) {
         if (selectedPageIdx >= 0) {
             var page = findPageNode(selectedPageIdx);
             fragmentPagesRef.current.scrollTop = page.offsetTop - fragmentPagesRef.current.firstChild.offsetTop;
+            if (Object.keys(fragmentPageAreas).length > 1) {
+                fragmentPagesRef.current.scrollTop += parseInt(calculatePageHeight() / 2);
+            }
         }
     }
 
     const fragmentPagesStyles = {
-        height: parseInt(500*zoom*297/210 + 20) + "px"
+        height: calculatePageHeight() + "px"
     }
 
     return <div>
