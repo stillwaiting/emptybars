@@ -3,30 +3,11 @@ import ReactDOM from 'react-dom';
 
 import Player from './player/Player';
 import { transformFromHumanReadable} from "emptybars-common/utils";
+import { initFragmentsPlayer } from "emptybars-common/initialiser";
 
 import ImagesLoader from './ImagesLoader';
 
-window.fragmentsPlayer = {
-    initialized: false,
-    interval: false
-};
-
-window.fragmentsPlayer.interval = setInterval(() => {
-    if (document.getElementById('playerData')) {
-        if (window.fragmentsPlayer.initialized) {
-            clearInterval(window.fragmentsPlayer.interval);
-            window.location.reload();
-            return;
-        }
-        window.fragmentsPlayer.initialized = true;
-        const data = JSON.parse(document.getElementById('playerData').innerHTML);
-        const parent = document.getElementById('playerData').parentNode;
-        document.getElementById('playerData').remove();
-        InitPlayer(parent, data);
-    }
-}, 100);
-
-function InitPlayer($element, data) {
+initFragmentsPlayer(($element, data) => {
 
     const onImagesLoaded = (images) => {
         return ReactDOM.render(
@@ -43,5 +24,5 @@ function InitPlayer($element, data) {
         </React.StrictMode>,
         $element
     );
-}
+});
 
