@@ -42,7 +42,13 @@ class ReactPlayerWrapper extends React.Component {
     };
 
     _handleOnPlay() {
-        this.setState({playing: true});
+        if (!this.state.playing) {
+            this.setState({
+                playing: true,
+                endSec: -1,
+                gotoAfterStopSec: -1
+            });
+        }
     }
 
     _handleStop() {
