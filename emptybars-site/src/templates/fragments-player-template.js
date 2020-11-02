@@ -12,7 +12,7 @@ const SecondPage = ( {pageContext, data} ) => {
         <div><p>Performed by: {data.performer.edges[0].node.fields.content}</p></div>
         <div>
             Initialising...
-            <script id='playerData' type="application/json"
+            <script id='fragmentsData' type="application/json"
                     dangerouslySetInnerHTML={{__html: JSON.stringify(pageContext.fragments, null, 3)}}>
             </script>
         </div>

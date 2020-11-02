@@ -33,8 +33,17 @@ function FragmentPages({ images, pages, fragmentPages, fragmentPageAreas }) {
         return selectedPageIdx;
     }
 
+    const findScrollareaNode = () => {
+        for (var i = 0; i < fragmentPagesRef.current.childNodes.length; i++) {
+            if (fragmentPagesRef.current.childNodes[i].className == 'scrollArea') {
+                return fragmentPagesRef.current.childNodes[i];
+            }
+        }
+        throw 'Cannot find scrollArea';
+    }
+
     const findPageNode = (selectedPageIdx) => {
-        var container = fragmentPagesRef.current.firstChild;
+        var container = findScrollareaNode();
         var invariant = 0;
         for (var i = 0; i < container.childNodes.length; i++) {
             if (container.childNodes[i].className == "page") {
@@ -44,7 +53,7 @@ function FragmentPages({ images, pages, fragmentPages, fragmentPageAreas }) {
                 invariant ++;
             }
         }
-        throw "cannot page page " + selectedPageIdx;
+        throw "cannot find page " + selectedPageIdx;
     }
 
     const calculatePageHeight = () =>
@@ -56,7 +65,7 @@ function FragmentPages({ images, pages, fragmentPages, fragmentPageAreas }) {
         const selectedPageIdx = findFirstSelectedPageIdx();
         if (selectedPageIdx >= 0) {
             var page = findPageNode(selectedPageIdx);
-            fragmentPagesRef.current.scrollTop = page.offsetTop - fragmentPagesRef.current.firstChild.offsetTop;
+            fragmentPagesRef.current.scrollTop = page.offsetTop - findScrollareaNode().offsetTop;
             if (Object.keys(fragmentPageAreas).length > 1) {
                 fragmentPagesRef.current.scrollTop += parseInt(calculatePageHeight() / 2);
             }
@@ -68,8 +77,12 @@ function FragmentPages({ images, pages, fragmentPages, fragmentPageAreas }) {
     }
 
     return <div>
-        <div>Zoom: <span onClick={handleZoomIn}>+</span> <span onClick={handleZoomOut}>-</span> <span onClick={handleReset}>reset</span></div>
         <div className='fragmentPages' ref={fragmentPagesRef} style={fragmentPagesStyles}>
+            <div className='zoom'>
+                <img src='https://images2.imgbox.com/22/21/4gO3I6ii_o.png?download=true' width='32' onClick={handleZoomIn} />
+                <img src='https://images2.imgbox.com/1b/b2/L4tgMq2a_o.png?download=true' width='32' onClick={handleZoomOut} />
+                <img src='https://images2.imgbox.com/f3/d5/paRxNKm0_o.png?download=true' width='32' onClick={handleReset} />
+            </div>
             <div className='scrollArea'>
             {pages.map((p, idx) => {
                 return <div className='page' key={"fragmentpage" + idx}>

@@ -4,6 +4,15 @@
   .scrollArea {
     border: 1px solid #000;
   }
+
+  .zoom {
+    position: absolute;
+
+    img {
+      cursor: pointer;
+      padding: 4px;
+    }
+  }
 }
 
 .page {
