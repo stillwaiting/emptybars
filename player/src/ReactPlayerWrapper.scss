@@ -2,10 +2,8 @@
 
 .playWithNavButtons {
   .positionAndControls {
+    margin-left: 5px;
     .controls {
-
-      display: flex;
-      flex-direction: row;
 
       .gotoButton {
         @include squareButton;

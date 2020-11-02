@@ -9,7 +9,6 @@
     flex-wrap: wrap;
     width:300px;
     padding: 2px;
-    border: 1px solid darkred;
   }
   .button {
     @include squareButton;
@@ -19,5 +18,12 @@
   }
   .error {
     color: red;
+  }
+
+  .playFragmentsSection {
+    margin-top: 5px;
+    img {
+      cursor: pointer;
+    }
   }
 }

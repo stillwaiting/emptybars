@@ -93,7 +93,10 @@ function Fragments({ fragments, playInterval, activeFragments }) {
                     </div>
                 ))}
             </div>
-            <div>Play fragments: <input onChange={onPlayInputChange} value={playInput}/></div>
+            <div className='playFragmentsSection'>
+                Play fragments: <input onChange={onPlayInputChange} value={playInput}/>
+                &nbsp; <img src='https://images2.imgbox.com/02/01/VzjEL9yb_o.png?download=true' align='center' />
+            </div>
             {!parsePlayInput(playInput)
                 ? <div>
                     <div className="error">Invalid format!</div>

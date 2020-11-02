@@ -14,7 +14,7 @@ class ReactPlayerWrapper extends React.Component {
             duration: -1,
             gotoAfterStopSec: -1,
             endSec: -1,
-            playing: true,
+            playing: false,
         };
         this.$player = React.createRef();
     }
