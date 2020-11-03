@@ -20,7 +20,7 @@ function Fragments({ fragments, playInterval, activeFragments }) {
     };
 
     const handlePlayClick = () => {
-        const [startFragmentIdx, startFragmentIdxDelta, stopFragmentIdx, stopFragmentIdxDelta] = parsePlayInput(playInput);
+        const [startFragmentIdx, startFragmentIdxDelta, stopFragmentIdx, stopFragmentIdxDelta] = parsedPlayInput();
         playInterval(
             fragments[startFragmentIdx-1].startSec + startFragmentIdxDelta,
             fragments[stopFragmentIdx-1].endSec + stopFragmentIdxDelta
@@ -58,8 +58,8 @@ function Fragments({ fragments, playInterval, activeFragments }) {
         }
     }
 
-    const parsePlayInput = (playInput) => {
-        const split = playInput.split(':');
+    const parsedPlayInput = () => {
+        const split = playInput.replace(' ', '').split(':');
         if (split.length != 2) {
             return false;
         }
@@ -76,6 +76,15 @@ function Fragments({ fragments, playInterval, activeFragments }) {
         return [fromFragment, fromFragmentDelta, untilFragment, untilFragmentDelta];
     }
 
+    const isFragmentInPlayInput = (idx) => {
+        const parsed = parsedPlayInput();
+        if (parsed) {
+            const [fromFragment, fromFragmentDelta, untilFragment, untilFragmentDelta] = parsed;
+            return (fromFragment <= (idx+1) && untilFragment >= (idx+1));
+        }
+        return false;
+    }
+
     return (
         <div className='fragments'>
             <div>Fragments:</div>
@@ -86,7 +95,7 @@ function Fragments({ fragments, playInterval, activeFragments }) {
                         tabIndex={0}
                         className={`button ${
                             (activeFragments.indexOf(key) >= 0) ? 'active' : ''
-                        }`}
+                        } ${isFragmentInPlayInput(key) ? 'inPlayInput' : ''}`}
                         key={key}
                         onClick={handleClickFragment.bind(null, key)}
                     >
@@ -95,7 +104,7 @@ function Fragments({ fragments, playInterval, activeFragments }) {
                 ))}
             </div>
             <div className='playFragmentsSection'>
-                Play fragments: <input onChange={onPlayInputChange} value={playInput} className={parsePlayInput(playInput) ? '' : 'errorInput'}/>
+                Play fragments: <input onChange={onPlayInputChange} value={playInput} className={parsedPlayInput() ? '' : 'errorInput'}/>
                 <ReactTooltip id='formats'>
                     <div>
                         <div>Allowed formats:
@@ -110,7 +119,7 @@ function Fragments({ fragments, playInterval, activeFragments }) {
                 </ReactTooltip>
                 &nbsp; <img src='https://images2.imgbox.com/02/01/VzjEL9yb_o.png?download=true' align='center' data-tip data-for='formats' />
             </div>
-            {!parsePlayInput(playInput)
+            {!parsedPlayInput()
                 ? ''
                 : <button onClick={handlePlayClick}>Play</button>
             }

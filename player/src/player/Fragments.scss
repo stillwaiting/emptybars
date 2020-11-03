@@ -16,6 +16,11 @@
 
     white-space: nowrap;
     margin:1px;
+
+    &.inPlayInput {
+      background-color: #717171;
+      color: white;
+    }
   }
   .error {
     color: red;
