@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import React from "react"
 import Image from "./image";
 
-const Header = ({ siteTitle }) => (
+const Header = ({ composition, composer, performer }) => (
   <header
     style={{
       background: "darkblue",
@@ -13,23 +13,40 @@ const Header = ({ siteTitle }) => (
     <div
       style={{
         margin: `0 auto`,
+        display: "flex",
         maxWidth: 960,
-        padding: `0.5rem 1.0875rem 0 1.0875rem`,
+        padding: `0.5rem 0 0.5rem 0`,
       }}
     >
-      <h1 style={{ margin: 0 }}>
 
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
+        <div>
+            <Link
+              to="/"
+              style={{
+                color: `white`,
+                textDecoration: `none`,
+              }}
+            >
             <Image />
-          {/*{siteTitle}*/}
-        </Link>
-      </h1>
+            </Link>
+        </div>
+        <div style={{
+
+        }}>
+            {composition
+                ?  <div style={{
+                    color: "white",
+                    paddingLeft: "20px"
+                }}>
+                        <h1 style={{
+                            margin:"0px",
+                            paddingTop: "20px",
+                        }}>{composition} ({composer})</h1>
+                        Performed by {performer}
+                    </div>
+                : ''
+            }
+        </div>
     </div>
   </header>
 )

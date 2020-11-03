@@ -6,10 +6,11 @@ import SEO from "../components/seo"
 import Helmet from "react-helmet";
 
 const SecondPage = ( {pageContext, data} ) => {
-    return <Layout>
-        <SEO title="Page two"/>
-        <h1>{data.composition.edges[0].node.fields.content} ({data.composer.edges[0].node.fields.content})</h1>
-        <div><p>Performed by: {data.performer.edges[0].node.fields.content}</p></div>
+    return <Layout composition={data.composition.edges[0].node.fields.content} composer={data.composer.edges[0].node.fields.content} performer={data.performer.edges[0].node.fields.content}>
+        <SEO title={`${data.composition.edges[0].node.fields.content} (${data.composer.edges[0].node.fields.content}), ` +
+                `performed by: ${data.performer.edges[0].node.fields.content}`} />
+        {/*<h1>{data.composition.edges[0].node.fields.content} ({data.composer.edges[0].node.fields.content})</h1>*/}
+        {/*<div><p>Performed by: {data.performer.edges[0].node.fields.content}</p></div>*/}
         <div>
             Initialising...
             <script id='fragmentsData' type="application/json"
