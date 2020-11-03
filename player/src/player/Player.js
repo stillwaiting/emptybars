@@ -57,7 +57,7 @@ function Player({ fragments, images, pages, videoUrl }) {
 
     return (
             <div className={initialised ? 'player' : 'player notInitialised'}>
-                <div className='fragmentPages'>
+                <div className='fragmentPagesWrapper'>
                     <FragmentPages
                         images={images}
                         pages={pages || []}

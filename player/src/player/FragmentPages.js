@@ -59,6 +59,9 @@ function FragmentPages({ images, pages, fragmentPages, fragmentPageAreas }) {
     const calculatePageHeight = () =>
         parseInt(500*zoom*297/210 + 20);
 
+    const calculatePageWidth = () =>
+        parseInt(500*zoom + 20);
+
     const hash = JSON.stringify(fragmentPageAreas);
     if (lastScrollHash != hash && fragmentPagesRef.current) {
         setLastScrollHash(hash);
@@ -73,7 +76,8 @@ function FragmentPages({ images, pages, fragmentPages, fragmentPageAreas }) {
     }
 
     const fragmentPagesStyles = {
-        height: calculatePageHeight() + "px"
+        height: calculatePageHeight() + "px",
+        width: calculatePageWidth() + "px"
     }
 
     return <div>
