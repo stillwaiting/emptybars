@@ -15,6 +15,8 @@ class ReactPlayerWrapper extends React.Component {
             gotoAfterStopSec: -1,
             endSec: -1,
             playing: false,
+            playbackSpeed: 100,
+            showControls: false,
         };
         this.$player = React.createRef();
     }
@@ -52,11 +54,16 @@ class ReactPlayerWrapper extends React.Component {
     }
 
     _handleOnStart() {
+        this.setState({showControls: true});
         this.props.onPlay();
     }
 
     _handleStop() {
         this.setState({playing: false});
+    }
+
+    _handleOnSelect(speed) {
+        this.setState({playbackSpeed: speed.target.value});
     }
 
     playFragment(startSec, endSec, mode) {
@@ -70,6 +77,7 @@ class ReactPlayerWrapper extends React.Component {
     }
 
     render() {
+            const playbackSpeeds = [25, 50, 60, 70, 80, 90, 100, 125, 150, 200];
             return (
                 <div className='playWithNavButtons'>
                     <ReactPlayer
@@ -84,6 +92,7 @@ class ReactPlayerWrapper extends React.Component {
                         progressInterval={100}
                         onPause={this._handleStop.bind(this)}
                         onEnded={this._handleStop.bind(this)}
+                        playbackRate={this.state.playbackSpeed / 100.0}
                         playing={this.state.playing}
                         controls={true}
                         config={{
@@ -92,9 +101,21 @@ class ReactPlayerWrapper extends React.Component {
                             }
                         }}
                     />
-                    <div className='positionAndControls'>
-                        Current position: <span className='position'>{secsToString(this.state.progress)}</span>
-                    </div>
+                    {this.state.showControls
+                        ?
+                        <div className='positionAndControls'>
+                            Current position: <span className='position'>{secsToString(this.state.progress)}</span>
+                            <br/>
+                            Playback speed:
+                            <select value={this.state.playbackSpeed} onChange={this._handleOnSelect.bind(this)}>
+                                {playbackSpeeds.map((speed) =>
+                                    <option key={`option${speed}`} value={speed}>{speed}%</option>
+                                )}
+                            </select>
+                        </div>
+                        :
+                        ''
+                    }
                 </div>
             );
     }

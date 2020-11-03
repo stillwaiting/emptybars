@@ -48,7 +48,7 @@ const IndexPage = ({ data }) => {
 
     const renderPerformer = (composerSlug, compositionSlug, performerSlug) => {
         return <li key={performerSlug}>
-            <Link to={`${composerSlug}/${compositionSlug}/${performerSlug}`}>{indexedData[composerSlug].compositions[compositionSlug].performers[performerSlug].name}</Link>
+            <Link to={`${composerSlug}/${compositionSlug}/${performerSlug}`}>performed by {indexedData[composerSlug].compositions[compositionSlug].performers[performerSlug].name}</Link>
         </li>
     }
 
@@ -76,7 +76,6 @@ const IndexPage = ({ data }) => {
 
     return <Layout>
         <SEO title="Home"/>
-        <h1>Hi people</h1>
         <ul>
         {composerSlugsSorted.map(renderComposer)}
         </ul>
