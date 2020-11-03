@@ -1,5 +1,5 @@
 import React from 'react';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import ImageAreas from "./ImageAreas";
 
 import './FragmentPages.scss';
@@ -62,18 +62,29 @@ function FragmentPages({ images, pages, fragmentPages, fragmentPageAreas }) {
     const calculatePageWidth = () =>
         parseInt(500*zoom + 20);
 
-    const hash = JSON.stringify(fragmentPageAreas);
-    if (lastScrollHash != hash && fragmentPagesRef.current) {
-        setLastScrollHash(hash);
-        const selectedPageIdx = findFirstSelectedPageIdx();
-        if (selectedPageIdx >= 0) {
-            var page = findPageNode(selectedPageIdx);
-            fragmentPagesRef.current.scrollTop = page.offsetTop - findScrollareaNode().offsetTop;
-            if (Object.keys(fragmentPageAreas).length > 1) {
-                fragmentPagesRef.current.scrollTop += parseInt(calculatePageHeight() / 2);
+    const handleScrolling = () => {
+        const hash = JSON.stringify(fragmentPageAreas);
+        if (lastScrollHash != hash && fragmentPagesRef.current) {
+            var updateHash = true;
+            const selectedPageIdx = findFirstSelectedPageIdx();
+            if (selectedPageIdx >= 0) {
+                var page = findPageNode(selectedPageIdx);
+                fragmentPagesRef.current.scrollTop = page.offsetTop - findScrollareaNode().offsetTop;
+                if (page.offsetTop == 0) {
+                    updateHash = false;
+                }
+                if (Object.keys(fragmentPageAreas).length > 1) {
+                    fragmentPagesRef.current.scrollTop += parseInt(calculatePageHeight() / 2);
+                }
+            }
+            if (updateHash) {
+                setLastScrollHash(hash);
             }
         }
     }
+
+    useEffect(handleScrolling, []);
+    handleScrolling();
 
     const fragmentPagesStyles = {
         height: calculatePageHeight() + "px",
