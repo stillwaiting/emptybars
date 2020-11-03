@@ -27,8 +27,11 @@ function Editor({ fragments, pages, videoUrl, onDataUpdated }) {
         setVideoPlayerPosSecs(parseFloat(playedSeconds.toFixed(1)));
     };
 
-    const onFragmentChanged = (updatedFragment) => {
+    const onFragmentChanged = (updatedFragment, newFragment) => {
         fragments[currentFragmentIdx] = updatedFragment;
+        if (newFragment) {
+            fragments.splice(currentFragmentIdx + 1, 0, newFragment);
+        }
         onDataUpdated({ fragments, pages, videoUrl });
     };
 

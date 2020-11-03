@@ -47,6 +47,16 @@ function FragmentPosition({ $player, fragment, fragmentIdx, videoPlayerPosSecs, 
         return <span className={className}>Fragment start delta={deltaStart.toFixed(1)}, delta end delta={deltaEnd.toFixed(1)}</span>;
     }
 
+    const handleSplitFragment = () => {
+        const oldVal = fragment.endSec;
+        fragment.endSec = parseFloat(videoPlayerPosSecs.toFixed(1));
+        onFragmentChanged(fragment, JSON.parse(JSON.stringify({
+            startSec: fragment.endSec,
+            endSec: oldVal,
+            pages: fragment.pages
+        })));
+    }
+
     return (
         <div className='fragmentPosition'>
             <div class='title'>Selected Fragment #{fragmentIdx + 1} ({secsToString(fragment.startSec)} - {secsToString(fragment.endSec)})</div>
@@ -74,6 +84,12 @@ function FragmentPosition({ $player, fragment, fragmentIdx, videoPlayerPosSecs, 
                         Set as fragment's end time
                     </div>
                 </div>
+                {(fragment.startSec < videoPlayerPosSecs && fragment.endSec > videoPlayerPosSecs)
+                    ?
+                    <div className='button' onClick={handleSplitFragment}>
+                        Split fragment at {secsToString(videoPlayerPosSecs)}
+                    </div>
+                    :'' }
             </div>
         </div>
     );
