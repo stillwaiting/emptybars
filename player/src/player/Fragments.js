@@ -1,6 +1,6 @@
 import React, {useState, useRef, useEffect} from 'react';
 import { secsToString } from "emptybars-common/utils";
-
+import ReactTooltip from 'react-tooltip';
 import './Fragments.scss';
 
 function Fragments({ fragments, playInterval, activeFragments }) {
@@ -83,6 +83,7 @@ function Fragments({ fragments, playInterval, activeFragments }) {
 
                 {fragments.map(({ startSec, endSec }, key) => (
                     <div
+                        tabIndex={0}
                         className={`button ${
                             (activeFragments.indexOf(key) >= 0) ? 'active' : ''
                         }`}
@@ -94,19 +95,23 @@ function Fragments({ fragments, playInterval, activeFragments }) {
                 ))}
             </div>
             <div className='playFragmentsSection'>
-                Play fragments: <input onChange={onPlayInputChange} value={playInput}/>
-                &nbsp; <img src='https://images2.imgbox.com/02/01/VzjEL9yb_o.png?download=true' align='center' />
+                Play fragments: <input onChange={onPlayInputChange} value={playInput} className={parsePlayInput(playInput) ? '' : 'errorInput'}/>
+                <ReactTooltip id='formats'>
+                    <div>
+                        <div>Allowed formats:
+                            <ul className='allowedFormats'>
+                             <li><span>1:1</span> - play fragment 1 </li>
+                             <li><span>1:3</span> - play fragments 1, 2 and 3</li>
+                             <li><span>1-10s:2+15.2s</span> - play fragments 1 and 2, <br />but start 10 seconds earlier and finish 15.2
+                            seconds later</li>
+                            </ul>
+                        </div>
+                    </div>
+                </ReactTooltip>
+                &nbsp; <img src='https://images2.imgbox.com/02/01/VzjEL9yb_o.png?download=true' align='center' data-tip data-for='formats' />
             </div>
             {!parsePlayInput(playInput)
-                ? <div>
-                    <div className="error">Invalid format!</div>
-                    <div>Allowed formats: <br/>
-                        <span>1:1</span> - Play fragment 1 <br/>
-                        <span>1:3</span> - Play fragments 1, 2 and 3<br/>
-                        <span>1-10s:2+15.2s</span> - Play fragments 1 and 2; start 10 seconds earlier and finish 15.2
-                        seconds later
-                    </div>
-                </div>
+                ? ''
                 : <button onClick={handlePlayClick}>Play</button>
             }
          </div>);

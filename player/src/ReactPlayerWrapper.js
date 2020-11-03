@@ -51,6 +51,10 @@ class ReactPlayerWrapper extends React.Component {
         }
     }
 
+    _handleOnStart() {
+        this.props.onPlay();
+    }
+
     _handleStop() {
         this.setState({playing: false});
     }
@@ -76,6 +80,7 @@ class ReactPlayerWrapper extends React.Component {
                         onDuration={this._handleDuration.bind(this)}
                         onProgress={this._handleProgress.bind(this)}
                         onPlay={this._handleOnPlay.bind(this)}
+                        onStart={this._handleOnStart.bind(this)}
                         progressInterval={100}
                         onPause={this._handleStop.bind(this)}
                         onEnded={this._handleStop.bind(this)}

@@ -4,10 +4,11 @@ import Fragments from './Fragments';
 
 import FragmentPages from "./FragmentPages";
 
-import './Player.css';
+import './Player.scss';
 
 function Player({ fragments, images, pages, videoUrl }) {
     const [activeFragments, setActiveFragments] = useState([]);
+    const [initialised, setInitialised] = useState(false)
     const [videoPlayerPosSecs, setVideoPlayerPosSecs] = useState(0);
 
     const $player = useRef(null);
@@ -26,6 +27,10 @@ function Player({ fragments, images, pages, videoUrl }) {
         });
         setActiveFragments(newActiveFragments);
     };
+
+    const onPlay = () => {
+        setInitialised(true)
+    }
 
     const getActivePages = () => {
         var activePages = [];
@@ -51,8 +56,8 @@ function Player({ fragments, images, pages, videoUrl }) {
     }
 
     return (
-            <div className='player'>
-                <div>
+            <div className={initialised ? 'player' : 'player notInitialised'}>
+                <div className='fragmentPages'>
                     <FragmentPages
                         images={images}
                         pages={pages || []}
@@ -61,8 +66,8 @@ function Player({ fragments, images, pages, videoUrl }) {
                         />
                 </div>
 
-                <div>
-                    <ReactPlayerWrapper videoUrl={videoUrl} onProgressUpdate={onProgressUpdate} ref={$player} />
+                <div className='playerAndFragments'>
+                    <ReactPlayerWrapper videoUrl={videoUrl} onProgressUpdate={onProgressUpdate} ref={$player} onPlay={onPlay} />
                     <Fragments fragments={fragments} playInterval={handlePlayInterval} activeFragments={activeFragments}/>
                 </div>
 

@@ -1,0 +1,14 @@
+
+.player {
+    display: flex;
+    padding: 20px;
+}
+
+.notInitialised {
+    .fragmentPages {
+        display: none;
+    }
+    .fragments {
+        display:none;
+    }
+}
