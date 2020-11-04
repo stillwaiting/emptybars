@@ -10,6 +10,7 @@ function Player({ fragments, images, pages, videoUrl }) {
     const [activeFragments, setActiveFragments] = useState([]);
     const [initialised, setInitialised] = useState(false)
     const [videoPlayerPosSecs, setVideoPlayerPosSecs] = useState(0);
+    const [playInput, setPlayInput] = useState("");
 
     const $player = useRef(null);
 
@@ -55,12 +56,36 @@ function Player({ fragments, images, pages, videoUrl }) {
         return areas;
     }
 
+    const fragmentContainsPoint = (pageAreas, posX, posY) => {
+        for (var areaIdx = 0; areaIdx < pageAreas.length; areaIdx++) {
+            const {x, y, width, height} = pageAreas[areaIdx];
+            const x2 = x + width;
+            const y2 = y + height;
+            if (posX > Math.min(x, x2) && posX < Math.max(x, x2) && posY > Math.min(y, y2) && posY < Math.max(y, y2)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    const onPageClicked = (pageUid, pageX, pageY) => {
+        for (var fragmentIdx = 0 ; fragmentIdx < fragments.length; fragmentIdx ++) {
+            const fragment = fragments[fragmentIdx];
+            if (fragmentContainsPoint(fragment.pageAreas[pageUid] || [], pageX, pageY)) {
+                setPlayInput((fragmentIdx + 1) + ':' + (fragmentIdx + 1));
+                handlePlayInterval(fragment.startSec, fragment.endSec);
+                return;
+            }
+        }
+    }
+
     return (
             <div className={initialised ? 'player' : 'player notInitialised'}>
                 <div className='fragmentPagesWrapper'>
                     <FragmentPages
                         images={images}
                         pages={pages || []}
+                        onPageClicked={onPageClicked}
                         fragmentPages={getActivePages()}
                         fragmentPageAreas={getActivePageAreas()}
                         />
@@ -68,7 +93,7 @@ function Player({ fragments, images, pages, videoUrl }) {
 
                 <div className='playerAndFragments'>
                     <ReactPlayerWrapper videoUrl={videoUrl} onProgressUpdate={onProgressUpdate} ref={$player} onPlay={onPlay} />
-                    <Fragments fragments={fragments} playInterval={handlePlayInterval} activeFragments={activeFragments}/>
+                    <Fragments fragments={fragments} playInterval={handlePlayInterval} activeFragments={activeFragments} playInput={playInput} setPlayInput={setPlayInput}/>
                 </div>
 
             </div>

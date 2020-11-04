@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 
 import './ImageAreas.scss';
 
-function ImageAreas({ title, image, width, areas }) {
+function ImageAreas({ title, image, width, areas, onImageClicked }) {
     // var [height, setHeight] = useState(100);
     var canvasRef = useRef(null);
     var coeffOrigImageToScreenCoords;
@@ -28,6 +28,20 @@ function ImageAreas({ title, image, width, areas }) {
         }
     }
 
+    function getCursorPosition(canvas, event) {
+        const rect = canvas.getBoundingClientRect()
+        const x = event.clientX - rect.left
+        const y = event.clientY - rect.top
+        return [x, y]
+    }
+
+    const handleMouseClick = (e) => {
+        const [x, y] = getCursorPosition(canvasRef.current, e);
+        const origX = x / coeffOrigImageToScreenCoords;
+        const origY = y / coeffOrigImageToScreenCoords;
+        onImageClicked(origX, origY);
+    }
+
     useEffect(() => {
         drawCanvas();
     });
@@ -39,7 +53,7 @@ function ImageAreas({ title, image, width, areas }) {
             <div className='imageAreas'>
                 <div className='canvas'>
                     <div className='title'>{title}</div>
-                    <canvas width={width} height={height} ref={canvasRef}>
+                    <canvas width={width} height={height} ref={canvasRef} onClick={handleMouseClick}>
                     </canvas>
                 </div>
             </div>

@@ -3,9 +3,7 @@ import { secsToString } from "emptybars-common/utils";
 import ReactTooltip from 'react-tooltip';
 import './Fragments.scss';
 
-function Fragments({ fragments, playInterval, activeFragments }) {
-    const [playInput, setPlayInput] = useState("");
-
+function Fragments({ fragments, playInterval, activeFragments, playInput, setPlayInput }) {
     const onPlayInputChange = (e) => {
         setPlayInput(e.target.value);
     }

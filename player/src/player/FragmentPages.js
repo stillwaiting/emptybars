@@ -4,7 +4,7 @@ import ImageAreas from "./ImageAreas";
 
 import './FragmentPages.scss';
 
-function FragmentPages({ images, pages, fragmentPages, fragmentPageAreas }) {
+function FragmentPages({ images, pages, fragmentPages, fragmentPageAreas, onPageClicked }) {
     const [zoom, setZoom] = useState(1);
     const [lastScrollHash, setLastScrollHash] = useState("");
     const fragmentPagesRef = useRef();
@@ -56,6 +56,11 @@ function FragmentPages({ images, pages, fragmentPages, fragmentPageAreas }) {
         throw "cannot find page " + selectedPageIdx;
     }
 
+    const onImageClicked = (imageIdx, imageX, imageY) => {
+        const pageId = pages[imageIdx].id;
+        onPageClicked(pageId, imageX, imageY);
+    }
+
     const calculatePageHeight = () =>
         parseInt(500*zoom*297/210 + 20);
 
@@ -104,6 +109,7 @@ function FragmentPages({ images, pages, fragmentPages, fragmentPageAreas }) {
                             <ImageAreas
                                 title={`Page #${idx+1}`}
                                 image={images[idx]}
+                                onImageClicked={((imageX, imageY) => onImageClicked(idx, imageX, imageY)).bind(this)}
                                 width = {parseInt(500 * zoom)} areas={fragmentPageAreas[p.id] || [] }
                             />
                         </div>;
