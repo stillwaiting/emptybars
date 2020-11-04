@@ -4,7 +4,7 @@ import ImageAreas from "./ImageAreas";
 
 import './FragmentPages.scss';
 
-function FragmentPages({ images, pages, fragmentPages, fragmentPageAreas, onPageClicked }) {
+function FragmentPages({ images, pages, fragmentPageAreas, skipScrollingFromTime, onPageClicked }) {
     const [zoom, setZoom] = useState(1);
     const [lastScrollHash, setLastScrollHash] = useState("");
     const fragmentPagesRef = useRef();
@@ -67,6 +67,9 @@ function FragmentPages({ images, pages, fragmentPages, fragmentPageAreas, onPage
     const calculatePageWidth = () =>
         parseInt(500*zoom + 20);
 
+    const shouldSkipScrolling = () =>
+        skipScrollingFromTime && ((new Date().getTime() - skipScrollingFromTime) < 2000);
+
     const handleScrolling = () => {
         const hash = JSON.stringify(fragmentPageAreas);
         if (lastScrollHash != hash && fragmentPagesRef.current) {
@@ -74,11 +77,13 @@ function FragmentPages({ images, pages, fragmentPages, fragmentPageAreas, onPage
             const selectedPageIdx = findFirstSelectedPageIdx();
             if (selectedPageIdx >= 0) {
                 var page = findPageNode(selectedPageIdx);
-                fragmentPagesRef.current.scrollTop = page.offsetTop - findScrollareaNode().offsetTop;
+                if (!shouldSkipScrolling()) {
+                    fragmentPagesRef.current.scrollTop = page.offsetTop - findScrollareaNode().offsetTop;
+                }
                 if (page.offsetTop == 0) {
                     updateHash = false;
                 }
-                if (Object.keys(fragmentPageAreas).length > 1) {
+                if (!shouldSkipScrolling() && Object.keys(fragmentPageAreas).length > 1) {
                     fragmentPagesRef.current.scrollTop += parseInt(calculatePageHeight() / 2);
                 }
             }

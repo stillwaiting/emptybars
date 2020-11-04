@@ -60,6 +60,7 @@ class ReactPlayerWrapper extends React.Component {
 
     _handleStop() {
         this.setState({playing: false});
+        this.props.onStop();
     }
 
     _handleOnSelect(speed) {
