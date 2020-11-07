@@ -4,17 +4,18 @@ import { transformFromHumanReadable, transformToHumanReadable} from "emptybars-c
 
 import './EditorLoader.scss';
 
-var history = [];
-var redo = [];
-
 function EditorLoader(initialData) {
     var [data, setData] = useState(transformFromHumanReadable(initialData));
+    var [history, setHistory] = useState([]);
+    var [redo, setRedo] = useState([]);
     const textareaRef = useRef(null);
     const handleOnDataUpdated = (newData, operationName) => {
         const historyChunk = {oldData: JSON.parse(JSON.stringify(data)), newData: JSON.parse(JSON.stringify(newData)), operationName};
         history.push(historyChunk);
         setData(newData);
         redo = [];
+        setHistory(history);
+        setRedo(redo)
     }
 
     const handleCopyClick = () => {
@@ -27,12 +28,16 @@ function EditorLoader(initialData) {
         const undoData = history.pop();
         setData(JSON.parse(JSON.stringify(undoData.oldData)));
         redo.push(undoData);
+        setRedo(redo);
+        setHistory(history);
     }
 
     const handleRedo = () => {
         const redoData = redo.pop();
         setData(JSON.parse(JSON.stringify(redoData.newData)));
         history.push(redoData);
+        setRedo(redo);
+        setHistory(history);
     }
 
     return <div className="editorLoader">
