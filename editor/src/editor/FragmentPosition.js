@@ -17,18 +17,21 @@ function FragmentPosition({ $player, fragment, fragmentIdx, videoPlayerPosSecs, 
     }
 
     const hanleSetCurrentTimeAsFragmentStart = () => {
-        fragment.startSec = parseFloat(videoPlayerPosSecs.toFixed(1));
-        onFragmentChanged(fragment, undefined, "update fragment start time");
+        const newFragment = JSON.parse(JSON.stringify(fragment));
+        newFragment.startSec = parseFloat(videoPlayerPosSecs.toFixed(1));
+        onFragmentChanged(newFragment, undefined, "update fragment start time");
     }
 
     const handleSetFragmentStartToLastFragmentEnd = () => {
-        fragment.startSec = getPrevFragmentEndSec();
-        onFragmentChanged(fragment, undefined, "update fragment start time");
+        const newFragment = JSON.parse(JSON.stringify(fragment));
+        newFragment.startSec = getPrevFragmentEndSec();
+        onFragmentChanged(newFragment, undefined, "update fragment start time");
     }
 
     const hanleSetCurrentTimeAsFragmentEnd = () => {
-        fragment.endSec = parseFloat(videoPlayerPosSecs.toFixed(1));
-        onFragmentChanged(fragment, undefined, 'update fragment end time');
+        const newFragment = JSON.parse(JSON.stringify(fragment));
+        newFragment.endSec = parseFloat(videoPlayerPosSecs.toFixed(1));
+        onFragmentChanged(newFragment, undefined, 'update fragment end time');
     }
 
     const renderFragmentPos = () => {
