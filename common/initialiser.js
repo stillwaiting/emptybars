@@ -20,7 +20,7 @@ export const initFragmentsPlayer = (callback) => {
                 return;
             }
             window.fragmentsPlayer.initialized = true;
-            const data = JSON.parse(document.getElementById('fragmentsData').innerHTML);
+            const data = JSON.parse(document.getElementById('fragmentsData').innerHTML.trim());
             const parent = document.getElementById('fragmentsData').parentNode;
             document.getElementById('fragmentsData').remove();
             callback(parent, data);
