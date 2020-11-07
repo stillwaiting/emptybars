@@ -6,6 +6,7 @@ import EditorLoader from './EditorLoader';
 import {initFragmentsPlayer} from "emptybars-common/initialiser";
 
 initFragmentsPlayer(($element, data) => {
+
     const {fragments, pages, videoUrl, videoTitle} = data;
 
     ReactDOM.render(
