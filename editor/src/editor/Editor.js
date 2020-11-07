@@ -46,13 +46,15 @@ function Editor({ fragments, pages, videoUrl, onDataUpdated }) {
     }
 
     const onFragmentPagesChanged = (currentFragmentSelectedPages, message) => {
-        fragments[currentFragmentIdx].pages = currentFragmentSelectedPages;
-        onDataUpdated({ fragments, pages, videoUrl }, message);
+        const newFragments = JSON.parse(JSON.stringify(fragments));
+        newFragments[currentFragmentIdx].pages = currentFragmentSelectedPages;
+        onDataUpdated({ fragments: newFragments, pages, videoUrl }, message);
     };
 
     const onFragmentPageAreasChanged = (currentFragmentPageAreas, message) => {
-        fragments[currentFragmentIdx].pageAreas = currentFragmentPageAreas;
-        onDataUpdated({ fragments, pages, videoUrl }, message);
+        const newFragments = JSON.parse(JSON.stringify(fragments));
+        newFragments[currentFragmentIdx].pageAreas = currentFragmentPageAreas;
+        onDataUpdated({ fragments: newFragments, pages, videoUrl }, message);
     };
 
     const getPrevFragmentEndSec = () => {

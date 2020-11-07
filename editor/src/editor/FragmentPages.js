@@ -12,7 +12,7 @@ function FragmentPages({ pages, fragmentPages, fragmentPageAreas, onFragmentPage
         } else {
             newFragmentPages = newFragmentPages.filter(it => it != page.id);
         }
-        onFragmentPagesChanges(newFragmentPages);
+        onFragmentPagesChanges(newFragmentPages, 'list of fragment pages updated');
     }
 
     const handleOnNewAreaAdded = (pageId, newArea) => {
@@ -22,13 +22,13 @@ function FragmentPages({ pages, fragmentPages, fragmentPageAreas, onFragmentPage
         } else {
             newFragmentPageAreas[pageId].push(newArea);
         }
-        onFragmentPageAreasChanged(newFragmentPageAreas);
+        onFragmentPageAreasChanged(newFragmentPageAreas, 'page area added');
     }
 
     const handleOnDeleteArea = (pageId, areaIdx) => {
         const newFragmentPageAreas = JSON.parse(JSON.stringify(fragmentPageAreas));
         newFragmentPageAreas[pageId].splice(areaIdx, 1);
-        onFragmentPageAreasChanged(newFragmentPageAreas);
+        onFragmentPageAreasChanged(newFragmentPageAreas, 'page area deleted');
     }
 
     return <div className='fragmentPages'>

@@ -94,9 +94,7 @@ function ImageAreas({ title, imgUrl, width, areas, onNewAreaAdded, onDeleteArea 
     }
 
     const handleDelete = (areaIdx) => {
-        if (window.confirm("Delete the area?")) {
-            onDeleteArea(areaIdx);
-        }
+        onDeleteArea(areaIdx);
     }
 
     useEffect(() => {
