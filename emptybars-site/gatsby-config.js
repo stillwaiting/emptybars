@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
     title: `emptybars.org`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    description: `Sheet music split onto fragments and connected to Youtube videos for fun and profit!`,
+    author: `Boris Gvozdev`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,

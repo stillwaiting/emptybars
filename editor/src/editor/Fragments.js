@@ -8,9 +8,10 @@ function Fragments({ fragments, onFragmentSelected, onFragmentsChanged}) {
     var [lastCreatedFragmentIdx, setLastCreatedFragmentIdx] = useState(-1);
     const lastCreatedFragmentRef = useRef(null);
 
-    const handleClickFragment = (fragmentIdx) => {
+    const handleClickFragment = (fragmentIdx, fragment) => {
         setSelectedFragmentIdx(fragmentIdx);
-        onFragmentSelected(fragmentIdx);
+        console.log(fragment);
+        onFragmentSelected(fragmentIdx, fragment);
     };
 
     useEffect(() => {
@@ -21,20 +22,21 @@ function Fragments({ fragments, onFragmentSelected, onFragmentsChanged}) {
     });
 
     const handleAddFragmentClick = () => {
-        if (fragments.length > 0) {
-            fragments.push({
+        const newFragments = JSON.parse(JSON.stringify(fragments));
+        if (newFragments.length > 0) {
+            newFragments.push({
                 startSec: fragments[fragments.length-1].endSec,
                 endSec: fragments[fragments.length-1].endSec + 10
             });
         } else {
-            fragments.push({
+            newFragments.push({
                 startSec: 0,
                 endSec: 10
             });
         }
-        handleClickFragment(fragments.length - 1);
-        onFragmentsChanged(JSON.parse(JSON.stringify(fragments)));
-        setLastCreatedFragmentIdx(fragments.length-1);
+        onFragmentsChanged(newFragments, "add fragment");
+        setLastCreatedFragmentIdx(newFragments.length - 1);
+        handleClickFragment(newFragments.length - 1, newFragments[newFragments.length-1]);
     }
 
     return (
@@ -50,7 +52,7 @@ function Fragments({ fragments, onFragmentSelected, onFragmentsChanged}) {
                             selectedFragmentIdx === key ? 'active' : ''
                         }`}
                         key={key}
-                        onClick={handleClickFragment.bind(null, key)}
+                        onClick={handleClickFragment.bind(null, key, fragments[key])}
                         ref={(key == lastCreatedFragmentIdx) ? lastCreatedFragmentRef : null}
                     >
                         Fragment {key+1}: {secsToString(startSec)} - {secsToString(endSec)}

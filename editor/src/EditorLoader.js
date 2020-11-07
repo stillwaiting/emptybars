@@ -4,11 +4,17 @@ import { transformFromHumanReadable, transformToHumanReadable} from "emptybars-c
 
 import './EditorLoader.scss';
 
+var history = [];
+var redo = [];
+
 function EditorLoader(initialData) {
     var [data, setData] = useState(transformFromHumanReadable(initialData));
     const textareaRef = useRef(null);
-    const handleOnDataUpdated = (newData) => {
+    const handleOnDataUpdated = (newData, operationName) => {
+        const historyChunk = {oldData: JSON.parse(JSON.stringify(data)), newData: JSON.parse(JSON.stringify(newData)), operationName};
+        history.push(historyChunk);
         setData(newData);
+        redo = [];
     }
 
     const handleCopyClick = () => {
@@ -17,10 +23,34 @@ function EditorLoader(initialData) {
         alert('Copied!');
     }
 
+    const handleUndo = () => {
+        const undoData = history.pop();
+        setData(JSON.parse(JSON.stringify(undoData.oldData)));
+        redo.push(undoData);
+    }
+
+    const handleRedo = () => {
+        const redoData = redo.pop();
+        setData(JSON.parse(JSON.stringify(redoData.newData)));
+        history.push(redoData);
+    }
+
     return <div className="editorLoader">
         <Editor {...data} onDataUpdated={handleOnDataUpdated} />
         <textarea readOnly={true} value={JSON.stringify(transformToHumanReadable(data), null, 2)} ref={textareaRef} />
         <div className="copyButton"  onClick={handleCopyClick}>copy</div>
+        {history.length > 0
+            ? <div>
+                Last operation: {history[history.length - 1].operationName} <span className="undoButton" onClick={handleUndo}>undo</span>
+            </div>
+            : ''
+        }
+        {redo.length > 0
+            ? <div>
+                Cancelled operation: {redo[redo.length-1].operationName} <span className="undoButton" onClick={handleRedo}>redo</span>
+            </div>
+            : ''
+        }
     </div>;
 }
 

@@ -7,12 +7,13 @@ function Pages({ pages, onPagesUpdated }) {
         const url = prompt('Please enter page`s image URL');
         // TODO: add validation
         if (url) {
+            const newPages = JSON.parse(JSON.stringify(pages));
             const id = new Date().getTime().toString();
-            onPagesUpdated(pages.push({
+            newPages.push({
                 url,
                 id
-            }));
-            onPagesUpdated(pages);
+            });
+            onPagesUpdated(newPages, 'new page');
         }
     }
 

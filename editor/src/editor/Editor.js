@@ -9,44 +9,50 @@ import FragmentPages from "./FragmentPages";
 import './Editor.css';
 
 function Editor({ fragments, pages, videoUrl, onDataUpdated }) {
-    const [currentFragmentIdx, setCurrentFragmentIdx] = useState(-1);
+    var [currentFragmentIdx, setCurrentFragmentIdx] = useState(-1);
     const [videoPlayerPosSecs, setVideoPlayerPosSecs] = useState(0);
 
     const $player = useRef(null);
 
-    const handleFragmentSelected = (fragmentIdx) => {
+    if (currentFragmentIdx >= fragments.length) {
+        currentFragmentIdx = -1;
+        setCurrentFragmentIdx(-1);
+    }
+
+    const handleFragmentSelected = (fragmentIdx, fragment) => {
         setCurrentFragmentIdx(fragmentIdx);
-        $player.current.seekToAndStop(fragments[fragmentIdx].startSec)
+        $player.current.seekToAndStop(fragment.startSec)
     };
 
-    const handleOnPagesUpdated = (pages) => {
-        onDataUpdated({ fragments, pages, videoUrl });
+    const handleOnPagesUpdated = (pages, message) => {
+        onDataUpdated({ fragments, pages, videoUrl }, message);
     }
 
     const onProgressUpdate = (playedSeconds) => {
         setVideoPlayerPosSecs(parseFloat(playedSeconds.toFixed(1)));
     };
 
-    const onFragmentChanged = (updatedFragment, newFragment) => {
-        fragments[currentFragmentIdx] = updatedFragment;
+    const onFragmentChanged = (updatedFragment, newFragment, message) => {
+        const newFragments = JSON.parse(JSON.stringify(fragments));
+        newFragments[currentFragmentIdx] = updatedFragment;
         if (newFragment) {
-            fragments.splice(currentFragmentIdx + 1, 0, newFragment);
+            newFragments.splice(currentFragmentIdx + 1, 0, newFragment);
         }
-        onDataUpdated({ fragments, pages, videoUrl });
+        onDataUpdated({ fragments: newFragments, pages, videoUrl }, message);
     };
 
-    const onFragmentsChanged = (newFragments) => {
-        onDataUpdated({ fragments: newFragments, pages, videoUrl });
+    const onFragmentsChanged = (newFragments, message) => {
+        onDataUpdated({ fragments: newFragments, pages, videoUrl }, message);
     }
 
-    const onFragmentPagesChanged = (currentFragmentSelectedPages) => {
+    const onFragmentPagesChanged = (currentFragmentSelectedPages, message) => {
         fragments[currentFragmentIdx].pages = currentFragmentSelectedPages;
-        onDataUpdated({ fragments, pages, videoUrl });
+        onDataUpdated({ fragments, pages, videoUrl }, message);
     };
 
-    const onFragmentPageAreasChanged = (currentFragmentPageAreas) => {
+    const onFragmentPageAreasChanged = (currentFragmentPageAreas, message) => {
         fragments[currentFragmentIdx].pageAreas = currentFragmentPageAreas;
-        onDataUpdated({ fragments, pages, videoUrl });
+        onDataUpdated({ fragments, pages, videoUrl }, message);
     };
 
     const getPrevFragmentEndSec = () => {

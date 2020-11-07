@@ -18,17 +18,17 @@ function FragmentPosition({ $player, fragment, fragmentIdx, videoPlayerPosSecs, 
 
     const hanleSetCurrentTimeAsFragmentStart = () => {
         fragment.startSec = parseFloat(videoPlayerPosSecs.toFixed(1));
-        onFragmentChanged(fragment);
+        onFragmentChanged(fragment, undefined, "update fragment start time");
     }
 
     const handleSetFragmentStartToLastFragmentEnd = () => {
         fragment.startSec = getPrevFragmentEndSec();
-        onFragmentChanged(fragment);
+        onFragmentChanged(fragment, undefined, "update fragment start time");
     }
 
     const hanleSetCurrentTimeAsFragmentEnd = () => {
         fragment.endSec = parseFloat(videoPlayerPosSecs.toFixed(1));
-        onFragmentChanged(fragment);
+        onFragmentChanged(fragment, undefined, 'update fragment end time');
     }
 
     const renderFragmentPos = () => {
@@ -48,19 +48,20 @@ function FragmentPosition({ $player, fragment, fragmentIdx, videoPlayerPosSecs, 
     }
 
     const handleSplitFragment = () => {
+        const newFragment = JSON.parse(JSON.stringify(fragment));
         const oldVal = fragment.endSec;
-        fragment.endSec = parseFloat(videoPlayerPosSecs.toFixed(1));
-        onFragmentChanged(fragment, JSON.parse(JSON.stringify({
-            startSec: fragment.endSec,
+        newFragment.endSec = parseFloat(videoPlayerPosSecs.toFixed(1));
+        onFragmentChanged(newFragment, JSON.parse(JSON.stringify({
+            startSec: newFragment.endSec,
             endSec: oldVal,
-            pages: fragment.pages
-        })));
+            pages: newFragment.pages
+        })), 'split fragment');
     }
 
     return (
         <div className='fragmentPosition'>
-            <div class='title'>Selected Fragment #{fragmentIdx + 1} ({secsToString(fragment.startSec)} - {secsToString(fragment.endSec)})</div>
-            <div class='playerPosition'>{renderFragmentPos()}</div>
+            <div className='title'>Selected Fragment #{fragmentIdx + 1} ({secsToString(fragment.startSec)} - {secsToString(fragment.endSec)})</div>
+            <div className='playerPosition'>{renderFragmentPos()}</div>
             <div className='controls'>
                 <div className='button' onClick={handlePlayCurrentFragment}>
                     Play the whole fragment

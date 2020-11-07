@@ -10,4 +10,8 @@
   .copyButton {
     @include blueButton;
   }
+
+  .undoButton {
+    @include blueButton;
+  }
 }
