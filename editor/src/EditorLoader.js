@@ -31,7 +31,7 @@ function EditorLoader(initialData) {
     }
 
     const handleOnDataProvided = (providedData) => {
-        setData(transformFromHumanReadable(providedData));
+        doSetData(transformFromHumanReadable(providedData));
     }
 
     const handleCopyClick = () => {

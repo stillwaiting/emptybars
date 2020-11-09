@@ -95,7 +95,7 @@ function Editor({ fragments, pages, videoUrl, onDataUpdated }) {
 
                 <Fragments fragments={fragments} onFragmentSelected={handleFragmentSelected} onFragmentsChanged={onFragmentsChanged} />
 
-                <Pages pages={pages || []} onPagesUpdated={handleOnPagesUpdated} />
+                {/*<Pages pages={pages || []} onPagesUpdated={handleOnPagesUpdated} />*/}
 
             </div>
     );
