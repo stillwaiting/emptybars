@@ -1,26 +1,16 @@
-<!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
-<p align="center">
-  <a href="https://www.gatsbyjs.com">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-  </a>
-</p>
 <h1 align="center">
   emptybars.org website generator
 </h1>
 
-Kick off your project with this default boilerplate. This starter ships with the main Gatsby configuration files you might need to get up and running blazing fast with the blazing fast app generator for React.
-
-_Have another more specific idea? You may want to check out our vibrant collection of [official and community-created starters](https://www.gatsbyjs.com/docs/gatsby-starters/)._
+TBD: add description
 
 ## 🚀 Quick start
 
-1.  **Create a Gatsby site.**
+1. **Fetch node modules**
 
-    Use the Gatsby CLI to create a new site, specifying the default starter.
-
-    ```shell
-    # create a new Gatsby site using the default starter
-    gatsby new my-default-starter https://github.com/gatsbyjs/gatsby-starter-default
+    ```shell script
+    cd gatsby
+    yarn
     ```
 
 1.  **Start developing.**
@@ -37,14 +27,16 @@ _Have another more specific idea? You may want to check out our vibrant collecti
     Your site is now running at `http://localhost:8000`!
 
     _Note: You'll also see a second link: _`http://localhost:8000/___graphql`_. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.com/tutorial/part-five/#introducing-graphiql)._
-
-    Open the `my-default-starter` directory in your code editor of choice and edit `src/pages/index.js`. Save your changes and the browser will update in real time!
     
 ## Known issues
 
 ### error  Cannot query field "playerCss" on type "Query"  graphql/template-strings
 
 Solution: clean cache and try again (https://www.gatsbyjs.com/docs/debugging-cache-issues/)
+
+```shell script
+rm -rf .cache
+```
 
 ## 🧐 What's inside?
 
@@ -54,6 +46,7 @@ A quick look at the top-level files and directories you'll see in a Gatsby proje
     ├── node_modules
     ├── src
     ├── .gitignore
+    |── .cache
     ├── .prettierrc
     ├── gatsby-browser.js
     ├── gatsby-config.js
@@ -66,9 +59,11 @@ A quick look at the top-level files and directories you'll see in a Gatsby proje
 
 1.  **`/node_modules`**: This directory contains all of the modules of code that your project depends on (npm packages) are automatically installed.
 
-2.  **`/src`**: This directory will contain all of the code related to what you will see on the front-end of your site (what you see in the browser) such as your site header or a page template. `src` is a convention for “source code”.
+1.  **`/src`**: This directory will contain all of the code related to what you will see on the front-end of your site (what you see in the browser) such as your site header or a page template. `src` is a convention for “source code”.
 
-3.  **`.gitignore`**: This file tells git which files it should not track / not maintain a version history for.
+1.  **`.gitignore`**: This file tells git which files it should not track / not maintain a version history for.
+
+1.  **`.cache`** This directory is where gatsby stores its cache. **Cleaning it usually solves 99% of unexpected errors and problems!**
 
 4.  **`.prettierrc`**: This is a configuration file for [Prettier](https://prettier.io/). Prettier is a tool to help keep the formatting of your code consistent.
 
@@ -102,4 +97,3 @@ Looking for more guidance? Full documentation for Gatsby lives [on the website](
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gatsbyjs/gatsby-starter-default)
 
-<!-- AUTO-GENERATED-CONTENT:END -->
