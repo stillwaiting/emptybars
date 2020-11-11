@@ -24,25 +24,56 @@ const Layout = ({ composition, composer, performer, children }) => {
   `)
 
   return (
-    <>
+    <div style={{background: 'white'}}>
       <Header composition={composition} composer={composer} performer={performer} siteTitle={data.site.siteMetadata?.title || `Title`} />
       <div
         style={{
           margin: `0 auto`,
+          background: 'white',
           maxWidth: 960,
           padding: `0 1.0875rem 1.45rem`,
         }}
       >
         <main>{children}</main>
-        <footer style={{
-          marginTop: `2rem`
-        }}>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.com">Gatsby</a>
-        </footer>
       </div>
-    </>
+
+    <footer style={{
+        background: "black",
+        marginTop: `2rem`,
+        color: "white",
+        paddingTop: '20px'
+    }}>
+        <div style={{
+            margin: `0 auto`,
+            maxWidth: 960,
+            padding: `0.5rem 0 0.5rem 0`,
+        }}>
+            <div style={{display:'flex'}}>
+                <div>
+                    <ul>
+                        <li>About</li>
+                        <li>Editor</li>
+                        <li>Player</li>
+                        <li>Contribute</li>
+                    </ul>
+                </div>
+                <div>
+                    <ul>
+                        <li>Terms of Use</li>
+                        <li>Privacy Policy</li>
+                        <li>Intellectual Property</li>
+                        <li>Cookies</li>
+                    </ul>
+                </div>
+            </div>
+            <div style={{fontSize: '75%'}}>
+            © {new Date().getFullYear()},
+            Built with &nbsp; <a href="https://www.gatsbyjs.com" style={{color: 'white'}}>Gatsby</a>
+            </div>
+        </div>
+
+    </footer>
+    </div>
   )
 }
 
