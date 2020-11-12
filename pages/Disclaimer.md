@@ -2,8 +2,8 @@
 
 # Legal rights holders
 
-"emptybars.org" is an open-source non-commercial project that is maintained by volunteers
-from the community with the only mission to promote the classical music and the musical 
+"EmptyBars.Org" is an open-source, non-commercial project that is maintained by the community 
+volunteers with the only mission to promote the classical music and the musical 
 education around the world.
  
 We are doing our best to respect intellectual property rights (a.k.a. "copyrights") of 
