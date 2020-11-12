@@ -2,9 +2,9 @@ import React from 'react';
 import { useRef, useState, useEffect } from 'react';
 import ImageAreas from "./ImageAreas";
 
-import './FragmentPages.scss';
+import './SegmentPages.scss';
 
-function FragmentPages({ images, pages, fragmentPageAreas, skipScrollingFromTime, onPageClicked }) {
+function SegmentPages({ images, pages, fragmentPageAreas, skipScrollingFromTime, onPageClicked }) {
     const [zoom, setZoom] = useState(1);
     const [lastScrollHash, setLastScrollHash] = useState("");
     const fragmentPagesRef = useRef();
@@ -124,4 +124,4 @@ function FragmentPages({ images, pages, fragmentPageAreas, skipScrollingFromTime
     </div>;
 };
 
-export default FragmentPages;
+export default SegmentPages;

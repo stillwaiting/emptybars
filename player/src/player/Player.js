@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
 import ReactPlayerWrapper from '../ReactPlayerWrapper';
-import Fragments from './Fragments';
+import Segments from './Segments';
 
-import FragmentPages from "./FragmentPages";
+import SegmentPages from "./SegmentPages";
 
 import './Player.scss';
 
@@ -92,7 +92,7 @@ function Player({ fragments, images, pages, videoUrl }) {
     return (
             <div className={initialised ? 'player' : 'player notInitialised'}>
                 <div className='fragmentPagesWrapper'>
-                    <FragmentPages
+                    <SegmentPages
                         images={images}
                         pages={pages || []}
                         onPageClicked={onPageClicked}
@@ -103,7 +103,7 @@ function Player({ fragments, images, pages, videoUrl }) {
 
                 <div className='playerAndFragments'>
                     <ReactPlayerWrapper videoUrl={videoUrl} onProgressUpdate={onProgressUpdate} ref={$player} onPlay={onPlay} onStop={onStop} />
-                    <Fragments fragments={fragments} playInterval={handlePlayInterval} activeFragments={activeFragments} playInput={playInput} setPlayInput={setPlayInput}/>
+                    <Segments fragments={fragments} playInterval={handlePlayInterval} activeFragments={activeFragments} playInput={playInput} setPlayInput={setPlayInput}/>
                 </div>
 
             </div>

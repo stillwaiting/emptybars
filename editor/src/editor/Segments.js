@@ -1,9 +1,9 @@
 import React, {useState, useRef, useEffect} from 'react';
 import { secsToString } from "emptybars-common/utils";
 
-import './Fragments.scss';
+import './Segments.scss';
 
-function Fragments({ fragments, onFragmentSelected, onFragmentsChanged}) {
+function Segments({ fragments, onFragmentSelected, onFragmentsChanged}) {
     var [selectedFragmentIdx, setSelectedFragmentIdx] = useState(-1);
     var [lastCreatedFragmentIdx, setLastCreatedFragmentIdx] = useState(-1);
     const lastCreatedFragmentRef = useRef(null);
@@ -62,4 +62,4 @@ function Fragments({ fragments, onFragmentSelected, onFragmentsChanged}) {
          </div>);
 }
 
-export default Fragments;
+export default Segments;

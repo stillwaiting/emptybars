@@ -1,9 +1,9 @@
 import React from 'react';
 import ImageAreas from "./ImageAreas";
 
-import './FragmentPages.scss';
+import './SegmentPages.scss';
 
-function FragmentPages({ pages, fragmentPages, fragmentPageAreas, onFragmentPagesChanges, onFragmentPageAreasChanged }) {
+function SegmentPages({ pages, fragmentPages, fragmentPageAreas, onFragmentPagesChanges, onFragmentPageAreasChanged }) {
     const handleOnChange = (e, pageIdx) => {
         var newFragmentPages = JSON.parse(JSON.stringify(fragmentPages));
         const page = pages[pageIdx];
@@ -53,4 +53,4 @@ function FragmentPages({ pages, fragmentPages, fragmentPageAreas, onFragmentPage
     </div>;
 };
 
-export default FragmentPages;
+export default SegmentPages;

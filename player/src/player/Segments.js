@@ -1,9 +1,9 @@
 import React, {useState, useRef, useEffect} from 'react';
 import { secsToString } from "emptybars-common/utils";
 import ReactTooltip from 'react-tooltip';
-import './Fragments.scss';
+import './Segments.scss';
 
-function Fragments({ fragments, playInterval, activeFragments, playInput, setPlayInput }) {
+function Segments({ fragments, playInterval, activeFragments, playInput, setPlayInput }) {
     const onPlayInputChange = (e) => {
         setPlayInput(e.target.value);
     }
@@ -124,4 +124,4 @@ function Fragments({ fragments, playInterval, activeFragments, playInput, setPla
          </div>);
 }
 
-export default Fragments;
+export default Segments;

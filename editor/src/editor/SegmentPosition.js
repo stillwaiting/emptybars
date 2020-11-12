@@ -1,9 +1,9 @@
 import React from 'react';
 import { secsToString } from "emptybars-common/utils";
 
-import './FragmentPosition.scss';
+import './SegmentPosition.scss';
 
-function FragmentPosition({ $player, fragment, fragmentIdx, videoPlayerPosSecs, onFragmentChanged, getPrevFragmentEndSec}) {
+function SegmentPosition({ $player, fragment, fragmentIdx, videoPlayerPosSecs, onFragmentChanged, getPrevFragmentEndSec}) {
     const handlePlayCurrentFragment = () => {
         $player.playFragment(fragment.startSec, fragment.endSec, 'STAY_AT_START');
     }
@@ -99,4 +99,4 @@ function FragmentPosition({ $player, fragment, fragmentIdx, videoPlayerPosSecs, 
     );
 }
 
-export default FragmentPosition;
+export default SegmentPosition;

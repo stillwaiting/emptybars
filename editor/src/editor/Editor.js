@@ -1,10 +1,10 @@
 import React, { useState, useRef } from 'react';
 import PlayerWithNavButtons from '../PlayerWithNavButtons';
-import FragmentPosition from './FragmentPosition';
-import Fragments from './Fragments';
+import SegmentPosition from './SegmentPosition';
+import Segments from './Segments';
 
 import Pages from "./Pages";
-import FragmentPages from "./FragmentPages";
+import SegmentPages from "./SegmentPages";
 
 import './Editor.css';
 
@@ -72,7 +72,7 @@ function Editor({ fragments, pages, videoUrl, onDataUpdated }) {
                     {currentFragmentIdx >= 0
                         ?
                         <div>
-                            <FragmentPosition
+                            <SegmentPosition
                                 $player={$player.current}
                                 fragment={fragments[currentFragmentIdx]}
                                 fragmentIdx={currentFragmentIdx}
@@ -80,7 +80,7 @@ function Editor({ fragments, pages, videoUrl, onDataUpdated }) {
                                 videoPlayerPosSecs={videoPlayerPosSecs}
                                 getPrevFragmentEndSec={getPrevFragmentEndSec}
                             />
-                            <FragmentPages
+                            <SegmentPages
                                 pages={pages || []}
                                 fragmentPages={fragments[currentFragmentIdx].pages || []}
                                 fragmentPageAreas={fragments[currentFragmentIdx].pageAreas || {}}
@@ -93,7 +93,7 @@ function Editor({ fragments, pages, videoUrl, onDataUpdated }) {
 
                 </div>
 
-                <Fragments fragments={fragments} onFragmentSelected={handleFragmentSelected} onFragmentsChanged={onFragmentsChanged} />
+                <Segments fragments={fragments} onFragmentSelected={handleFragmentSelected} onFragmentsChanged={onFragmentsChanged} />
 
                 {/*<Pages pages={pages || []} onPagesUpdated={handleOnPagesUpdated} />*/}
 

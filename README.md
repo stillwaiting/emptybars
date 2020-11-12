@@ -1,2 +1,2 @@
 # emptybars
-Project for musicians to study pieces by fragments
+Project for musicians to study pieces by segments
