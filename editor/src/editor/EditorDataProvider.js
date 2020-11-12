@@ -39,7 +39,7 @@ export default function EditorDataProvider({ lastStateFromLocalStorage, onDataPr
             case OP_NEW: {
                 onDataProvided({
                     videoUrl,
-                    fragments: [],
+                    segments: [],
                     pages: pages.trim().split("\n").map(p => p.trim()).filter(p => p).map(pageUrl => ({
                         url: pageUrl,
                         id: '' + (new Date().getTime()) + Math.random()
@@ -79,7 +79,7 @@ export default function EditorDataProvider({ lastStateFromLocalStorage, onDataPr
             </td>
             <td className='secondCol'>
                 <p>
-                    Old fragments content (paste here)
+                    Old segments content (paste here)
                 </p>
                 <p>
                     <textarea onChange={handleOldStateChanged} value={oldState} readOnly={opType != OP_LOAD_OLD} />

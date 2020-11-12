@@ -3,15 +3,15 @@ import ReactDOM from 'react-dom';
 
 import EditorLoader from './EditorLoader';
 
-import {initFragmentsPlayer} from "emptybars-common/initialiser";
+import {initSegmentsPlayer} from "emptybars-common/initialiser";
 
-initFragmentsPlayer(($element, data) => {
+initSegmentsPlayer(($element, data) => {
 
-    const {fragments, pages, videoUrl, videoTitle} = data;
+    const {segments, pages, videoUrl, videoTitle} = data;
 
     ReactDOM.render(
         <React.StrictMode>
-          <EditorLoader fragments={fragments || []} pages={pages || []} videoUrl={videoUrl} />
+          <EditorLoader segments={segments || []} pages={pages || []} videoUrl={videoUrl} />
         </React.StrictMode>,
         $element
     );

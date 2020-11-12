@@ -53,7 +53,7 @@ class PlayerWithNavButtons extends React.Component {
         this.setState({playing: false});
     }
 
-    playFragment(startSec, endSec, mode) {
+    playSegment(startSec, endSec, mode) {
         this.$player.current.seekTo(startSec, 'seconds');
         this.setState({
             // TODO: remove magic strings
@@ -93,13 +93,13 @@ class PlayerWithNavButtons extends React.Component {
 
     handlePlayOneSecBefore() {
         this.maybeStop1SecPlaying(() => {
-            this.playFragment(this.state.progress - 1, this.state.progress, 'STAY_AT_END');
+            this.playSegment(this.state.progress - 1, this.state.progress, 'STAY_AT_END');
         });
     }
 
     handlePlayOneSecAfter() {
         this.maybeStop1SecPlaying(() => {
-            this.playFragment(this.state.progress, this.state.progress + 1, 'STAY_AT_START');
+            this.playSegment(this.state.progress, this.state.progress + 1, 'STAY_AT_START');
         });
     }
 

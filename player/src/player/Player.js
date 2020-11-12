@@ -6,8 +6,8 @@ import SegmentPages from "./SegmentPages";
 
 import './Player.scss';
 
-function Player({ fragments, images, pages, videoUrl }) {
-    const [activeFragments, setActiveFragments] = useState([]);
+function Player({ segments, images, pages, videoUrl }) {
+    const [activeSegments, setActiveSegments] = useState([]);
     const [initialised, setInitialised] = useState(false)
     const [skipScrollingFromTime, setSkipScrollingFromTime] = useState(false)
     const [refreshSkipScrollingOnPlay, setRefreshSkipScrollingOnPlaying] = useState(false)
@@ -17,17 +17,17 @@ function Player({ fragments, images, pages, videoUrl }) {
     const $player = useRef(null);
 
     const handlePlayInterval = (from, until) => {
-        $player.current.playFragment(from, until)
+        $player.current.playSegment(from, until)
     };
 
-    const updateActiveFragments = (playedSeconds) => {
-        var newActiveFragments = [];
-        fragments.forEach((fragment, idx) => {
-            if (fragment.startSec <= playedSeconds && fragment.endSec >= playedSeconds) {
-                newActiveFragments.push(idx);
+    const updateActiveSegments = (playedSeconds) => {
+        var newActiveSegments = [];
+        segments.forEach((segment, idx) => {
+            if (segment.startSec <= playedSeconds && segment.endSec >= playedSeconds) {
+                newActiveSegments.push(idx);
             }
         });
-        setActiveFragments(newActiveFragments);
+        setActiveSegments(newActiveSegments);
     }
 
     const onProgressUpdate = (playedSeconds) => {
@@ -36,7 +36,7 @@ function Player({ fragments, images, pages, videoUrl }) {
             setSkipScrollingFromTime(new Date().getTime());
             setRefreshSkipScrollingOnPlaying(false);
         }
-        updateActiveFragments(playedSeconds);
+        updateActiveSegments(playedSeconds);
     };
 
     const onPlay = () => {
@@ -50,9 +50,9 @@ function Player({ fragments, images, pages, videoUrl }) {
 
     const getActivePageAreas = () => {
         var areas = {};
-        activeFragments.forEach(fragmentIdx => {
-            for (const pageId in fragments[fragmentIdx].pageAreas) {
-                const pageAreas = fragments[fragmentIdx].pageAreas[pageId];
+        activeSegments.forEach(segmentIdx => {
+            for (const pageId in segments[segmentIdx].pageAreas) {
+                const pageAreas = segments[segmentIdx].pageAreas[pageId];
                 if (areas[pageId]) {
                     areas[pageId] = areas[pageId].concat(pageAreas)
                 } else {
@@ -63,7 +63,7 @@ function Player({ fragments, images, pages, videoUrl }) {
         return areas;
     }
 
-    const fragmentContainsPoint = (pageAreas, posX, posY) => {
+    const segmentContainsPoint = (pageAreas, posX, posY) => {
         for (var areaIdx = 0; areaIdx < pageAreas.length; areaIdx++) {
             const {x, y, width, height} = pageAreas[areaIdx];
             const x2 = x + width;
@@ -76,14 +76,14 @@ function Player({ fragments, images, pages, videoUrl }) {
     }
 
     const onPageClicked = (pageUid, pageX, pageY) => {
-        for (var fragmentIdx = 0 ; fragmentIdx < fragments.length; fragmentIdx ++) {
-            const fragment = fragments[fragmentIdx];
-            if (fragmentContainsPoint(fragment.pageAreas[pageUid] || [], pageX, pageY)) {
-                setPlayInput((fragmentIdx + 1) + ':' + (fragmentIdx + 1));
+        for (var segmentIdx = 0 ; segmentIdx < segments.length; segmentIdx ++) {
+            const segment = segments[segmentIdx];
+            if (segmentContainsPoint(segment.pageAreas[pageUid] || [], pageX, pageY)) {
+                setPlayInput((segmentIdx + 1) + ':' + (segmentIdx + 1));
                 setRefreshSkipScrollingOnPlaying(true);
                 setSkipScrollingFromTime(new Date().getTime());
-                updateActiveFragments(fragment.startSec);
-                handlePlayInterval(fragment.startSec, fragment.endSec);
+                updateActiveSegments(segment.startSec);
+                handlePlayInterval(segment.startSec, segment.endSec);
                 return;
             }
         }
@@ -91,19 +91,19 @@ function Player({ fragments, images, pages, videoUrl }) {
 
     return (
             <div className={initialised ? 'player' : 'player notInitialised'}>
-                <div className='fragmentPagesWrapper'>
+                <div className='segmentPagesWrapper'>
                     <SegmentPages
                         images={images}
                         pages={pages || []}
                         onPageClicked={onPageClicked}
                         skipScrollingFromTime={skipScrollingFromTime}
-                        fragmentPageAreas={getActivePageAreas()}
+                        segmentPageAreas={getActivePageAreas()}
                         />
                 </div>
 
-                <div className='playerAndFragments'>
+                <div className='playerAndSegments'>
                     <ReactPlayerWrapper videoUrl={videoUrl} onProgressUpdate={onProgressUpdate} ref={$player} onPlay={onPlay} onStop={onStop} />
-                    <Segments fragments={fragments} playInterval={handlePlayInterval} activeFragments={activeFragments} playInput={playInput} setPlayInput={setPlayInput}/>
+                    <Segments segments={segments} playInterval={handlePlayInterval} activeSegments={activeSegments} playInput={playInput} setPlayInput={setPlayInput}/>
                 </div>
 
             </div>

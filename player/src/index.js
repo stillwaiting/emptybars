@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom';
 
 import Player from './player/Player';
 import { transformFromHumanReadable} from "emptybars-common/utils";
-import { initFragmentsPlayer } from "emptybars-common/initialiser";
+import { initSegmentsPlayer } from "emptybars-common/initialiser";
 
 import ImagesLoader from './ImagesLoader';
 
-initFragmentsPlayer(($element, data) => {
+initSegmentsPlayer(($element, data) => {
 
     const onImagesLoaded = (images) => {
         return ReactDOM.render(

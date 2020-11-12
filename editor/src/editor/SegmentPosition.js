@@ -3,40 +3,40 @@ import { secsToString } from "emptybars-common/utils";
 
 import './SegmentPosition.scss';
 
-function SegmentPosition({ $player, fragment, fragmentIdx, videoPlayerPosSecs, onFragmentChanged, getPrevFragmentEndSec}) {
-    const handlePlayCurrentFragment = () => {
-        $player.playFragment(fragment.startSec, fragment.endSec, 'STAY_AT_START');
+function SegmentPosition({ $player, segment, segmentIdx, videoPlayerPosSecs, onSegmentChanged: onSegmentChanged, getPrevSegmentEndSec: getPrevSegmentEndSec}) {
+    const handlePlayCurrentSegment = () => {
+        $player.playSegment(segment.startSec, segment.endSec, 'STAY_AT_START');
     }
 
-    const handleJumpFragmentStart = () => {
-        $player.seekToAndStop(fragment.startSec);
+    const handleJumpSegmentStart = () => {
+        $player.seekToAndStop(segment.startSec);
     }
 
-    const handleJumpFragmentEnd = () => {
-        $player.seekToAndStop(fragment.endSec);
+    const handleJumpSegmentEnd = () => {
+        $player.seekToAndStop(segment.endSec);
     }
 
-    const hanleSetCurrentTimeAsFragmentStart = () => {
-        const newFragment = JSON.parse(JSON.stringify(fragment));
-        newFragment.startSec = parseFloat(videoPlayerPosSecs.toFixed(1));
-        onFragmentChanged(newFragment, undefined, "update fragment start time");
+    const hanleSetCurrentTimeAsSegmentStart = () => {
+        const newSegment = JSON.parse(JSON.stringify(segment));
+        newSegment.startSec = parseFloat(videoPlayerPosSecs.toFixed(1));
+        onSegmentChanged(newSegment, undefined, "update segment start time");
     }
 
-    const handleSetFragmentStartToLastFragmentEnd = () => {
-        const newFragment = JSON.parse(JSON.stringify(fragment));
-        newFragment.startSec = getPrevFragmentEndSec();
-        onFragmentChanged(newFragment, undefined, "update fragment start time");
+    const handleSetSegmentStartToLastSegmentEnd = () => {
+        const newSegment = JSON.parse(JSON.stringify(segment));
+        newSegment.startSec = getPrevSegmentEndSec();
+        onSegmentChanged(newSegment, undefined, "update segment start time");
     }
 
-    const hanleSetCurrentTimeAsFragmentEnd = () => {
-        const newFragment = JSON.parse(JSON.stringify(fragment));
-        newFragment.endSec = parseFloat(videoPlayerPosSecs.toFixed(1));
-        onFragmentChanged(newFragment, undefined, 'update fragment end time');
+    const hanleSetCurrentTimeAsSegmentEnd = () => {
+        const newSegment = JSON.parse(JSON.stringify(segment));
+        newSegment.endSec = parseFloat(videoPlayerPosSecs.toFixed(1));
+        onSegmentChanged(newSegment, undefined, 'update segment end time');
     }
 
-    const renderFragmentPos = () => {
-        const deltaStart = (videoPlayerPosSecs - fragment.startSec);
-        const deltaEnd = (videoPlayerPosSecs - fragment.endSec);
+    const renderSegmentPos = () => {
+        const deltaStart = (videoPlayerPosSecs - segment.startSec);
+        const deltaEnd = (videoPlayerPosSecs - segment.endSec);
 
         var className;
         if (deltaStart >= 0 && deltaEnd <= 0) {
@@ -47,51 +47,51 @@ function SegmentPosition({ $player, fragment, fragmentIdx, videoPlayerPosSecs, o
             className =  'after';
         }
 
-        return <span className={className}>Fragment start delta={deltaStart.toFixed(1)}, delta end delta={deltaEnd.toFixed(1)}</span>;
+        return <span className={className}>Segment start delta={deltaStart.toFixed(1)}, delta end delta={deltaEnd.toFixed(1)}</span>;
     }
 
-    const handleSplitFragment = () => {
-        const newFragment = JSON.parse(JSON.stringify(fragment));
-        const oldVal = fragment.endSec;
-        newFragment.endSec = parseFloat(videoPlayerPosSecs.toFixed(1));
-        onFragmentChanged(newFragment, JSON.parse(JSON.stringify({
-            startSec: newFragment.endSec,
+    const handleSplitSegment = () => {
+        const newSegment = JSON.parse(JSON.stringify(segment));
+        const oldVal = segment.endSec;
+        newSegment.endSec = parseFloat(videoPlayerPosSecs.toFixed(1));
+        onSegmentChanged(newSegment, JSON.parse(JSON.stringify({
+            startSec: newSegment.endSec,
             endSec: oldVal,
-            pages: newFragment.pages
-        })), 'split fragment');
+            pages: newSegment.pages
+        })), 'split segment');
     }
 
     return (
-        <div className='fragmentPosition'>
-            <div className='title'>Selected Fragment #{fragmentIdx + 1} ({secsToString(fragment.startSec)} - {secsToString(fragment.endSec)})</div>
-            <div className='playerPosition'>{renderFragmentPos()}</div>
+        <div className='segmentPosition'>
+            <div className='title'>Selected Segment #{segmentIdx + 1} ({secsToString(segment.startSec)} - {secsToString(segment.endSec)})</div>
+            <div className='playerPosition'>{renderSegmentPos()}</div>
             <div className='controls'>
-                <div className='button' onClick={handlePlayCurrentFragment}>
-                    Play the whole fragment
+                <div className='button' onClick={handlePlayCurrentSegment}>
+                    Play the whole segment
                 </div>
                 <div className='group'>
-                    <div className='button'  onClick={handleJumpFragmentStart}>
-                        Jump to fragment start
+                    <div className='button'  onClick={handleJumpSegmentStart}>
+                        Jump to segment start
                     </div>
-                    <div className='button'  onClick={handleJumpFragmentEnd}>
-                        Jump to fragment end
+                    <div className='button'  onClick={handleJumpSegmentEnd}>
+                        Jump to segment end
                     </div>
                 </div>
-                <div className='button'  onClick={handleSetFragmentStartToLastFragmentEnd}>
-                    Set fragment start at prev. fragment end
+                <div className='button'  onClick={handleSetSegmentStartToLastSegmentEnd}>
+                    Set segment start at prev. segment end
                 </div>
                 <div className='group'>
-                    <div className='button'  onClick={hanleSetCurrentTimeAsFragmentStart}>
-                        Set as fragment's start time
+                    <div className='button'  onClick={hanleSetCurrentTimeAsSegmentStart}>
+                        Set as segment's start time
                     </div>
-                    <div className='button'  onClick={hanleSetCurrentTimeAsFragmentEnd}>
-                        Set as fragment's end time
+                    <div className='button'  onClick={hanleSetCurrentTimeAsSegmentEnd}>
+                        Set as segment's end time
                     </div>
                 </div>
-                {(fragment.startSec < videoPlayerPosSecs && fragment.endSec > videoPlayerPosSecs)
+                {(segment.startSec < videoPlayerPosSecs && segment.endSec > videoPlayerPosSecs)
                     ?
-                    <div className='button' onClick={handleSplitFragment}>
-                        Split fragment at {secsToString(videoPlayerPosSecs)}
+                    <div className='button' onClick={handleSplitSegment}>
+                        Split segment at {secsToString(videoPlayerPosSecs)}
                     </div>
                     :'' }
             </div>

@@ -1,28 +1,28 @@
 /**
- * Searches for "fragmentsData" script(json) tag
+ * Searches for "segmentsData" script(json) tag
  *
  * @param callback($element, data))
  */
-export const initFragmentsPlayer = (callback) => {
-    if (window.fragmentsPlayer) {
+export const initSegmentsPlayer = (callback) => {
+    if (window.segmentsPlayer) {
         return;
     }
-    window.fragmentsPlayer = {
+    window.segmentsPlayer = {
         initialized: false,
         interval: false
     };
 
-    window.fragmentsPlayer.interval = setInterval(() => {
-        if (document.getElementById('fragmentsData')) {
-            if (window.fragmentsPlayer.initialized) {
-                clearInterval(window.fragmentsPlayer.interval);
+    window.segmentsPlayer.interval = setInterval(() => {
+        if (document.getElementById('segmentsData')) {
+            if (window.segmentsPlayer.initialized) {
+                clearInterval(window.segmentsPlayer.interval);
                 window.location.reload();
                 return;
             }
-            window.fragmentsPlayer.initialized = true;
-            const data = JSON.parse(document.getElementById('fragmentsData').innerHTML.trim());
-            const parent = document.getElementById('fragmentsData').parentNode;
-            document.getElementById('fragmentsData').remove();
+            window.segmentsPlayer.initialized = true;
+            const data = JSON.parse(document.getElementById('segmentsData').innerHTML.trim());
+            const parent = document.getElementById('segmentsData').parentNode;
+            document.getElementById('segmentsData').remove();
             callback(parent, data);
         }
     }, 100);

@@ -4,10 +4,10 @@ import ImageAreas from "./ImageAreas";
 
 import './SegmentPages.scss';
 
-function SegmentPages({ images, pages, fragmentPageAreas, skipScrollingFromTime, onPageClicked }) {
+function SegmentPages({ images, pages, segmentPageAreas, skipScrollingFromTime, onPageClicked }) {
     const [zoom, setZoom] = useState(1);
     const [lastScrollHash, setLastScrollHash] = useState("");
-    const fragmentPagesRef = useRef();
+    const segmentPagesRef = useRef();
 
     const handleZoomIn = () => {
         setZoom(zoom + 0.1);
@@ -25,7 +25,7 @@ function SegmentPages({ images, pages, fragmentPageAreas, skipScrollingFromTime,
         var selectedPageIdx = -1;
         for (var idx = 0; idx < pages.length; idx++) {
             const puid = pages[idx].id;
-            if (fragmentPageAreas[puid] && fragmentPageAreas[puid].length) {
+            if (segmentPageAreas[puid] && segmentPageAreas[puid].length) {
                 selectedPageIdx = idx;
                 break;
             }
@@ -34,9 +34,9 @@ function SegmentPages({ images, pages, fragmentPageAreas, skipScrollingFromTime,
     }
 
     const findScrollareaNode = () => {
-        for (var i = 0; i < fragmentPagesRef.current.childNodes.length; i++) {
-            if (fragmentPagesRef.current.childNodes[i].className == 'scrollArea') {
-                return fragmentPagesRef.current.childNodes[i];
+        for (var i = 0; i < segmentPagesRef.current.childNodes.length; i++) {
+            if (segmentPagesRef.current.childNodes[i].className == 'scrollArea') {
+                return segmentPagesRef.current.childNodes[i];
             }
         }
         throw 'Cannot find scrollArea';
@@ -71,20 +71,20 @@ function SegmentPages({ images, pages, fragmentPageAreas, skipScrollingFromTime,
         skipScrollingFromTime && ((new Date().getTime() - skipScrollingFromTime) < 2000);
 
     const handleScrolling = () => {
-        const hash = JSON.stringify(fragmentPageAreas);
-        if (lastScrollHash != hash && fragmentPagesRef.current) {
+        const hash = JSON.stringify(segmentPageAreas);
+        if (lastScrollHash != hash && segmentPagesRef.current) {
             var updateHash = true;
             const selectedPageIdx = findFirstSelectedPageIdx();
             if (selectedPageIdx >= 0) {
                 var page = findPageNode(selectedPageIdx);
                 if (!shouldSkipScrolling()) {
-                    fragmentPagesRef.current.scrollTop = page.offsetTop - findScrollareaNode().offsetTop;
+                    segmentPagesRef.current.scrollTop = page.offsetTop - findScrollareaNode().offsetTop;
                 }
                 if (page.offsetTop == 0) {
                     updateHash = false;
                 }
-                if (!shouldSkipScrolling() && Object.keys(fragmentPageAreas).length > 1) {
-                    fragmentPagesRef.current.scrollTop += parseInt(calculatePageHeight() / 2);
+                if (!shouldSkipScrolling() && Object.keys(segmentPageAreas).length > 1) {
+                    segmentPagesRef.current.scrollTop += parseInt(calculatePageHeight() / 2);
                 }
             }
             if (updateHash) {
@@ -96,13 +96,13 @@ function SegmentPages({ images, pages, fragmentPageAreas, skipScrollingFromTime,
     useEffect(handleScrolling, []);
     handleScrolling();
 
-    const fragmentPagesStyles = {
+    const segmentPagesStyles = {
         height: calculatePageHeight() + "px",
         width: calculatePageWidth() + "px"
     }
 
     return <div>
-        <div className='fragmentPages' ref={fragmentPagesRef} style={fragmentPagesStyles}>
+        <div className='segmentPages' ref={segmentPagesRef} style={segmentPagesStyles}>
             <div className='zoom'>
                 <img src='https://images2.imgbox.com/22/21/4gO3I6ii_o.png?download=true' width='32' onClick={handleZoomIn} />
                 <img src='https://images2.imgbox.com/1b/b2/L4tgMq2a_o.png?download=true' width='32' onClick={handleZoomOut} />
@@ -110,12 +110,12 @@ function SegmentPages({ images, pages, fragmentPageAreas, skipScrollingFromTime,
             </div>
             <div className='scrollArea'>
             {pages.map((p, idx) => {
-                return <div className='page' key={"fragmentpage" + idx}>
+                return <div className='page' key={"segmentpage" + idx}>
                             <ImageAreas
                                 title={`Page #${idx+1}`}
                                 image={images[idx]}
                                 onImageClicked={((imageX, imageY) => onImageClicked(idx, imageX, imageY)).bind(this)}
-                                width = {parseInt(500 * zoom)} areas={fragmentPageAreas[p.id] || [] }
+                                width = {parseInt(500 * zoom)} areas={segmentPageAreas[p.id] || [] }
                             />
                         </div>;
             })}

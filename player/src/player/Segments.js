@@ -3,25 +3,25 @@ import { secsToString } from "emptybars-common/utils";
 import ReactTooltip from 'react-tooltip';
 import './Segments.scss';
 
-function Segments({ fragments, playInterval, activeFragments, playInput, setPlayInput }) {
+function Segments({ segments, playInterval, activeSegments, playInput, setPlayInput }) {
     const onPlayInputChange = (e) => {
         setPlayInput(e.target.value);
     }
 
-    const handleClickFragment = (fragmentIdx) => {
+    const handleClickSegment = (segmentIdx) => {
         onPlayInputChange({
             target: {
-                value: (fragmentIdx+1) + ':' + (fragmentIdx+1)
+                value: (segmentIdx+1) + ':' + (segmentIdx+1)
             }
         });
-        playInterval(fragments[fragmentIdx].startSec, fragments[fragmentIdx].endSec);
+        playInterval(segments[segmentIdx].startSec, segments[segmentIdx].endSec);
     };
 
     const handlePlayClick = () => {
-        const [startFragmentIdx, startFragmentIdxDelta, stopFragmentIdx, stopFragmentIdxDelta] = parsedPlayInput();
+        const [startSegmentIdx, startSegmentIdxDelta, stopSegmentIdx, stopSegmentIdxDelta] = parsedPlayInput();
         playInterval(
-            fragments[startFragmentIdx-1].startSec + startFragmentIdxDelta,
-            fragments[stopFragmentIdx-1].endSec + stopFragmentIdxDelta
+            segments[startSegmentIdx-1].startSec + startSegmentIdxDelta,
+            segments[stopSegmentIdx-1].endSec + stopSegmentIdxDelta
         )
     }
 
@@ -31,15 +31,15 @@ function Segments({ fragments, playInterval, activeFragments, playInput, setPlay
             !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
     }
 
-    const parseFragmentPoint = (str) => {
+    const parseSegmentPoint = (str) => {
         str = str.split('-').join('+-');
         const split = str.split('+');
         const number = parseInt(split[0]);
         if (number != split[0]) {
             return [false, false];
         }
-        if (number <= 0 || number > fragments.length) {
-            console.error("Fragment " + number + " is out of range. Max=" + fragments.length)
+        if (number <= 0 || number > segments.length) {
+            console.error("Segment " + number + " is out of range. Max=" + segments.length)
             return [false, false];
         }
         if (split.length == 1) {
@@ -61,55 +61,55 @@ function Segments({ fragments, playInterval, activeFragments, playInput, setPlay
         if (split.length != 2) {
             return false;
         }
-        const fromFragmentStr = split[0];
-        const untilFragmentStr = split[1];
-        var [fromFragment, fromFragmentDelta] = parseFragmentPoint(fromFragmentStr);
-        if (!fromFragment) {
+        const fromSegmentStr = split[0];
+        const untilSegmentStr = split[1];
+        var [fromSegment, fromSegmentDelta] = parseSegmentPoint(fromSegmentStr);
+        if (!fromSegment) {
             return false;
         }
-        var [untilFragment, untilFragmentDelta] = parseFragmentPoint(untilFragmentStr);
-        if (!untilFragment) {
+        var [untilSegment, untilSegmentDelta] = parseSegmentPoint(untilSegmentStr);
+        if (!untilSegment) {
             return false;
         }
-        return [fromFragment, fromFragmentDelta, untilFragment, untilFragmentDelta];
+        return [fromSegment, fromSegmentDelta, untilSegment, untilSegmentDelta];
     }
 
-    const isFragmentInPlayInput = (idx) => {
+    const isSegmentInPlayInput = (idx) => {
         const parsed = parsedPlayInput();
         if (parsed) {
-            const [fromFragment, fromFragmentDelta, untilFragment, untilFragmentDelta] = parsed;
-            return (fromFragment <= (idx+1) && untilFragment >= (idx+1));
+            const [fromSegment, fromSegmentDelta, untilSegment, untilSegmentDelta] = parsed;
+            return (fromSegment <= (idx+1) && untilSegment >= (idx+1));
         }
         return false;
     }
 
     return (
-        <div className='fragments'>
-            <div>Fragments:</div>
+        <div className='segments'>
+            <div>Segments:</div>
             <div className='scrolling'>
 
-                {fragments.map(({ startSec, endSec }, key) => (
+                {segments.map(({ startSec, endSec }, key) => (
                     <div
                         tabIndex={0}
                         className={`button ${
-                            (activeFragments.indexOf(key) >= 0) ? 'active' : ''
-                        } ${isFragmentInPlayInput(key) ? 'inPlayInput' : ''}`}
+                            (activeSegments.indexOf(key) >= 0) ? 'active' : ''
+                        } ${isSegmentInPlayInput(key) ? 'inPlayInput' : ''}`}
                         key={key}
-                        onClick={handleClickFragment.bind(null, key)}
+                        onClick={handleClickSegment.bind(null, key)}
                     >
                         #{key+1}
                     </div>
                 ))}
             </div>
-            <div className='playFragmentsSection'>
-                Play fragments: <input onChange={onPlayInputChange} value={playInput} className={parsedPlayInput() ? '' : 'errorInput'}/>
+            <div className='playSegmentsSection'>
+                Play segments: <input onChange={onPlayInputChange} value={playInput} className={parsedPlayInput() ? '' : 'errorInput'}/>
                 <ReactTooltip id='formats'>
                     <div>
                         <div>Allowed formats:
                             <ul className='allowedFormats'>
-                             <li><span>1:1</span> - play fragment 1 </li>
-                             <li><span>1:3</span> - play fragments 1, 2 and 3</li>
-                             <li><span>1-10s:2+15.2s</span> - play fragments 1 and 2, <br />but start 10 seconds earlier and finish 15.2
+                             <li><span>1:1</span> - play segment 1 </li>
+                             <li><span>1:3</span> - play segments 1, 2 and 3</li>
+                             <li><span>1-10s:2+15.2s</span> - play segments 1 and 2, <br />but start 10 seconds earlier and finish 15.2
                             seconds later</li>
                             </ul>
                         </div>

@@ -68,7 +68,7 @@ const path = require(`path`)
 
 exports.createPages = ({graphql, actions}) => {
     const {createPage} = actions
-    const fragmentPlayerTemplate = path.resolve(`src/templates/fragments-player-template.js`)
+    const segmentPlayerTemplate = path.resolve(`src/templates/segments-player-template.js`)
     // Query for markdown nodes to use in creating pages.
     // You can query for whatever data you want to create pages for e.g.
     // products, portfolio items, landing pages, etc.
@@ -98,9 +98,9 @@ exports.createPages = ({graphql, actions}) => {
             createPage({
                 // Path for this page — required
                 path: `${node.relativeDirectory}`,
-                component: fragmentPlayerTemplate,
+                component: segmentPlayerTemplate,
                 context: {
-                    fragments: JSON.parse(node.fields.content),
+                    segments: JSON.parse(node.fields.content),
                     composerNamePath: `${composer}/name.txt`,
                     compositionNamePath: `${composer}/${composition}/name.txt`,
                     performerNamePath: `${composer}/${composition}/${performer}/name.txt`,
