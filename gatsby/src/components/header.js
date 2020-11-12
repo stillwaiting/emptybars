@@ -41,8 +41,8 @@ const Header = ({ composition, composer, performer }) => (
                         <h1 style={{
                             margin:"0px",
                             paddingTop: "20px",
-                        }}>{composition} ({composer})</h1>
-                        Performed by {performer}
+                        }}>{composition} {composer ? <span>({composer})</span> : ''}</h1>
+                    {performer ? <span>Performed by {performer}</span> : ''}
                     </div>
                 : ''
             }

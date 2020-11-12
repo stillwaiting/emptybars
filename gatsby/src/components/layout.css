@@ -20,6 +20,14 @@ body {
   -webkit-font-feature-settings: "kern", "liga", "clig", "calt";
   font-feature-settings: "kern", "liga", "clig", "calt";
 }
+
+.footerMenu li {
+  list-style-type: none;
+}
+
+.footerMenu a {
+  color: white;
+}
 article,
 aside,
 details,

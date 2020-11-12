@@ -48,12 +48,12 @@ const Layout = ({ composition, composer, performer, children }) => {
             maxWidth: 960,
             padding: `0.5rem 0 0.5rem 0`,
         }}>
-            <div style={{display:'flex'}}>
+            <div style={{display:'flex'}} className='footerMenu'>
                 <div>
                     <ul>
-                        <li>About</li>
-                        <li>Editor</li>
-                        <li>Player</li>
+                        <li><a href='#'>About</a></li>
+                        <li>Editor (how to use)</li>
+                        <li>Player (how to use)</li>
                         <li>Contribute</li>
                     </ul>
                 </div>
@@ -68,7 +68,7 @@ const Layout = ({ composition, composer, performer, children }) => {
             </div>
             <div style={{fontSize: '75%'}}>
             © {new Date().getFullYear()},
-            Built with &nbsp; <a href="https://www.gatsbyjs.com" style={{color: 'white'}}>Gatsby</a>
+            Built with&nbsp;<a href="https://www.gatsbyjs.com" style={{color: 'white'}}>Gatsby</a>
             </div>
         </div>
 
