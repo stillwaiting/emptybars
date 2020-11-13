@@ -74,7 +74,7 @@ const IndexPage = ({ data }) => {
         </li>;
     }
 
-    return <Layout composition='EmptyBars.Org'>
+    return <Layout composition='EmptyBars.org'>
         <SEO title="Home"/>
         <ul>
         {composerSlugsSorted.map(renderComposer)}

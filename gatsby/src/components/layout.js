@@ -51,18 +51,17 @@ const Layout = ({ composition, composer, performer, children }) => {
             <div style={{display:'flex'}} className='footerMenu'>
                 <div>
                     <ul>
-                        <li><a href='#'>About</a></li>
+                        <li><a href='/about'>About</a></li>
                         <li>Editor (how to use)</li>
                         <li>Player (how to use)</li>
-                        <li>Contribute</li>
+                        <li><a href='/contribute'>Contribute</a></li>
                     </ul>
                 </div>
                 <div>
                     <ul>
-                        <li>Terms of Use</li>
-                        <li>Privacy Policy</li>
-                        <li>Intellectual Property</li>
-                        <li>Cookies</li>
+                        <li><a href='/privacy'>Privacy Policy</a></li>
+                        <li><a href='/ip'>Intellectual Property</a></li>
+                        <li><a href='/cookies'>Cookies</a></li>
                     </ul>
                 </div>
             </div>
