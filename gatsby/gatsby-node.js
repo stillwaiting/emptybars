@@ -50,6 +50,33 @@ exports.onCreateNode = async ({ node, loadNodeContent, actions }) => {
         });
     }
 
+    if (node.name == 'editorIndexHtml') {
+        const content = await loadNodeContent(node);
+        const baseUrl = node.url.split('index.html')[0];
+        const dom = new jsdom.JSDOM(content);
+        const cssNodes = [...dom.window.document.querySelectorAll('link')];
+        console.log('Editor css files found: ' + cssNodes.length);
+        createNode({
+            id: "editorCss",
+            urls: cssNodes.map(node => baseUrl + node.href),
+            internal: {
+                type: 'editorCss',
+                contentDigest: "html"
+            }
+        });
+
+        const jsNodes = [...dom.window.document.querySelectorAll('script')].filter(node => node.src);
+        console.log('Editor js files found: ' + jsNodes.length);
+        createNode({
+            id: "editorJs",
+            urls: jsNodes.map(node => baseUrl + node.src),
+            internal: {
+                type: 'editorJs',
+                contentDigest: "html"
+            }
+        });
+    }
+
     if (node.internal.type === `File` && (node.extension === 'json' || node.extension === 'txt')) {
         fs.readFile(node.absolutePath, undefined, (_err, buf) => {
             createNodeField({ node, name: `content`, value: buf.toString().trim()});

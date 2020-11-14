@@ -4001,9 +4001,9 @@ emojis-list@^3.0.0:
   resolved "https://registry.yarnpkg.com/emojis-list/-/emojis-list-3.0.0.tgz#5570662046ad29e2e916e71aae260abdff4f6a78"
   integrity sha512-/kyM18EfinwXZbno9FyUGeFh87KC8HRQBQGildHZbEuRyWFOmv1U10o9BBp8XVZDVNNuQKyIGIu5ZYAAXJ0V2Q==
 
-"emptybars-common@file:../common/emptybars-common-1.0.5.tgz":
-  version "1.0.5"
-  resolved "file:../common/emptybars-common-1.0.5.tgz#7b42484cb2b3b1b1de1e9b767ee4b960027486c1"
+"emptybars-common@file:../common/emptybars-common-1.0.6.tgz":
+  version "1.0.6"
+  resolved "file:../common/emptybars-common-1.0.6.tgz#e10a1f2e456f36f4a828ee17028c9008b50ba238"
 
 encodeurl@~1.0.2:
   version "1.0.2"
