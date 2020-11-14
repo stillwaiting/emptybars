@@ -1,27 +1,27 @@
 import React, {useState, useRef, useEffect} from 'react';
 import { secsToString } from "emptybars-common/utils";
 import ReactTooltip from 'react-tooltip';
-import './Segments.scss';
+import './Sections.scss';
 
-function Segments({ segments, playInterval, activeSegments, playInput, setPlayInput }) {
+function Sections({ sections, playInterval, activeSections, playInput, setPlayInput }) {
     const onPlayInputChange = (e) => {
         setPlayInput(e.target.value);
     }
 
-    const handleClickSegment = (segmentIdx) => {
+    const handleClickSection = (sectionIdx) => {
         onPlayInputChange({
             target: {
-                value: (segmentIdx+1) + ':' + (segmentIdx+1)
+                value: (sectionIdx+1) + ':' + (sectionIdx+1)
             }
         });
-        playInterval(segments[segmentIdx].startSec, segments[segmentIdx].endSec);
+        playInterval(sections[sectionIdx].startSec, sections[sectionIdx].endSec);
     };
 
     const handlePlayClick = () => {
-        const [startSegmentIdx, startSegmentIdxDelta, stopSegmentIdx, stopSegmentIdxDelta] = parsedPlayInput();
+        const [startSectionIdx, startSectionIdxDelta, stopSectionIdx, stopSectionIdxDelta] = parsedPlayInput();
         playInterval(
-            segments[startSegmentIdx-1].startSec + startSegmentIdxDelta,
-            segments[stopSegmentIdx-1].endSec + stopSegmentIdxDelta
+            sections[startSectionIdx-1].startSec + startSectionIdxDelta,
+            sections[stopSectionIdx-1].endSec + stopSectionIdxDelta
         )
     }
 
@@ -31,15 +31,15 @@ function Segments({ segments, playInterval, activeSegments, playInput, setPlayIn
             !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
     }
 
-    const parseSegmentPoint = (str) => {
+    const parseSectionPoint = (str) => {
         str = str.split('-').join('+-');
         const split = str.split('+');
         const number = parseInt(split[0]);
         if (number != split[0]) {
             return [false, false];
         }
-        if (number <= 0 || number > segments.length) {
-            console.error("Segment " + number + " is out of range. Max=" + segments.length)
+        if (number <= 0 || number > sections.length) {
+            console.error("Section " + number + " is out of range. Max=" + sections.length)
             return [false, false];
         }
         if (split.length == 1) {
@@ -61,55 +61,55 @@ function Segments({ segments, playInterval, activeSegments, playInput, setPlayIn
         if (split.length != 2) {
             return false;
         }
-        const fromSegmentStr = split[0];
-        const untilSegmentStr = split[1];
-        var [fromSegment, fromSegmentDelta] = parseSegmentPoint(fromSegmentStr);
-        if (!fromSegment) {
+        const fromSectionStr = split[0];
+        const untilSectionStr = split[1];
+        var [fromSection, fromSectionDelta] = parseSectionPoint(fromSectionStr);
+        if (!fromSection) {
             return false;
         }
-        var [untilSegment, untilSegmentDelta] = parseSegmentPoint(untilSegmentStr);
-        if (!untilSegment) {
+        var [untilSection, untilSectionDelta] = parseSectionPoint(untilSectionStr);
+        if (!untilSection) {
             return false;
         }
-        return [fromSegment, fromSegmentDelta, untilSegment, untilSegmentDelta];
+        return [fromSection, fromSectionDelta, untilSection, untilSectionDelta];
     }
 
-    const isSegmentInPlayInput = (idx) => {
+    const isSectionInPlayInput = (idx) => {
         const parsed = parsedPlayInput();
         if (parsed) {
-            const [fromSegment, fromSegmentDelta, untilSegment, untilSegmentDelta] = parsed;
-            return (fromSegment <= (idx+1) && untilSegment >= (idx+1));
+            const [fromSection, fromSectionDelta, untilSection, untilSectionDelta] = parsed;
+            return (fromSection <= (idx+1) && untilSection >= (idx+1));
         }
         return false;
     }
 
     return (
-        <div className='segments'>
-            <div>Segments:</div>
+        <div className='sections'>
+            <div>Sections:</div>
             <div className='scrolling'>
 
-                {segments.map(({ startSec, endSec }, key) => (
+                {sections.map(({ startSec, endSec }, key) => (
                     <div
                         tabIndex={0}
                         className={`button ${
-                            (activeSegments.indexOf(key) >= 0) ? 'active' : ''
-                        } ${isSegmentInPlayInput(key) ? 'inPlayInput' : ''}`}
+                            (activeSections.indexOf(key) >= 0) ? 'active' : ''
+                        } ${isSectionInPlayInput(key) ? 'inPlayInput' : ''}`}
                         key={key}
-                        onClick={handleClickSegment.bind(null, key)}
+                        onClick={handleClickSection.bind(null, key)}
                     >
                         #{key+1}
                     </div>
                 ))}
             </div>
-            <div className='playSegmentsSection'>
-                Play segments: <input onChange={onPlayInputChange} value={playInput} className={parsedPlayInput() ? '' : 'errorInput'}/>
+            <div className='playSectionsSection'>
+                Play sections: <input onChange={onPlayInputChange} value={playInput} className={parsedPlayInput() ? '' : 'errorInput'}/>
                 <ReactTooltip id='formats'>
                     <div>
                         <div>Allowed formats:
                             <ul className='allowedFormats'>
-                             <li><span>1:1</span> - play segment 1 </li>
-                             <li><span>1:3</span> - play segments 1, 2 and 3</li>
-                             <li><span>1-10s:2+15.2s</span> - play segments 1 and 2, <br />but start 10 seconds earlier and finish 15.2
+                             <li><span>1:1</span> - play section 1 </li>
+                             <li><span>1:3</span> - play sections 1, 2 and 3</li>
+                             <li><span>1-10s:2+15.2s</span> - play sections 1 and 2, <br />but start 10 seconds earlier and finish 15.2
                             seconds later</li>
                             </ul>
                         </div>
@@ -124,4 +124,4 @@ function Segments({ segments, playInterval, activeSegments, playInput, setPlayIn
          </div>);
 }
 
-export default Segments;
+export default Sections;

@@ -13,8 +13,8 @@ const SecondPage = ( {pageContext, data} ) => {
         {/*<div><p>Performed by: {data.performer.edges[0].node.fields.content}</p></div>*/}
         <div>
             Initialising...
-            <script id='segmentsData' type="application/json"
-                    dangerouslySetInnerHTML={{__html: JSON.stringify(pageContext.segments, null, 3)}}>
+            <script id='sectionsData' type="application/json"
+                    dangerouslySetInnerHTML={{__html: JSON.stringify(pageContext.sections, null, 3)}}>
             </script>
         </div>
         <Link to="/">Go back to the homepage</Link>
@@ -33,7 +33,7 @@ const SecondPage = ( {pageContext, data} ) => {
 export default SecondPage
 
 export const query = graphql`
-    query segmentsTemplateQuery($composerNamePath: String, $compositionNamePath: String, $performerNamePath:String) {
+    query sectionsTemplateQuery($composerNamePath: String, $compositionNamePath: String, $performerNamePath:String) {
   playerCss {
     urls
   }

@@ -1,34 +1,34 @@
 /**
- * Searches for "segmentsData" script(json) tag
+ * Searches for "sectionsData" script(json) tag
  *
  * @param callback($element, data))
  */
-export const initSegmentsPlayer = (callback) => {
-    console.log('initSegmentsPlayer');
-    if (window.segmentsPlayer) {
-        console.log('segmentsPlayer found, quit');
+export const initSectionsPlayer = (callback) => {
+    console.log('initSectionsPlayer');
+    if (window.sectionsPlayer) {
+        console.log('sectionsPlayer found, quit');
         return;
     }
-    window.segmentsPlayer = {
+    window.sectionsPlayer = {
         initialized: false,
         interval: false
     };
 
-    window.segmentsPlayer.interval = setInterval(() => {
-        console.log('checking segmentsData node');
-        if (document.getElementById('segmentsData')) {
+    window.sectionsPlayer.interval = setInterval(() => {
+        console.log('checking sectionsData node');
+        if (document.getElementById('sectionsData')) {
             console.log('found!');
-            if (window.segmentsPlayer.initialized) {
+            if (window.sectionsPlayer.initialized) {
                 console.log('initialised!');
-                clearInterval(window.segmentsPlayer.interval);
+                clearInterval(window.sectionsPlayer.interval);
                 window.location.reload();
                 return;
             }
             console.log('initialise');
-            window.segmentsPlayer.initialized = true;
-            const data = JSON.parse(document.getElementById('segmentsData').innerHTML.trim());
-            const parent = document.getElementById('segmentsData').parentNode;
-            document.getElementById('segmentsData').remove();
+            window.sectionsPlayer.initialized = true;
+            const data = JSON.parse(document.getElementById('sectionsData').innerHTML.trim());
+            const parent = document.getElementById('sectionsData').parentNode;
+            document.getElementById('sectionsData').remove();
             callback(parent, data);
         }
     }, 1000);

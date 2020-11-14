@@ -10,8 +10,7 @@ const EditorPage = ( { data }) => {
         <SEO title='Editor' />
         <div>
             Loading...
-            <script id='segmentsData' type="application/json">
-            </script>
+            <script id='sectionsData' type="application/json">""</script>
         </div>
         <Link to="/">Go back to the homepage</Link>
         <Helmet>

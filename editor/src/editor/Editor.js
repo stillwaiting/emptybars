@@ -1,67 +1,67 @@
 import React, { useState, useRef } from 'react';
 import PlayerWithNavButtons from '../PlayerWithNavButtons';
-import SegmentPosition from './SegmentPosition';
-import Segments from './Segments';
+import SectionPosition from './SectionPosition';
+import Sections from './Sections';
 
 import Pages from "./Pages";
-import SegmentPages from "./SegmentPages";
+import SectionPages from "./SectionPages";
 
 import './Editor.css';
 
-function Editor({ segments, pages, videoUrl, onDataUpdated }) {
-    var [currentSegmentIdx, setCurrentSegmentIdx] = useState(-1);
+function Editor({ sections, pages, videoUrl, onDataUpdated }) {
+    var [currentSectionIdx, setCurrentSectionIdx] = useState(-1);
     const [videoPlayerPosSecs, setVideoPlayerPosSecs] = useState(0);
 
     const $player = useRef(null);
 
-    if (currentSegmentIdx >= segments.length) {
-        currentSegmentIdx = -1;
-        setCurrentSegmentIdx(-1);
+    if (currentSectionIdx >= sections.length) {
+        currentSectionIdx = -1;
+        setCurrentSectionIdx(-1);
     }
 
-    const handleSegmentSelected = (segmentIdx, segment) => {
-        setCurrentSegmentIdx(segmentIdx);
-        $player.current.seekToAndStop(segment.startSec)
+    const handleSectionSelected = (sectionIdx, section) => {
+        setCurrentSectionIdx(sectionIdx);
+        $player.current.seekToAndStop(section.startSec)
     };
 
     const handleOnPagesUpdated = (pages, message) => {
-        onDataUpdated({ segments, pages, videoUrl }, message);
+        onDataUpdated({ sections, pages, videoUrl }, message);
     }
 
     const onProgressUpdate = (playedSeconds) => {
         setVideoPlayerPosSecs(parseFloat(playedSeconds.toFixed(1)));
     };
 
-    const onSegmentChanged = (updatedSegment, newSegment, message) => {
-        const newSegments = JSON.parse(JSON.stringify(segments));
-        newSegments[currentSegmentIdx] = updatedSegment;
-        if (newSegment) {
-            newSegments.splice(currentSegmentIdx + 1, 0, newSegment);
+    const onSectionChanged = (updatedSection, newSection, message) => {
+        const newSections = JSON.parse(JSON.stringify(sections));
+        newSections[currentSectionIdx] = updatedSection;
+        if (newSection) {
+            newSections.splice(currentSectionIdx + 1, 0, newSection);
         }
-        onDataUpdated({ segments: newSegments, pages, videoUrl }, message);
+        onDataUpdated({ sections: newSections, pages, videoUrl }, message);
     };
 
-    const onSegmentsChanged = (newSegments, message) => {
-        onDataUpdated({ segments: newSegments, pages, videoUrl }, message);
+    const onSectionsChanged = (newSections, message) => {
+        onDataUpdated({ sections: newSections, pages, videoUrl }, message);
     }
 
-    const onSegmentPagesChanged = (currentSegmentSelectedPages, message) => {
-        const newSegments = JSON.parse(JSON.stringify(segments));
-        newSegments[currentSegmentIdx].pages = currentSegmentSelectedPages;
-        onDataUpdated({ segments: newSegments, pages, videoUrl }, message);
+    const onSectionPagesChanged = (currentSectionSelectedPages, message) => {
+        const newSections = JSON.parse(JSON.stringify(sections));
+        newSections[currentSectionIdx].pages = currentSectionSelectedPages;
+        onDataUpdated({ sections: newSections, pages, videoUrl }, message);
     };
 
-    const onSegmentPageAreasChanged = (currentSegmentPageAreas, message) => {
-        const newSegments = JSON.parse(JSON.stringify(segments));
-        newSegments[currentSegmentIdx].pageAreas = currentSegmentPageAreas;
-        onDataUpdated({ segments: newSegments, pages, videoUrl }, message);
+    const onSectionPageAreasChanged = (currentSectionPageAreas, message) => {
+        const newSections = JSON.parse(JSON.stringify(sections));
+        newSections[currentSectionIdx].pageAreas = currentSectionPageAreas;
+        onDataUpdated({ sections: newSections, pages, videoUrl }, message);
     };
 
-    const getPrevSegmentEndSec = () => {
-        if (currentSegmentIdx == 0) {
+    const getPrevSectionEndSec = () => {
+        if (currentSectionIdx == 0) {
             return 0;
         }
-        return segments[currentSegmentIdx-1].endSec;
+        return sections[currentSectionIdx-1].endSec;
     }
 
     return (
@@ -69,23 +69,23 @@ function Editor({ segments, pages, videoUrl, onDataUpdated }) {
                 <div>
                     <PlayerWithNavButtons videoUrl={videoUrl} onProgressUpdate={onProgressUpdate} ref={$player} />
 
-                    {currentSegmentIdx >= 0
+                    {currentSectionIdx >= 0
                         ?
                         <div>
-                            <SegmentPosition
+                            <SectionPosition
                                 $player={$player.current}
-                                segment={segments[currentSegmentIdx]}
-                                segmentIdx={currentSegmentIdx}
-                                onSegmentChanged={onSegmentChanged}
+                                section={sections[currentSectionIdx]}
+                                sectionIdx={currentSectionIdx}
+                                onSectionChanged={onSectionChanged}
                                 videoPlayerPosSecs={videoPlayerPosSecs}
-                                getPrevSegmentEndSec={getPrevSegmentEndSec}
+                                getPrevSectionEndSec={getPrevSectionEndSec}
                             />
-                            <SegmentPages
+                            <SectionPages
                                 pages={pages || []}
-                                segmentPages={segments[currentSegmentIdx].pages || []}
-                                segmentPageAreas={segments[currentSegmentIdx].pageAreas || {}}
-                                onSegmentPagesChanges={onSegmentPagesChanged}
-                                onSegmentPageAreasChanged={onSegmentPageAreasChanged}
+                                sectionPages={sections[currentSectionIdx].pages || []}
+                                sectionPageAreas={sections[currentSectionIdx].pageAreas || {}}
+                                onSectionPagesChanges={onSectionPagesChanged}
+                                onSectionPageAreasChanged={onSectionPageAreasChanged}
                             />
                         </div>
                         : ''
@@ -93,7 +93,7 @@ function Editor({ segments, pages, videoUrl, onDataUpdated }) {
 
                 </div>
 
-                <Segments segments={segments} onSegmentSelected={handleSegmentSelected} onSegmentsChanged={onSegmentsChanged} />
+                <Sections sections={sections} onSectionSelected={handleSectionSelected} onSectionsChanged={onSectionsChanged} />
 
                 {/*<Pages pages={pages || []} onPagesUpdated={handleOnPagesUpdated} />*/}
 

@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `emptybars.org`,
-    description: `Sheet music split onto segments and connected to Youtube videos for fun and profit!`,
+    description: `Sheet music split onto sections and connected to Youtube videos to help musicians to learn!`,
     author: `Boris Gvozdev`,
   },
   plugins: [

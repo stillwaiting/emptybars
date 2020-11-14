@@ -67,7 +67,7 @@ class ReactPlayerWrapper extends React.Component {
         this.setState({playbackSpeed: speed.target.value});
     }
 
-    playSegment(startSec, endSec, mode) {
+    playSection(startSec, endSec, mode) {
         this.$player.current.seekTo(startSec, 'seconds');
         this.setState({
             // TODO: remove magic strings

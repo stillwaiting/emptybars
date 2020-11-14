@@ -16,7 +16,7 @@ export const stringToSecs = (str) => {
 
 export const transformToHumanReadable = (data) => {
     const transformedData = JSON.parse(JSON.stringify(data));
-    transformedData.segments.forEach(f => {
+    transformedData.sections.forEach(f => {
         f.start = secsToString(f.startSec);
         f.end = secsToString(f.endSec);
         delete f.startSec;
@@ -27,7 +27,7 @@ export const transformToHumanReadable = (data) => {
 
 export const transformFromHumanReadable = (data) => {
     const transformedData = JSON.parse(JSON.stringify(data));
-    transformedData.segments.forEach(f => {
+    transformedData.sections.forEach(f => {
         f.startSec = stringToSecs(f.start);
         f.endSec = stringToSecs(f.end);
         delete f.start;
