@@ -55,7 +55,7 @@ export default function EditorDataProvider({ lastStateFromLocalStorage, onDataPr
 
     return <table className='editorDataProvider'><tbody><tr>
             <td className='firstCol' onClick={handleOnSelect.bind(this, OP_NEW)}>
-                <input type='radio' name='operation' onChange={handleOnSelect.bind(this, OP_NEW)} checked={opType == OP_NEW} />
+                <input type='radio' name='operation' onChange={handleOnSelect.bind(this, OP_NEW)} checked={opType == OP_NEW} />&nbsp;
                 Create new
             </td>
             <td className='secondCol'>
@@ -74,7 +74,7 @@ export default function EditorDataProvider({ lastStateFromLocalStorage, onDataPr
             </td>
         </tr><tr>
             <td className='firstCol' onClick={handleOnSelect.bind(this, OP_LOAD_OLD)}>
-                <input type='radio' name='operation' onChange={handleOnSelect.bind(this, OP_LOAD_OLD)} checked={opType == OP_LOAD_OLD} />
+                <input type='radio' name='operation' onChange={handleOnSelect.bind(this, OP_LOAD_OLD)} checked={opType == OP_LOAD_OLD} />&nbsp;
                 Load old
             </td>
             <td className='secondCol'>
@@ -88,7 +88,7 @@ export default function EditorDataProvider({ lastStateFromLocalStorage, onDataPr
         </tr>{lastStateFromLocalStorage
             ? <tr>
                 <td className='firstCol' onClick={handleOnSelect.bind(this, OP_RESTORE)}>
-                    <input type='radio' name='operation' onChange={handleOnSelect.bind(this, OP_RESTORE)} checked={opType == OP_RESTORE}  />
+                    <input type='radio' name='operation' onChange={handleOnSelect.bind(this, OP_RESTORE)} checked={opType == OP_RESTORE}  />&nbsp;
                     Restore from local storage
                 </td>
                 <td className='secondCol'>
