@@ -2,7 +2,6 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
 
 function addComposer(indexedData, node) {
@@ -38,8 +37,7 @@ const IndexPage = ({ data }) => {
     data.compositions.nodes.forEach(node => {
         addComposition(indexedData, node);
     });
-    data.
-    performers.nodes.forEach(node => {
+    data.performers.nodes.forEach(node => {
         addPerformer(indexedData, node);
     });
 

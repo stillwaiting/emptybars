@@ -52,8 +52,8 @@ const Layout = ({ composition, composer, performer, children }) => {
                 <div>
                     <ul>
                         <li><a href='/about'>About</a></li>
-                        <li><a href='/editor'>Editor</a> (how to use)</li>
-                        <li>Player (how to use)</li>
+                        <li><a href='/editor'>Editor</a> (<a href='/editor-how-to'>how to use</a>)</li>
+                        <li><a href='/player'>Player</a> (<a href='/player-how-to'>how to use</a>)</li>
                         <li><a href='/contribute'>Contribute</a></li>
                     </ul>
                 </div>
