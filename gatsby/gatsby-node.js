@@ -8,15 +8,19 @@ const fs = require('fs');
 const jsdom = require("jsdom");
 
 function isComposerName(node) {
-    return (node.relativeDirectory && node.relativeDirectory.split('/').length == 1 && node.internal.type == 'File' && node.name === 'name');
+    return (node.relativeDirectory && node.relativeDirectory.split('/').length == 1 && node.internal.type == 'File' && node.name === 'composer-name');
 }
 
 function isCompositionName(node) {
-    return (node.relativeDirectory && node.relativeDirectory.split('/').length == 2 && node.internal.type == 'File' && node.name === 'name');
+    return (node.relativeDirectory && node.relativeDirectory.split('/').length == 2 && node.internal.type == 'File' && node.name === 'composition-name');
 }
 
 function isPerformerName(node) {
-    return (node.relativeDirectory && node.relativeDirectory.split('/').length == 3 && node.internal.type == 'File' && node.name === 'name');
+    return (node.relativeDirectory && node.relativeDirectory.split('/').length == 3 && node.internal.type == 'File' && node.name === 'performer-name');
+}
+
+function isSheetMusicUrl(node) {
+    return (node.relativeDirectory && node.relativeDirectory.split('/').length == 3 && node.internal.type == 'File' && node.name === 'sheet-music');
 }
 
 // You can delete this file if you're not using it
@@ -77,7 +81,7 @@ exports.onCreateNode = async ({ node, loadNodeContent, actions }) => {
         });
     }
 
-    if (node.internal.type === `File` && (node.extension === 'json' || node.extension === 'txt')) {
+    if (node.internal.type === `File` && (node.extension === 'json' || node.extension === 'txt' || node.extension === 'url')) {
         fs.readFile(node.absolutePath, undefined, (_err, buf) => {
             createNodeField({ node, name: `content`, value: buf.toString().trim()});
         });
@@ -88,6 +92,8 @@ exports.onCreateNode = async ({ node, loadNodeContent, actions }) => {
         createNodeField({ node, name: `type`, value: 'compositionName'});
     } else if (isPerformerName(node)) {
         createNodeField({ node, name: `type`, value: 'performerName'});
+    } else if (isSheetMusicUrl(node)) {
+        createNodeField({ node, name: `type`, value: 'sheetMusicUrl'});
     }
 }
 
@@ -128,9 +134,10 @@ exports.createPages = ({graphql, actions}) => {
                 component: sectionPlayerTemplate,
                 context: {
                     sections: JSON.parse(node.fields.content),
-                    composerNamePath: `${composer}/name.txt`,
-                    compositionNamePath: `${composer}/${composition}/name.txt`,
-                    performerNamePath: `${composer}/${composition}/${performer}/name.txt`,
+                    composerNamePath: `${composer}/composer-name.txt`,
+                    compositionNamePath: `${composer}/${composition}/composition-name.txt`,
+                    performerNamePath: `${composer}/${composition}/${performer}/performer-name.txt`,
+                    sheetMusicUrlPath: `${composer}/${composition}/sheet-music.url`,
                 },
             })
         })
