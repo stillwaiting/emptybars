@@ -37,14 +37,14 @@ module.exports = {
     {
       resolve: 'gatsby-source-remote-file',
       options: {
-        url: 'https://lucid-mestorf-8474c9.netlify.app/player/build/index.html',
+        url: process.env.EMPTYBARS_PLAYER_URL || 'https://lucid-mestorf-8474c9.netlify.app/player/build/index.html',
         name: 'playerIndexHtml',
       },
     },
     {
       resolve: 'gatsby-source-remote-file',
       options: {
-        url: 'https://lucid-mestorf-8474c9.netlify.app/editor/build/index.html',
+        url: process.env.EMPTYBARS_EDITOR_URL || 'https://lucid-mestorf-8474c9.netlify.app/editor/build/index.html',
         name: 'editorIndexHtml',
       },
     }

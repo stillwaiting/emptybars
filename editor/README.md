@@ -1,16 +1,33 @@
+This is the "editor" component of the website that gives facilities to segment any YouTube
+video and bind the segments to the sheet music.
 
-# Start dev environment
+# Prerequisite
 
-`yarn`
+Run `yarn` to install all required npm packages.
 
-`yarn start
+# Start development server (singleton mode)
 
+This mode starts the editor in singleton mode.
 
-TBD: add lint
+1. `./serve-develop.sh`
 
+2. open `http://localhost:3000` in your browser
+ 
+3. copy to clipboard the content of any "sections.json" file from composers dir (e.g. `composers/ravel/pavane/thiollier/sections.json`),
 
-# Step 1: prepare your notes
+and click `Submit` button
 
-Convert PDF to JPEGs: https://pdftoimage.com/
+NOTE: this mode supports hot-reloading; each change will be visible in the browser.
 
-Upload them to the Internet: https://imgbox.com/
+# Run with gatsby (website mode)
+
+This mode starts the editor in website's environment. 
+
+1. `./build.sh`
+
+2. `./serve-build.sh`
+
+3. `cd ../gatsby; ./serve-develop-local-components.sh`
+
+NOTE: no hot-reload; each change requires rebuilding and restarting of both the editor 
+      and the website!
