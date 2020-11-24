@@ -2,8 +2,6 @@
   emptybars.org website generator
 </h1>
 
-TBD: add description
-
 ## 🚀 Quick start
 
 1. **Fetch node modules**
@@ -15,7 +13,7 @@ TBD: add description
 
 1.  **Start developing.**
 
-    `./serve-develop.sh`
+    `./develop.sh`
 
 1.  **Open the source code and start editing!**
 
@@ -23,13 +21,9 @@ TBD: add description
 
     _Note: You'll also see a second link: _`http://localhost:8000/___graphql`_. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.com/tutorial/part-five/#introducing-graphiql).
     
-## Start website locally with local versions of the player and the editor
-
-1. **Build and start both the editor and the player in "website" mode**
-
-    Check their README.md files for more info
-
-1. `./serve-develop-local-components.sh`
+NOTE: if you have the editor or the player built and served locally (`./serve-build.sh` script)
+the local versions will be used; but to apply the changes both the player/editor and the
+gatsby website must be restarted.
     
 ## Known issues
 
@@ -51,7 +45,6 @@ A quick look at the top-level files and directories you'll see in a Gatsby proje
     ├── .gitignore
     |── .cache
     ├── .prettierrc
-    ├── build.sh
     ├── gatsby-browser.js
     ├── gatsby-config.js
     ├── gatsby-node.js
@@ -60,8 +53,7 @@ A quick look at the top-level files and directories you'll see in a Gatsby proje
     ├── package-lock.json
     ├── package.json
     └── README.md
-    └── serve-develop.sh
-    └── serve-develop-local-components.sh
+    └── develop.sh
 
 1.  **`/node_modules`**: This directory contains all of the modules of code that your project depends on (npm packages) are automatically installed.
 
@@ -91,10 +83,7 @@ A quick look at the top-level files and directories you'll see in a Gatsby proje
 
 1. **`README.md`**: A text file containing useful reference information about your project.
 
-1. **`serve-develop.sh`**: Launches the website on the local machine. Remote player and editor are used.
-
-1. **`serve-develop-local-components.sh`**: Launches the website on the local machine. Local player and editor are used 
-        (they must be started with `serve-build.sh` scripts).
+1. **`develop.sh`**: Launches the website on the local machine
 
 ## 🎓 Learning Gatsby
 

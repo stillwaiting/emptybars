@@ -12,4 +12,7 @@ else
   echo "WARN: local editor was not found! If you wish to run with local editor, goto 'editor' dir and run './build.sh ; serve-build.sh'"
 fi
 
-./serve-develop.sh
+rm -rf .cache
+
+env | grep EMPTYBARS
+gatsby develop
