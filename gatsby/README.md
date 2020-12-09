@@ -21,8 +21,8 @@
 
     _Note: You'll also see a second link: _`http://localhost:8000/___graphql`_. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.com/tutorial/part-five/#introducing-graphiql).
     
-NOTE: if you have the editor or the player built and served locally (`./serve-build.sh` script)
-the local versions will be used; but to apply the changes both the player/editor and the
+NOTE: if you have the editor or the player built and served locally (`./serve-build.sh` script in their directories)
+the local versions will be used; but to apply the changes both the player/editor AND the
 gatsby website must be restarted.
     
 ## Known issues

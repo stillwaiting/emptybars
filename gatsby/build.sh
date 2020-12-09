@@ -1,1 +1,1 @@
-gatsby build
+gatsby prod

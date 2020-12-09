@@ -117,7 +117,7 @@ function ImageAreas({ title, imgUrl, width, areas, onNewAreaAdded, onDeleteArea 
                                 >
                                 <div onClick={() => handleDelete(idx)}>
                                     Area {idx+1}
-                                    <img src='https://github.com/stillwaiting/emptybars/raw/main/Delete-Button.png' width={16} />
+                                    <img src='https://images2.imgbox.com/99/8d/YaJAz5hZ_o.png' width={16} />
                                 </div>
                         </div>)
                 })}
