@@ -89,6 +89,8 @@ function Player({ sections, images, pages, videoUrl }) {
         }
     }
 
+    const youtubeLink = `${videoUrl}?t=${sections.length > 0 ? sections[0].startSec : '0'}`;
+
     return (
             <div className={initialised ? 'player' : 'player notInitialised'}>
                 <div className='sectionPagesWrapper'>
@@ -103,6 +105,8 @@ function Player({ sections, images, pages, videoUrl }) {
 
                 <div className='playerAndSections'>
                     <ReactPlayerWrapper videoUrl={videoUrl} onProgressUpdate={onProgressUpdate} ref={$player} onPlay={onPlay} onStop={onStop} />
+                    <br />
+                    <div><a href={youtubeLink} target="_blank">Watch on YouTube</a></div>
                     <Sections sections={sections} playInterval={handlePlayInterval} activeSections={activeSections} playInput={playInput} setPlayInput={setPlayInput}/>
                 </div>
 
