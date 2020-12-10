@@ -1,4 +1,4 @@
-# emptybars.org
+# EmptyBars.org
 
 Project for musicians to learn pieces section by sections
 
