@@ -44,28 +44,24 @@ const IndexPage = ({ data }) => {
     const composerSlugsSorted = data.composers.nodes.map(node => node.relativeDirectory);
     composerSlugsSorted.sort();
 
-    const renderPerformer = (composerSlug, compositionSlug, performerSlug) => {
-        return <li key={performerSlug}>
-            <Link to={`${composerSlug}/${compositionSlug}/${performerSlug}`}>performed by {indexedData[composerSlug].compositions[compositionSlug].performers[performerSlug].name}</Link>
+    const renderPerformer = (compositionName, composerSlug, compositionSlug, performerSlug) => {
+        return <li key={compositionSlug + '_' + performerSlug}>
+            <Link to={`${composerSlug}/${compositionSlug}/${performerSlug}`}>{compositionName}, performed by {indexedData[composerSlug].compositions[compositionSlug].performers[performerSlug].name}</Link>
         </li>
     }
 
     const renderComposition = (composerSlug, compositionSlug) => {
         const performersSorted = Object.keys(indexedData[composerSlug].compositions[compositionSlug].performers);
         performersSorted.sort();
-        return <li key={compositionSlug}>
-            {indexedData[composerSlug].compositions[compositionSlug].name}
-            <ul>
-                {performersSorted.map(performerSlug => renderPerformer(composerSlug, compositionSlug, performerSlug))}
-            </ul>
-        </li>
+        const compositionName = indexedData[composerSlug].compositions[compositionSlug].name;
+        return performersSorted.map(performerSlug => renderPerformer(compositionName, composerSlug, compositionSlug, performerSlug));
     }
 
     const renderComposer = (composerSlug) => {
         const compositionsSorted = Object.keys(indexedData[composerSlug].compositions);
         compositionsSorted.sort();
         return <li key={composerSlug}>
-            {indexedData[composerSlug].name}
+            <b>{indexedData[composerSlug].name}</b>
             <ul>
                 {compositionsSorted.map(compositionSlug => renderComposition(composerSlug, compositionSlug))}
             </ul>
