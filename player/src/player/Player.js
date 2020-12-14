@@ -8,10 +8,9 @@ import './Player.scss';
 
 function Player({ sections, images, pages, videoUrl }) {
     const [activeSections, setActiveSections] = useState([]);
-    const [initialised, setInitialised] = useState(false)
+    const [initialised, setInitialised] = useState(0)
     const [skipScrollingFromTime, setSkipScrollingFromTime] = useState(false)
     const [refreshSkipScrollingOnPlay, setRefreshSkipScrollingOnPlaying] = useState(false)
-    const [videoPlayerPosSecs, setVideoPlayerPosSecs] = useState(0);
     const [playInput, setPlayInput] = useState("");
 
     const $player = useRef(null);
@@ -31,7 +30,14 @@ function Player({ sections, images, pages, videoUrl }) {
     }
 
     const onProgressUpdate = (playedSeconds) => {
-        setVideoPlayerPosSecs(parseFloat(playedSeconds.toFixed(1)));
+        if (playedSeconds > 0 && !initialised) {
+            setInitialised(true)
+            $player.current.playSection(sections[0].startSec, sections[0].endSec);
+            return;
+        }
+        if (!initialised) {
+            return;
+        }
         if (refreshSkipScrollingOnPlay) {
             setSkipScrollingFromTime(new Date().getTime());
             setRefreshSkipScrollingOnPlaying(false);
@@ -44,13 +50,6 @@ function Player({ sections, images, pages, videoUrl }) {
             $player.current.stop(sections[sections.length - 1].endSec);
         }
     };
-
-    const onPlay = () => {
-        if (!initialised) {
-            setInitialised(true)
-            $player.current.stop(sections[0].startSec);
-        }
-    }
 
     const onStop = () => {
         setSkipScrollingFromTime(false);
@@ -114,7 +113,7 @@ function Player({ sections, images, pages, videoUrl }) {
 
                 <div className='playerAndSections'>
                     <Sections sections={sections} playInterval={handlePlayInterval} activeSections={activeSections} playInput={playInput} setPlayInput={setPlayInput}/>
-                    <ReactPlayerWrapper videoUrl={videoUrl} onProgressUpdate={onProgressUpdate} ref={$player} onPlay={onPlay} onStop={onStop} />
+                    <ReactPlayerWrapper videoUrl={videoUrl} onProgressUpdate={onProgressUpdate} ref={$player} onStop={onStop} />
                     <br />
                     {initialised ? <div><a href={youtubeLink} target="_blank">Watch on YouTube</a></div> : ''}
                 </div>

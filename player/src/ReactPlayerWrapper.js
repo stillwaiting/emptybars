@@ -38,6 +38,7 @@ class ReactPlayerWrapper extends React.Component {
     _handleProgress({ playedSeconds }) {
         if (this.state.endSec > 0 && playedSeconds > this.state.endSec) {
             this._stopAndReturn();
+            return ;
         }
         this.setState({progress: playedSeconds});
         this.props.onProgressUpdate(playedSeconds);
@@ -48,14 +49,10 @@ class ReactPlayerWrapper extends React.Component {
             this.setState({
                 playing: true,
                 endSec: -1,
-                gotoAfterStopSec: -1
+                gotoAfterStopSec: -1,
+                showControls: true
             });
         }
-    }
-
-    _handleOnStart() {
-        this.setState({showControls: true});
-        this.props.onPlay();
     }
 
     _handleStop() {
@@ -111,10 +108,9 @@ class ReactPlayerWrapper extends React.Component {
                             onDuration={this._handleDuration.bind(this)}
                             onProgress={this._handleProgress.bind(this)}
                             onPlay={this._handleOnPlay.bind(this)}
-                            onStart={this._handleOnStart.bind(this)}
+                            onStart={this._handleOnPlay.bind(this)}
                             progressInterval={100}
                             onPause={this._handleStop.bind(this)}
-                            onEnded={this._handleStop.bind(this)}
                             playbackRate={this.state.playbackSpeed / 100.0}
                             playing={this.state.playing}
                             controls={true}
