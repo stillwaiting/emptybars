@@ -87,27 +87,6 @@ class ReactPlayerWrapper extends React.Component {
             const playbackSpeeds = [25, 50, 60, 70, 80, 90, 100, 125, 150, 200];
             return (
                 <div className='playWithNavButtons'>
-                    <ReactPlayer
-                        ref={this.$player}
-                        url={this.props.videoUrl}
-                        width='100%'
-                        height='100%'
-                        onDuration={this._handleDuration.bind(this)}
-                        onProgress={this._handleProgress.bind(this)}
-                        onPlay={this._handleOnPlay.bind(this)}
-                        onStart={this._handleOnStart.bind(this)}
-                        progressInterval={100}
-                        onPause={this._handleStop.bind(this)}
-                        onEnded={this._handleStop.bind(this)}
-                        playbackRate={this.state.playbackSpeed / 100.0}
-                        playing={this.state.playing}
-                        controls={true}
-                        config={{
-                            youtube: {
-                                playerVars: {origin: window.location.origin}
-                            }
-                        }}
-                    />
                     {this.state.showControls
                         ?
                         <div className='positionAndControls'>
@@ -123,6 +102,29 @@ class ReactPlayerWrapper extends React.Component {
                         :
                         ''
                     }
+                    <div className='player'>
+                        <ReactPlayer
+                            ref={this.$player}
+                            url={this.props.videoUrl}
+                            width='100%'
+                            height='100%'
+                            onDuration={this._handleDuration.bind(this)}
+                            onProgress={this._handleProgress.bind(this)}
+                            onPlay={this._handleOnPlay.bind(this)}
+                            onStart={this._handleOnStart.bind(this)}
+                            progressInterval={100}
+                            onPause={this._handleStop.bind(this)}
+                            onEnded={this._handleStop.bind(this)}
+                            playbackRate={this.state.playbackSpeed / 100.0}
+                            playing={this.state.playing}
+                            controls={true}
+                            config={{
+                                youtube: {
+                                    playerVars: {origin: window.location.origin}
+                                }
+                            }}
+                        />
+                    </div>
                 </div>
             );
     }

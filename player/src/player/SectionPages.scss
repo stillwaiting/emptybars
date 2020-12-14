@@ -5,13 +5,12 @@
     border: 1px solid lightgrey;
   }
 
+  canvas {
+    cursor: pointer;
+  }
+
   .zoom {
     position: absolute;
-
-    img {
-      cursor: pointer;
-      padding: 4px;
-    }
   }
 }
 

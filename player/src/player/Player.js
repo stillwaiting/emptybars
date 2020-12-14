@@ -113,10 +113,10 @@ function Player({ sections, images, pages, videoUrl }) {
                 </div>
 
                 <div className='playerAndSections'>
+                    <Sections sections={sections} playInterval={handlePlayInterval} activeSections={activeSections} playInput={playInput} setPlayInput={setPlayInput}/>
                     <ReactPlayerWrapper videoUrl={videoUrl} onProgressUpdate={onProgressUpdate} ref={$player} onPlay={onPlay} onStop={onStop} />
                     <br />
                     {initialised ? <div><a href={youtubeLink} target="_blank">Watch on YouTube</a></div> : ''}
-                    <Sections sections={sections} playInterval={handlePlayInterval} activeSections={activeSections} playInput={playInput} setPlayInput={setPlayInput}/>
                 </div>
 
             </div>

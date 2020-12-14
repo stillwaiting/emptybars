@@ -1,6 +1,7 @@
 @import "./mixins/squareButton";
 
 .playWithNavButtons {
+  margin-top: 5px;
   .positionAndControls {
     margin-left: 5px;
     .controls {
@@ -9,5 +10,8 @@
         @include squareButton;
       }
     }
+  }
+  .player {
+    margin-top: 5px;
   }
 }
