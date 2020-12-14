@@ -37,10 +37,19 @@ function Player({ sections, images, pages, videoUrl }) {
             setRefreshSkipScrollingOnPlaying(false);
         }
         updateActiveSections(playedSeconds);
+        if (playedSeconds < sections[0].startSec) {
+            $player.current.stop(sections[0].startSec);
+        }
+        if (playedSeconds > sections[sections.length - 1].endSec) {
+            $player.current.stop(sections[sections.length - 1].endSec);
+        }
     };
 
     const onPlay = () => {
-        setInitialised(true)
+        if (!initialised) {
+            setInitialised(true)
+            $player.current.stop(sections[0].startSec);
+        }
     }
 
     const onStop = () => {
@@ -106,7 +115,7 @@ function Player({ sections, images, pages, videoUrl }) {
                 <div className='playerAndSections'>
                     <ReactPlayerWrapper videoUrl={videoUrl} onProgressUpdate={onProgressUpdate} ref={$player} onPlay={onPlay} onStop={onStop} />
                     <br />
-                    <div><a href={youtubeLink} target="_blank">Watch on YouTube</a></div>
+                    {initialised ? <div><a href={youtubeLink} target="_blank">Watch on YouTube</a></div> : ''}
                     <Sections sections={sections} playInterval={handlePlayInterval} activeSections={activeSections} playInput={playInput} setPlayInput={setPlayInput}/>
                 </div>
 

@@ -77,6 +77,12 @@ class ReactPlayerWrapper extends React.Component {
         });
     }
 
+    stop(startSec) {
+        this.setState({playing: false});
+        this.$player.current.seekTo(startSec, 'seconds');
+        this.props.onStop();
+    }
+
     render() {
             const playbackSpeeds = [25, 50, 60, 70, 80, 90, 100, 125, 150, 200];
             return (
