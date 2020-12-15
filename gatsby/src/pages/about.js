@@ -7,22 +7,22 @@ const NotFoundPage = () => (
     <Layout composition='EmptyBars.org - About'>
     <SEO title="About"/>
         <p>
-            EmptyBars.org was created with a purpose to help musicians to learn. Many teachers advice their students
-            to learn new pieces by splitting them up onto sections and then learn each section separately.
+            EmptyBars.org was created with a purpose to help musicians to study new musical piececs. Lots of musical teachers advice their students
+            to learn pieces by splitting them on sections and then studying each section individually.
             (E.g. <a href='https://www.libertyparkmusic.com/learn-music-quickly/#p4' target='_blank' rel='noreferrer'
                 >here</a> or <a href='https://youtu.be/S-en1Bi7kwY?t=171' target='_blank' rel='noreferrer'
                 >here</a>.)
         </p>
         <p>
-            This is exactly what this project is about. On this website you can find musical compositions performed
-            by wonderful musicians from YouTube. Each composition is split onto segments and binded to the sheet music, so
-            you could listen and study it bit by bit.
+            On this website you can find musical compositions performed
+            by wonderful musicians on YouTube. Each composition is split on sections and each section is binded to a particular place in
+            the sheet music for convenient studying. The student could hear
         </p>
         <p>
-            You could also split ANY YouTube video that you'd like (see Editor) and play it back later by segments
-            (see Player). If the work is qualitative and the sheet music is in the public domain, you are very welcome
-            to contribute to the project and add this composition to the website (see how to do that).
-            Before doing that, please make sure you are not infringing any copyrights.
+            You could also split any YouTube video on sections by yourself, see <a href="/editor-how-to">Editor - how to use</a> and <a href="/player-how-to">Player - how to use</a> for more details.
+        </p>
+        <p>
+            You are welcome to contribute your works to the website. Please see <a href="/contribute">Contribute</a> for more details.
         </p>
     </Layout>
 )

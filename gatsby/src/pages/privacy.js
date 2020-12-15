@@ -15,7 +15,7 @@ const NotFoundPage = () => (
         </p>
             <ul>
                 <li><a href='https://youtube.com'>YouTube</a> - we use YouTube player to play segmented videos;</li>
-                <li><a href='https://netlify.com'>Netlify</a> - EmptyBars.org website is hosted on their infrastructure.</li>
+                <li><a href='https://netlify.com'>Netlify</a> - the website is hosted on Netlify infrastructure.</li>
             </ul>
         <p>
             Please check their Privacy Policies to find out more details.
@@ -23,8 +23,7 @@ const NotFoundPage = () => (
 
     <h2>Contact information</h2>
         <p>
-            Should you have any questions about our Privacy Policy, please don't hesitate to raise a question
-            at <a href='https://github.com/stillwaiting/emptybars/issues'>https://github.com/stillwaiting/emptybars/issues</a> and
+            Should you have any questions, please don't hesitate to raise a question at <a href='https://github.com/stillwaiting/emptybars/issues'>https://github.com/stillwaiting/emptybars/issues</a> and
             we will do our best to answer it in a timely manner.
         </p>
     </Layout>
