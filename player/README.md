@@ -27,7 +27,7 @@ This mode starts the player in website's environment.
 
 2. `./serve-build.sh`
 
-3. `cd ../gatsby; ./develop.sh`
+3. `cd ../gatsby; ./serve-develop.sh`
 
 NOTE: no hot-reload; each change requires rebuilding and restarting of both the player 
       and the website!

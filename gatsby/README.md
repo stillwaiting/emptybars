@@ -13,7 +13,7 @@
 
 1.  **Start developing.**
 
-    `./develop.sh`
+    `./serve-develop.sh`
 
 1.  **Open the source code and start editing!**
 
@@ -53,7 +53,7 @@ A quick look at the top-level files and directories you'll see in a Gatsby proje
     ├── package-lock.json
     ├── package.json
     └── README.md
-    └── develop.sh
+    └── serve-develop.sh
 
 1.  **`/node_modules`**: This directory contains all of the modules of code that your project depends on (npm packages) are automatically installed.
 
@@ -83,7 +83,7 @@ A quick look at the top-level files and directories you'll see in a Gatsby proje
 
 1. **`README.md`**: A text file containing useful reference information about your project.
 
-1. **`develop.sh`**: Launches the website on the local machine
+1. **`serve-develop.sh`**: Launches the website on the local machine
 
 ## 🎓 Learning Gatsby
 
