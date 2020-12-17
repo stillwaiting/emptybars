@@ -21,18 +21,25 @@ function Player({ sections, images, pages, videoUrl }) {
 
     const updateActiveSections = (playedSeconds) => {
         var newActiveSections = [];
-        sections.forEach((section, idx) => {
+        for (var idx = 0; idx <sections.length; idx++ ) {
+            const section = sections[idx];
+            // The intervals often overlap and the videos are paused at the start of the interval. Without this
+            // shortcut the paused video at the start of a segment usually shows 2 segments on the sheets, not good
+            if (Math.abs(section.startSec - playedSeconds) < 0.1) {
+                setActiveSections([idx]);
+                return;
+            }
             if (section.startSec <= playedSeconds && section.endSec >= playedSeconds) {
                 newActiveSections.push(idx);
             }
-        });
+        }
         setActiveSections(newActiveSections);
     }
 
     const onProgressUpdate = (playedSeconds) => {
         if (playedSeconds > 0 && !initialised) {
             setInitialised(true)
-            $player.current.playSection(sections[0].startSec, sections[0].endSec);
+            $player.current.playSection(sections[0].startSec, sections[sections.length-1].endSec);
             return;
         }
         if (!initialised) {
