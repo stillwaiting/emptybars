@@ -32,6 +32,11 @@ header {
   margin-bottom: 1.45rem;
 }
 
+header a {
+  color: var(--white);
+  text-decoration: none;
+}
+
 header> div{
   margin: 0 auto;
   display: flex;
@@ -42,12 +47,11 @@ header> div{
 header h1 {
   margin: 0;
   padding-top: 20px;
-}
-
-header>div div:nth-child(2)>div {
   color: var(--white);
   padding-left: 20px;
 }
+
+
 
 @media screen and (max-width: 600px) {
   header> div {
@@ -58,8 +62,6 @@ header>div div:nth-child(2)>div {
     padding-bottom: 10px;
     text-align: center;
     line-height: 2.5rem;
-  }
-  header>div div:nth-child(2)>div {
     padding-left:0;
   }
 }

@@ -6,25 +6,18 @@ import Image from "./image"
 const Header = ({ composition, composer, performer }) => (
   <header>
     <div>
-      <div>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          <Image />
-        </Link>
-      </div>
+      <Link to="/">
+        <Image />
+      </Link>
+
       <div>
         {composition ? (
-          <div>
+          <>
             <h1>
               {composition} {composer ? <span>({composer})</span> : ""}
             </h1>
             {performer ? <span>Performed by {performer}</span> : ""}
-          </div>
+          </>
         ) : (
           ""
         )}
