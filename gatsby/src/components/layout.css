@@ -1,3 +1,9 @@
+:root {
+  --background: #000; 
+  --white: #fff;
+  --main: #00008B;
+}
+
 html {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -14,11 +20,50 @@ body {
   font-weight: normal;
   word-wrap: break-word;
   font-kerning: normal;
-  background: black;
+  background: var(--background);
   -moz-font-feature-settings: "kern", "liga", "clig", "calt";
   -ms-font-feature-settings: "kern", "liga", "clig", "calt";
   -webkit-font-feature-settings: "kern", "liga", "clig", "calt";
   font-feature-settings: "kern", "liga", "clig", "calt";
+}
+
+header {
+  background: var(--main);
+  margin-bottom: 1.45rem;
+}
+
+header a {
+  color: var(--white);
+  text-decoration: none;
+}
+
+header> div{
+  margin: 0 auto;
+  display: flex;
+  max-width: 960px;
+  padding: 0.5rem 0 0.5rem 0;
+}
+
+header h1 {
+  margin: 0;
+  padding-top: 20px;
+  color: var(--white);
+  padding-left: 20px;
+}
+
+
+
+@media screen and (max-width: 600px) {
+  header> div {
+    flex-direction: column;
+    align-items: center;
+  }
+  header h1 {
+    padding-bottom: 10px;
+    text-align: center;
+    line-height: 2.5rem;
+    padding-left:0;
+  }
 }
 
 
@@ -27,7 +72,7 @@ body {
 }
 
 .footerMenu a {
-  color: white;
+  color: var(--white);
 }
 article,
 aside,
