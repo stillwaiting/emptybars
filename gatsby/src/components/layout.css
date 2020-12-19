@@ -51,7 +51,10 @@ header h1 {
   padding-left: 20px;
 }
 
-
+header span {
+  color: var(--white);
+  padding-left: 20px;
+}
 
 @media screen and (max-width: 600px) {
   header> div {
