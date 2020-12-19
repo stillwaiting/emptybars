@@ -49,10 +49,12 @@ class ReactPlayerWrapper extends React.Component {
             this.setState({
                 playing: true,
                 endSec: -1,
-                gotoAfterStopSec: -1,
-                showControls: true
+                gotoAfterStopSec: -1
             });
         }
+        this.setState({
+            showControls: true
+        });
     }
 
     _handleStop() {
