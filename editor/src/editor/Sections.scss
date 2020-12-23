@@ -4,28 +4,25 @@
 .sections {
   max-width: 100%;
   .scrolling {
-    padding: 5px;
-    border: 1px solid darkred;
     display: flex;
     flex-direction: column;
+
     .addButtonWrapper {
       display: flex;
       margin-left: 10px;
       .addButton {
         @include blueButton;
         text-align: center;
-        padding: 20px 25px 13px;
       }
     }
     .sectionWrapper {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
+      justify-content: left;
       .button {
         @include squareButton;
         white-space: nowrap;
       }
-
     }
   }
 
