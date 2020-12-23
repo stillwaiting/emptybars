@@ -1,9 +1,9 @@
 import React, {useState, useRef, useEffect} from 'react';
-import { secsToString } from "emptybars-common/utils";
+import {secsToString} from "emptybars-common/utils";
 
 import './Sections.scss';
 
-function Sections({ sections, onSectionSelected, onSectionsChanged}) {
+function Sections({sections, onSectionSelected, onSectionsChanged}) {
     var [selectedSectionIdx, setSelectedSectionIdx] = useState(-1);
     var [lastCreatedSectionIdx, setLastCreatedSectionIdx] = useState(-1);
     const lastCreatedSectionRef = useRef(null);
@@ -25,8 +25,8 @@ function Sections({ sections, onSectionSelected, onSectionsChanged}) {
         const newSections = JSON.parse(JSON.stringify(sections));
         if (newSections.length > 0) {
             newSections.push({
-                startSec: sections[sections.length-1].endSec,
-                endSec: sections[sections.length-1].endSec + 10
+                startSec: sections[sections.length - 1].endSec,
+                endSec: sections[sections.length - 1].endSec + 10
             });
         } else {
             newSections.push({
@@ -36,17 +36,19 @@ function Sections({ sections, onSectionSelected, onSectionsChanged}) {
         }
         onSectionsChanged(newSections, "add section");
         setLastCreatedSectionIdx(newSections.length - 1);
-        handleClickSection(newSections.length - 1, newSections[newSections.length-1]);
+        handleClickSection(newSections.length - 1, newSections[newSections.length - 1]);
     }
 
     return (
         <div className='sections'>
             <div className='scrolling'>
-                <div className='addButton' onClick={handleAddSectionClick.bind(null)}>
-                    Add section
+                <div className="addButtonWrapper">
+                    <div className='addButton' onClick={handleAddSectionClick.bind(null)}>
+                        Add section
+                    </div>
                 </div>
-
-                {sections.map(({ startSec, endSec }, key) => (
+                <div className="sectionWrapper">
+                {sections.map(({startSec, endSec}, key) => (
                     <div
                         className={`button ${
                             selectedSectionIdx === key ? 'active' : ''
@@ -55,11 +57,12 @@ function Sections({ sections, onSectionSelected, onSectionsChanged}) {
                         onClick={handleClickSection.bind(null, key, sections[key])}
                         ref={(key == lastCreatedSectionIdx) ? lastCreatedSectionRef : null}
                     >
-                        Section {key+1}: {secsToString(startSec)} - {secsToString(endSec)}
+                        Section {key + 1}: {secsToString(startSec)} - {secsToString(endSec)}
                     </div>
                 ))}
+                </div>
             </div>
-         </div>);
+        </div>);
 }
 
 export default Sections;

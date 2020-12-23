@@ -1,6 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, {useState, useRef} from 'react';
 import Editor from './editor/Editor';
-import { transformFromHumanReadable, transformToHumanReadable} from "emptybars-common/utils";
+import {transformFromHumanReadable, transformToHumanReadable} from "emptybars-common/utils";
 
 import './EditorLoader.scss';
 import EditorDataProvider from "./editor/EditorDataProvider";
@@ -20,7 +20,11 @@ function EditorLoader(initialData) {
 
 
     const handleOnDataUpdated = (newData, operationName) => {
-        const historyChunk = {oldData: JSON.parse(JSON.stringify(data)), newData: JSON.parse(JSON.stringify(newData)), operationName};
+        const historyChunk = {
+            oldData: JSON.parse(JSON.stringify(data)),
+            newData: JSON.parse(JSON.stringify(newData)),
+            operationName
+        };
         doSetData(newData);
 
         history.push(historyChunk);
@@ -61,11 +65,16 @@ function EditorLoader(initialData) {
     }
 
     return <div>{data.videoUrl ?
-            <div className="editorLoader">
-                <Editor {...data} onDataUpdated={handleOnDataUpdated}/>
+        <div className="editorLoader">
+            <div className="editorLoaderWrapper">
+                <div className="editor">
+                    <Editor {...data} onDataUpdated={handleOnDataUpdated}/>
+                </div>
+                <div className="jsonData">
                 <textarea readOnly={true} value={JSON.stringify(transformToHumanReadable(data), null, 2)}
                           ref={textareaRef}/>
-                <div className="copyButton" onClick={handleCopyClick}>copy</div>
+                    <div className="copyButton" onClick={handleCopyClick}>copy</div>
+                </div>
                 {history.length > 0
                     ? <div>
                         Last operation: {history[history.length - 1].operationName} <span className="undoButton"
@@ -81,8 +90,11 @@ function EditorLoader(initialData) {
                     : ''
                 }
             </div>
-            :
-            <EditorDataProvider lastStateFromLocalStorage={window.localStorage.getItem(LOCAL_STORAGE_KEY)} onDataProvided={handleOnDataProvided} />
+
+        </div>
+        :
+        <EditorDataProvider lastStateFromLocalStorage={window.localStorage.getItem(LOCAL_STORAGE_KEY)}
+                            onDataProvided={handleOnDataProvided}/>
     }</div>;
 }
 
