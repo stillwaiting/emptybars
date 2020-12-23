@@ -3,7 +3,9 @@ earlier by the editor).
 
 # Prerequisite
 
-Run `yarn` to install all required npm packages.
+1. Go to `../common` dir and run `./install.sh`
+
+1. Run `yarn` to install all required npm packages.
 
 # Start development server (singleton mode)
 
@@ -23,11 +25,9 @@ NOTE: this mode supports hot-reloading; each change will be visible in the brows
 
 This mode starts the player in website's environment. 
 
-1. `./build.sh`
+1. `./serve-build.sh`
 
-2. `./serve-build.sh`
-
-3. `cd ../gatsby; ./serve-develop.sh`
+2. in another terminal `cd ../gatsby; ./serve-develop.sh`
 
 NOTE: no hot-reload; each change requires rebuilding and restarting of both the player 
       and the website!
