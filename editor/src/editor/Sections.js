@@ -41,7 +41,6 @@ function Sections({sections, onSectionSelected, onSectionsChanged}) {
 
     return (
         <div className='sections'>
-            <div className='scrolling'>
                 <div className="addButtonWrapper">
                     <div className='addButton' onClick={handleAddSectionClick.bind(null)}>
                         Add section
@@ -60,7 +59,6 @@ function Sections({sections, onSectionSelected, onSectionsChanged}) {
                         Section {key + 1}: {secsToString(startSec)} - {secsToString(endSec)}
                     </div>
                 ))}
-                </div>
             </div>
         </div>);
 }

@@ -65,7 +65,6 @@ function Editor({ sections, pages, videoUrl, onDataUpdated }) {
     }
 
     return (
-            <div className='editor'>
                 <div>
                     <Sections sections={sections} onSectionSelected={handleSectionSelected} onSectionsChanged={onSectionsChanged} />
                     <PlayerWithNavButtons videoUrl={videoUrl} onProgressUpdate={onProgressUpdate} ref={$player} />
@@ -90,8 +89,6 @@ function Editor({ sections, pages, videoUrl, onDataUpdated }) {
                         </div>
                         : ''
                     }
-
-                </div>
 
 
                 {/*<Pages pages={pages || []} onPagesUpdated={handleOnPagesUpdated} />*/}

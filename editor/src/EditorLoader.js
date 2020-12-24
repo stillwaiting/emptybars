@@ -67,9 +67,9 @@ function EditorLoader(initialData) {
     return <div>{data.videoUrl ?
         <div className="editorLoader">
             <div className="editorLoaderWrapper">
-                <div className="editor">
-                    <Editor {...data} onDataUpdated={handleOnDataUpdated}/>
-                </div>
+
+                <Editor {...data} onDataUpdated={handleOnDataUpdated}/>
+
                 <div className="jsonData">
                 <textarea readOnly={true} value={JSON.stringify(transformToHumanReadable(data), null, 2)}
                           ref={textareaRef}/>
