@@ -53,6 +53,19 @@ class PlayerWithNavButtons extends React.Component {
         this.setState({playing: false});
     }
 
+    handlePlayCurrentSection() {
+        console.log(this.props.sectionStartSec, this.props.sectionEndSec);
+        this.playSection(this.props.sectionStartSec, this.props.sectionEndSec, 'STAY_AT_START');
+    }
+
+    handleJumpSectionStart() {
+        this.seekToAndStop(this.props.sectionStartSec);
+    }
+
+    handleJumpSectionEnd() {
+        this.seekToAndStop(this.props.sectionEndSec);
+    }
+
     playSection(startSec, endSec, mode) {
         this.$player.current.seekTo(startSec, 'seconds');
         this.setState({
@@ -131,6 +144,24 @@ class PlayerWithNavButtons extends React.Component {
                             }
                             <div className='gotoButton' onClick={this.handlePlayOneSecBefore.bind(this)} >Play 1 sec before</div>
                             <div className='gotoButton' onClick={this.handlePlayOneSecAfter.bind(this)} >Play 1 sec after</div>
+
+
+                            {this.props.sectionStartSec >= 0 ?
+                                <div className='controls'>
+                                    <div className='gotoButton' onClick={this.handlePlayCurrentSection.bind(this)}>
+                                        Play the whole section
+                                    </div>
+
+                                    <div className='gotoButton'  onClick={this.handleJumpSectionStart.bind(this)}>
+                                        Jump to section start
+                                    </div>
+
+                                    <div className='gotoButton'  onClick={this.handleJumpSectionEnd.bind(this)}>
+                                        Jump to section end
+                                    </div>
+                                </div>
+                            : '' }
+
                         </div>
                     </div>
                 </div>

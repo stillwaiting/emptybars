@@ -3,19 +3,7 @@ import { secsToString } from "emptybars-common/utils";
 
 import './SectionPosition.scss';
 
-function SectionPosition({ $player, section, sectionIdx, videoPlayerPosSecs, onSectionChanged: onSectionChanged, getPrevSectionEndSec: getPrevSectionEndSec}) {
-    const handlePlayCurrentSection = () => {
-        $player.playSection(section.startSec, section.endSec, 'STAY_AT_START');
-    }
-
-    const handleJumpSectionStart = () => {
-        $player.seekToAndStop(section.startSec);
-    }
-
-    const handleJumpSectionEnd = () => {
-        $player.seekToAndStop(section.endSec);
-    }
-
+function SectionPosition({ section, sectionIdx, videoPlayerPosSecs, onSectionChanged: onSectionChanged, getPrevSectionEndSec: getPrevSectionEndSec}) {
     const hanleSetCurrentTimeAsSectionStart = () => {
         const newSection = JSON.parse(JSON.stringify(section));
         newSection.startSec = parseFloat(videoPlayerPosSecs.toFixed(1));
@@ -66,17 +54,6 @@ function SectionPosition({ $player, section, sectionIdx, videoPlayerPosSecs, onS
             <div className='title'>Selected Section #{sectionIdx + 1} ({secsToString(section.startSec)} - {secsToString(section.endSec)})</div>
             <div className='playerPosition'>{renderSectionPos()}</div>
             <div className='controls'>
-                <div className='button' onClick={handlePlayCurrentSection}>
-                    Play the whole section
-                </div>
-                <div className='group'>
-                    <div className='button'  onClick={handleJumpSectionStart}>
-                        Jump to section start
-                    </div>
-                    <div className='button'  onClick={handleJumpSectionEnd}>
-                        Jump to section end
-                    </div>
-                </div>
                 <div className='button'  onClick={handleSetSectionStartToLastSectionEnd}>
                     Set section start at prev. section end
                 </div>
@@ -94,6 +71,7 @@ function SectionPosition({ $player, section, sectionIdx, videoPlayerPosSecs, onS
                         Split section at {secsToString(videoPlayerPosSecs)}
                     </div>
                     :'' }
+
             </div>
         </div>
     );

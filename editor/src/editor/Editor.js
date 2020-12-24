@@ -67,7 +67,13 @@ function Editor({ sections, pages, videoUrl, onDataUpdated }) {
     return (
                 <div>
                     <Sections sections={sections} onSectionSelected={handleSectionSelected} onSectionsChanged={onSectionsChanged} />
-                    <PlayerWithNavButtons videoUrl={videoUrl} onProgressUpdate={onProgressUpdate} ref={$player} />
+                    <PlayerWithNavButtons
+                        videoUrl={videoUrl}
+                        onProgressUpdate={onProgressUpdate}
+                        ref={$player}
+                        sectionStartSec={currentSectionIdx >= 0 ? sections[currentSectionIdx].startSec : -1}
+                        sectionEndSec={currentSectionIdx >= 0 ? sections[currentSectionIdx].endSec : -1}
+                    />
                     {currentSectionIdx >= 0
                         ?
                         <div>
