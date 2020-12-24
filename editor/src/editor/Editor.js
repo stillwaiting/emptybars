@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import PlayerWithNavButtons from '../PlayerWithNavButtons';
+import PlayerWithNavButtons from './PlayerWithNavButtons';
 import SectionPosition from './SectionPosition';
 import Sections from './Sections';
 
