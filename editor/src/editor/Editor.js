@@ -68,39 +68,14 @@ function Editor({ sections, pages, videoUrl, onDataUpdated }) {
 
     return (
                 <div>
-                    <Sections sections={sections} onSectionSelected={handleSectionSelected} onSectionsChanged={onSectionsChanged} />
-
-                    <div style={{height: '50px', overflow: 'hidden', margin: '10px', width:'800px'}}>
-                        <div style={{height: '50px', width: (videoDuration * 10) + 'px', marginLeft: '-' + (parseInt(videoPlayerPosSecs * 10) - 100  )  + 'px', position: 'relative'}}>
-                            {sections.map((section, idx) =>
-                                <div style={{
-                                    border: '1px solid #aaa',
-                                    height: '25px',
-                                    position:'absolute',
-                                    backgroundColor: (idx == currentSectionIdx) ? '#ccffcc' : '#eeeeee',
-                                    width: parseInt((section.endSec - section.startSec) * 10) + 'px',
-                                    textAlign:"center",
-                                    overflow: 'hidden',
-                                    lineHeight: '25px',
-                                    left: (parseInt(section.startSec*10) + 'px'),
-                                    top: '10px'
-                                }}
-                                >
-                                    {idx+1}
-                                </div>
-                            )}
-                            <div style={{
-                                height: '50px',
-                                position:'absolute',
-                                backgroundColor: '#0000ff',
-                                width: 2,
-                                overflow: 'hidden',
-                                left: parseInt(videoPlayerPosSecs * 10) + 'px',
-                                top: '0px'
-                            }}
-                             />
-                        </div>
-                    </div>
+                    <Sections
+                        sections={sections}
+                        currentSectionIdx={currentSectionIdx}
+                        videoDuratio={videoDuration}
+                        videoPlayerPosSecs={videoPlayerPosSecs}
+                        onSectionSelected={handleSectionSelected}
+                        onSectionsChanged={onSectionsChanged}
+                    />
 
                     <PlayerWithNavButtons
                         videoUrl={videoUrl}
@@ -109,6 +84,8 @@ function Editor({ sections, pages, videoUrl, onDataUpdated }) {
                         sectionStartSec={currentSectionIdx >= 0 ? sections[currentSectionIdx].startSec : -1}
                         sectionEndSec={currentSectionIdx >= 0 ? sections[currentSectionIdx].endSec : -1}
                     />
+
+
                     {currentSectionIdx >= 0
                         ?
                         <div>

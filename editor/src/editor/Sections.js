@@ -3,14 +3,11 @@ import {secsToString} from "emptybars-common/utils";
 
 import './Sections.scss';
 
-function Sections({sections, onSectionSelected, onSectionsChanged}) {
-    var [selectedSectionIdx, setSelectedSectionIdx] = useState(-1);
+function Sections({sections, videoDuration, videoPlayerPosSecs, currentSectionIdx, onSectionSelected, onSectionsChanged}) {
     var [lastCreatedSectionIdx, setLastCreatedSectionIdx] = useState(-1);
     const lastCreatedSectionRef = useRef(null);
 
     const handleClickSection = (sectionIdx, section) => {
-        setSelectedSectionIdx(sectionIdx);
-        console.log(section);
         onSectionSelected(sectionIdx, section);
     };
 
@@ -46,11 +43,44 @@ function Sections({sections, onSectionSelected, onSectionsChanged}) {
                         Add section
                     </div>
                 </div>
+
+            <div style={{height: '50px', overflow: 'hidden', margin: '10px', width:'800px'}}>
+                <div style={{height: '50px', width: (videoDuration * 10) + 'px', marginLeft: '-' + (parseInt(videoPlayerPosSecs * 10) - 100  )  + 'px', position: 'relative'}}>
+                    {sections.map((section, idx) =>
+                        <div style={{
+                            border: '1px solid #aaa',
+                            height: '25px',
+                            position:'absolute',
+                            backgroundColor: (idx == currentSectionIdx) ? '#ccffcc' : '#eeeeee',
+                            width: parseInt((section.endSec - section.startSec) * 10) + 'px',
+                            textAlign:"center",
+                            overflow: 'hidden',
+                            lineHeight: '25px',
+                            left: (parseInt(section.startSec*10) + 'px'),
+                            top: '10px'
+                        }}
+                        >
+                            {idx+1}
+                        </div>
+                    )}
+                    <div style={{
+                        height: '50px',
+                        position:'absolute',
+                        backgroundColor: '#0000ff',
+                        width: 2,
+                        overflow: 'hidden',
+                        left: parseInt(videoPlayerPosSecs * 10) + 'px',
+                        top: '0px'
+                    }}
+                    />
+                </div>
+            </div>
+
                 <div className="sectionWrapper">
                 {sections.map(({startSec, endSec}, key) => (
                     <div
                         className={`button ${
-                            selectedSectionIdx === key ? 'active' : ''
+                            currentSectionIdx === key ? 'active' : ''
                         }`}
                         key={key}
                         onClick={handleClickSection.bind(null, key, sections[key])}
