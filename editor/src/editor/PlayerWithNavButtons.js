@@ -38,7 +38,7 @@ class PlayerWithNavButtons extends React.Component {
             this.stopAndReturn();
         }
         this.setState({progress: playedSeconds});
-        this.props.onProgressUpdate(playedSeconds);
+        this.props.onProgressUpdate(playedSeconds, this.state.duration);
     };
 
     handleOnPlay() {

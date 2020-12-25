@@ -11,6 +11,7 @@ import './Editor.css';
 function Editor({ sections, pages, videoUrl, onDataUpdated }) {
     var [currentSectionIdx, setCurrentSectionIdx] = useState(-1);
     const [videoPlayerPosSecs, setVideoPlayerPosSecs] = useState(0);
+    const [videoDuration, setVideoDuration] = useState(0);
 
     const $player = useRef(null);
 
@@ -28,8 +29,9 @@ function Editor({ sections, pages, videoUrl, onDataUpdated }) {
         onDataUpdated({ sections, pages, videoUrl }, message);
     }
 
-    const onProgressUpdate = (playedSeconds) => {
+    const onProgressUpdate = (playedSeconds, duration) => {
         setVideoPlayerPosSecs(parseFloat(playedSeconds.toFixed(1)));
+        setVideoDuration(duration);
     };
 
     const onSectionChanged = (updatedSection, newSection, message) => {
@@ -67,6 +69,39 @@ function Editor({ sections, pages, videoUrl, onDataUpdated }) {
     return (
                 <div>
                     <Sections sections={sections} onSectionSelected={handleSectionSelected} onSectionsChanged={onSectionsChanged} />
+
+                    <div style={{height: '50px', overflow: 'hidden', margin: '10px', width:'800px'}}>
+                        <div style={{height: '50px', width: (videoDuration * 10) + 'px', marginLeft: '-' + (parseInt(videoPlayerPosSecs * 10) - 100  )  + 'px', position: 'relative'}}>
+                            {sections.map((section, idx) =>
+                                <div style={{
+                                    border: '1px solid #aaa',
+                                    height: '25px',
+                                    position:'absolute',
+                                    backgroundColor: (idx == currentSectionIdx) ? '#ccffcc' : '#eeeeee',
+                                    width: parseInt((section.endSec - section.startSec) * 10) + 'px',
+                                    textAlign:"center",
+                                    overflow: 'hidden',
+                                    lineHeight: '25px',
+                                    left: (parseInt(section.startSec*10) + 'px'),
+                                    top: '10px'
+                                }}
+                                >
+                                    {idx+1}
+                                </div>
+                            )}
+                            <div style={{
+                                height: '50px',
+                                position:'absolute',
+                                backgroundColor: '#0000ff',
+                                width: 2,
+                                overflow: 'hidden',
+                                left: parseInt(videoPlayerPosSecs * 10) + 'px',
+                                top: '0px'
+                            }}
+                             />
+                        </div>
+                    </div>
+
                     <PlayerWithNavButtons
                         videoUrl={videoUrl}
                         onProgressUpdate={onProgressUpdate}
