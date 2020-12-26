@@ -35,7 +35,7 @@ function SectionsTimeline({sections, videoDuration, videoPlayerPosSecs, currentS
                     </div>
                 </div>
 
-            <div style={{height: '50px', overflow: 'hidden', margin: '10px', width:'800px'}}>
+            <div style={{height: '50px', overflow: 'hidden', margin: '10px', width:'500px'}}>
                 <div style={{height: '50px', width: (videoDuration * 10) + 'px', marginLeft: '-' + (parseInt(videoPlayerPosSecs * 10) - 100  )  + 'px', position: 'relative'}}>
                     {sections.map((section, idx) =>
                         <div style={{
@@ -68,7 +68,19 @@ function SectionsTimeline({sections, videoDuration, videoPlayerPosSecs, currentS
                     />
                 </div>
             </div>
-
+            {sections.length && videoPlayerPosSecs > sections[sections.length - 1].endSec
+                ?
+                    <div>
+                        ← sections are there
+                    </div>
+                : '' }
+            {sections.length &&  videoPlayerPosSecs < sections[0].startSec
+                ?
+                <div style={{textAlign: 'right'}}>
+                    sections are there →
+                </div>
+                : ''
+            }
         </div>);
 }
 

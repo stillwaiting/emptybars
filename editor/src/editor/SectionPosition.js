@@ -35,7 +35,7 @@ function SectionPosition({ section, sectionIdx, videoPlayerPosSecs, onSectionCha
             className =  'after';
         }
 
-        return <span className={className}>Section start delta={deltaStart.toFixed(1)}, delta end delta={deltaEnd.toFixed(1)}</span>;
+        return <span className={className}>Start delta={deltaStart.toFixed(1)}; end delta={deltaEnd.toFixed(1)}</span>;
     }
 
     const handleSplitSection = () => {
@@ -54,12 +54,14 @@ function SectionPosition({ section, sectionIdx, videoPlayerPosSecs, onSectionCha
             <div className='title'>Selected Section #{sectionIdx + 1} ({secsToString(section.startSec)} - {secsToString(section.endSec)})</div>
             <div className='playerPosition'>{renderSectionPos()}</div>
             <div className='controls'>
-                <div className='button'  onClick={handleSetSectionStartToLastSectionEnd}>
-                    Set section start at prev. section end
-                </div>
                 <div className='group'>
-                    <div className='button'  onClick={hanleSetCurrentTimeAsSectionStart}>
-                        Set as section's start time
+                    <div>
+                        <div className='button'  onClick={hanleSetCurrentTimeAsSectionStart}>
+                            Set as section's start time
+                        </div>
+                        <div className='button'  onClick={handleSetSectionStartToLastSectionEnd}>
+                            Set section start at prev. section's end
+                        </div>
                     </div>
                     <div className='button'  onClick={hanleSetCurrentTimeAsSectionEnd}>
                         Set as section's end time

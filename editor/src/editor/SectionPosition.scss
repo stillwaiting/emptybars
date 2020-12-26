@@ -9,7 +9,7 @@
 
   .playerPosition {
 
-
+    padding-left: 10px;
     .before, .after {
       color: red;
     }
@@ -22,13 +22,14 @@
   .controls {
     .button {
       @include squareButton;
+      border: 1px solid green;
     }
 
     .group {
       display: flex;
       flex-direction: row;
       .button {
-        margin-top: 0px;
+        margin-top: 4px;
         margin-bottom: 0px;
       }
     }

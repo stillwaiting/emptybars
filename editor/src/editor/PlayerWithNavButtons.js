@@ -4,6 +4,7 @@ import ReactPlayer from 'react-player';
 import { secsToString } from 'emptybars-common/utils'
 
 import './PlayerWithNavButtons.scss';
+import SectionsTimeline from "./SectionsTimeline";
 
 class PlayerWithNavButtons extends React.Component {
 
@@ -54,16 +55,19 @@ class PlayerWithNavButtons extends React.Component {
     }
 
     handlePlayCurrentSection() {
-        console.log(this.props.sectionStartSec, this.props.sectionEndSec);
-        this.playSection(this.props.sectionStartSec, this.props.sectionEndSec, 'STAY_AT_START');
+        this.playSection(
+            this.props.sections[this.props.currentSectionIdx].startSec,
+            this.props.sections[this.props.currentSectionIdx].endSec,
+            'STAY_AT_START'
+        );
     }
 
     handleJumpSectionStart() {
-        this.seekToAndStop(this.props.sectionStartSec);
+        this.seekToAndStop(this.props.sections[this.props.currentSectionIdx].startSec);
     }
 
     handleJumpSectionEnd() {
-        this.seekToAndStop(this.props.sectionEndSec);
+        this.seekToAndStop(this.props.sections[this.props.currentSectionIdx].endSec);
     }
 
     playSection(startSec, endSec, mode) {
@@ -117,7 +121,7 @@ class PlayerWithNavButtons extends React.Component {
     }
 
     render() {
-            const moveTo = [-5, -1, -0.5, -0.1, 0.1, 0.5, 1, 5];
+            const moveTo = [-30, -5, -1, -0.5, -0.1, 0.1, 0.5, 1, 5, 30];
 
             return (
                 <div className='playWithNavButtons'>
@@ -136,34 +140,65 @@ class PlayerWithNavButtons extends React.Component {
                         playing={this.state.playing}
                         controls={true}
                     />
-                    <div className='positionAndControls'>
-                        Current position: <span className='position'>{secsToString(this.state.progress)}</span>
-                        <div className='controls'>
-                            {
-                                moveTo.map(item => <div className='gotoButton' onClick={(() => this.onMoveToClick(item)).bind(this)}>{item > 0 ? '+' + item : item}</div>)
-                            }
-                            <div className='gotoButton' onClick={this.handlePlayOneSecBefore.bind(this)} >Play 1 sec before</div>
-                            <div className='gotoButton' onClick={this.handlePlayOneSecAfter.bind(this)} >Play 1 sec after</div>
 
 
-                            {this.props.sectionStartSec >= 0 ?
-                                <div className='controls'>
-                                    <div className='gotoButton' onClick={this.handlePlayCurrentSection.bind(this)}>
-                                        Play the whole section
-                                    </div>
-
-                                    <div className='gotoButton'  onClick={this.handleJumpSectionStart.bind(this)}>
-                                        Jump to section start
-                                    </div>
-
-                                    <div className='gotoButton'  onClick={this.handleJumpSectionEnd.bind(this)}>
-                                        Jump to section end
-                                    </div>
+                    <table className='positionAndControls'>
+                        <tr>
+                            <td className='controls'>
+                                {
+                                    moveTo
+                                        .filter(item => item < 0)
+                                        .map(item => <div className='gotoButton' onClick={(() => this.onMoveToClick(item)).bind(this)}>{item > 0 ? '+' + item : item}</div>)
+                                }
+                                <div className='gotoButton' onClick={this.handlePlayOneSecBefore.bind(this)} >Play 1 sec before</div>
+                            </td>
+                            <td>
+                                <div>
+                                    Current position: <span className='position'>{secsToString(this.state.progress)}</span>
                                 </div>
-                            : '' }
+                                <SectionsTimeline
+                                    sections={this.props.sections}
+                                    currentSectionIdx={this.props.currentSectionIdx}
+                                    videoDuration={this.state.duration}
+                                    videoPlayerPosSecs={this.state.progress}
+                                    onSectionSelected={this.props.onSectionSelected}
+                                    onSectionsChanged={this.props.onSectionsChanged}
+                                />
 
-                        </div>
-                    </div>
+                                {this.props.currentSectionIdx >= 0 ?
+                                    <div className='controlsCentral'>
+                                        <div className='gotoButton'  onClick={this.handleJumpSectionStart.bind(this)}>
+                                            Jump to section start
+                                        </div>
+
+                                        <div className='gotoButton' onClick={this.handlePlayCurrentSection.bind(this)}>
+                                            Play the whole section
+                                        </div>
+
+                                        <div className='gotoButton'  onClick={this.handleJumpSectionEnd.bind(this)}>
+                                            Jump to section end
+                                        </div>
+                                    </div>
+                                    : '' }
+                            </td>
+                            <td className='controls'>
+                                {
+                                    moveTo
+                                        .filter(item => item > 0)
+                                        .reverse()
+                                        .map(item => <div className='gotoButton' onClick={(() => this.onMoveToClick(item)).bind(this)}>{item > 0 ? '+' + item : item}</div>)
+                                }
+                                <div className='gotoButton' onClick={this.handlePlayOneSecAfter.bind(this)} >Play 1 sec after</div>
+                            </td>
+                        </tr>
+                    </table>
+
+                    {/*<div className='positionAndControls'>*/}
+
+                    {/*    <div className='controls'>*/}
+
+                    {/*    </div>*/}
+                    {/*</div>*/}
                 </div>
             );
     }
