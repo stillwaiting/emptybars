@@ -24,6 +24,13 @@ class PlayerWithNavButtons extends React.Component {
         this.setState({duration: duration});
     }
 
+    handleGotoSec(sec) {
+        this.setState({
+            playing: false
+        });
+        this.$player.current.seekTo(sec, 'seconds');
+    }
+
     stopAndReturn() {
         const gotoAfterStopSec = this.state.gotoAfterStopSec;
         this.setState({
@@ -168,6 +175,7 @@ class PlayerWithNavButtons extends React.Component {
                                     videoPlayerPosSecs={this.state.progress}
                                     onSectionSelected={this.props.onSectionSelected}
                                     onSectionsChanged={this.props.onSectionsChanged}
+                                    onGotoSec={this.handleGotoSec.bind(this)}
                                 />
 
                                 {this.props.currentSectionIdx >= 0 ?
@@ -177,7 +185,7 @@ class PlayerWithNavButtons extends React.Component {
                                         </div>
 
                                         <div className='gotoButton' onClick={this.handlePlayCurrentSection.bind(this)}>
-                                            Play the whole section
+                                            Play section
                                         </div>
 
                                         <div className='gotoButton'  onClick={this.handleJumpSectionEnd.bind(this)}>

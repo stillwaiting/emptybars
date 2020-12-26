@@ -4,10 +4,11 @@ import ReactTooltip from 'react-tooltip';
 
 import './Sections.scss';
 
-function SectionsTimeline({sections, videoDuration, videoPlayerPosSecs, currentSectionIdx, onSectionSelected, onSectionsChanged}) {
+function SectionsTimeline({sections, videoDuration, videoPlayerPosSecs, currentSectionIdx, onSectionSelected, onSectionsChanged, onGotoSec}) {
     const lastCreatedSectionRef = useRef(null);
 
-    const handleClickSection = (sectionIdx, section) => {
+    const handleClickSection = (e, sectionIdx, section) => {
+        e.stopPropagation();
         onSectionSelected(sectionIdx, section);
     };
 
@@ -29,7 +30,10 @@ function SectionsTimeline({sections, videoDuration, videoPlayerPosSecs, currentS
     }
 
     const handleTimelineClick = (e) => {
-        console.log(e);
+        var rect = e.target.getBoundingClientRect();
+        var x = e.clientX - rect.left; //x position within the element.
+        var y = e.clientY - rect.top;  //y position within the element.
+        onGotoSec(x/10);
     }
 
     return (
@@ -64,7 +68,7 @@ function SectionsTimeline({sections, videoDuration, videoPlayerPosSecs, currentS
                             left: (parseInt(section.startSec*10) + 'px'),
                             top: '38px'
                         }}
-                             onClick={handleClickSection.bind(null, idx, sections[idx])}
+                             onClick={((e) => handleClickSection(e, idx, sections[idx])).bind(this)}
                              data-tip
                              data-for={'section-' + idx}
                              key={'section-' + idx}
