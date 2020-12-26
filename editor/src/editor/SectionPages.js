@@ -35,15 +35,19 @@ function SectionPages({ pages, sectionPages, sectionPageAreas, onSectionPagesCha
 
         <div className='pageCheckboxWrapper'>
             {pages.map((p, idx) => {
-                return <div>
-                    <input type="checkbox" checked={(sectionPages.indexOf(p.id)) >= 0 ? true : false} onChange={((e) => handleOnChange(e, idx)).bind(this)} /> Page #{idx + 1}
+                return <div key={'input' + idx}>
+                    <input
+                        type="checkbox"
+                        checked={(sectionPages.indexOf(p.id)) >= 0 ? true : false}
+                        onChange={((e) => handleOnChange(e, idx)).bind(this)}
+                    /> Page #{idx + 1}
                 </div>
             })}
         </div>
 
         {pages.map((p, idx) => {
             return (sectionPages.indexOf(p.id) >= 0) ?
-                    <div className='page'>
+                    <div className='page' key={'page' + idx}>
                         <ImageAreas
                             title={`Page #${idx+1}`}
                             imgUrl={p.url} width = {500} areas={sectionPageAreas[p.id] || [] }

@@ -1,5 +1,6 @@
 import React, {useState, useRef, useEffect} from 'react';
 import {secsToString} from "emptybars-common/utils";
+import ReactTooltip from 'react-tooltip';
 
 import './Sections.scss';
 
@@ -27,6 +28,10 @@ function SectionsTimeline({sections, videoDuration, videoPlayerPosSecs, currentS
         handleClickSection(newSections.length - 1, newSections[newSections.length - 1]);
     }
 
+    const handleTimelineClick = (e) => {
+        console.log(e);
+    }
+
     return (
         <div className='sections'>
                 <div className="addButtonWrapper">
@@ -36,7 +41,9 @@ function SectionsTimeline({sections, videoDuration, videoPlayerPosSecs, currentS
                 </div>
 
             <div style={{height: '50px', overflow: 'hidden', margin: '10px', width:'500px'}}>
-                <div style={{height: '50px', width: (videoDuration * 10) + 'px', marginLeft: '-' + (parseInt(videoPlayerPosSecs * 10) - 100  )  + 'px', position: 'relative'}}>
+                <div style={{height: '50px', width: (videoDuration * 10) + 'px', marginLeft: '-' + Math.max(0, (parseInt(videoPlayerPosSecs * 10) - 100  ))  + 'px', position: 'relative'}}
+                    onClick={handleTimelineClick}
+                >
                     {sections.map((section, idx) =>
                         <div style={{
                             border: '1px solid #aaa',
@@ -52,6 +59,9 @@ function SectionsTimeline({sections, videoDuration, videoPlayerPosSecs, currentS
                             top: '10px'
                         }}
                              onClick={handleClickSection.bind(null, idx, sections[idx])}
+                             data-tip
+                             data-for={'section-' + idx}
+                             key={'section-' + idx}
                         >
                             {idx+1}
                         </div>
@@ -68,6 +78,19 @@ function SectionsTimeline({sections, videoDuration, videoPlayerPosSecs, currentS
                     />
                 </div>
             </div>
+            {sections.map((item, idx) =>
+                <ReactTooltip id={'section-' + idx}
+                              key={'section-' + idx}
+                >
+                    <div>
+                        <strong>Section #{idx + 1}</strong>
+                    </div>
+                    <div>
+                        {secsToString(sections[idx].startSec)} - {secsToString(sections[idx].endSec)}
+                    </div>
+                </ReactTooltip>
+            )}
+
             {sections.length && videoPlayerPosSecs > sections[sections.length - 1].endSec
                 ?
                     <div>

@@ -8,11 +8,12 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "emptybars-common": "file:../common/emptybars-common-1.0.7.tgz",
-    "node-sass": "^4.14.1",
+    "node-sass": "4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-player": "^2.6.2",
-    "react-scripts": "3.4.3"
+    "react-scripts": "3.4.3",
+    "react-tooltip": "^4.2.11"
   },
   "scripts": {
     "start": "react-scripts start",

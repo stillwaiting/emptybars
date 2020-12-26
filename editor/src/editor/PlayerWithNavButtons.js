@@ -143,17 +143,22 @@ class PlayerWithNavButtons extends React.Component {
 
 
                     <table className='positionAndControls'>
+                        <tbody>
                         <tr>
                             <td className='controls'>
                                 {
                                     moveTo
                                         .filter(item => item < 0)
-                                        .map(item => <div className='gotoButton' onClick={(() => this.onMoveToClick(item)).bind(this)}>{item > 0 ? '+' + item : item}</div>)
+                                        .map(item => <div
+                                            className='gotoButton'
+                                            onClick={(() => this.onMoveToClick(item)).bind(this)}
+                                            key={'move-to-' + item}
+                                        >{item > 0 ? '+' + item : item}</div>)
                                 }
                                 <div className='gotoButton' onClick={this.handlePlayOneSecBefore.bind(this)} >Play 1 sec before</div>
                             </td>
-                            <td>
-                                <div>
+                            <td valign='top'>
+                                <div style={{marginTop:'10px'}}>
                                     Current position: <span className='position'>{secsToString(this.state.progress)}</span>
                                 </div>
                                 <SectionsTimeline
@@ -186,11 +191,16 @@ class PlayerWithNavButtons extends React.Component {
                                     moveTo
                                         .filter(item => item > 0)
                                         .reverse()
-                                        .map(item => <div className='gotoButton' onClick={(() => this.onMoveToClick(item)).bind(this)}>{item > 0 ? '+' + item : item}</div>)
+                                        .map(item => <div
+                                            className='gotoButton'
+                                            onClick={(() => this.onMoveToClick(item)).bind(this)}
+                                            key={'move-to-' + item}
+                                        >{item > 0 ? '+' + item : item}</div>)
                                 }
                                 <div className='gotoButton' onClick={this.handlePlayOneSecAfter.bind(this)} >Play 1 sec after</div>
                             </td>
                         </tr>
+                        </tbody>
                     </table>
 
                     {/*<div className='positionAndControls'>*/}

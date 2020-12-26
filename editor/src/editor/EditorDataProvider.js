@@ -53,54 +53,55 @@ export default function EditorDataProvider({ lastStateFromLocalStorage, onDataPr
         }
     }
 
-    return <table className='editorDataProvider'><tbody><tr>
-            <td className='firstCol' onClick={handleOnSelect.bind(this, OP_NEW)}>
-                <input type='radio' name='operation' onChange={handleOnSelect.bind(this, OP_NEW)} checked={opType == OP_NEW} />&nbsp;
-                Create new
-            </td>
-            <td className='secondCol'>
-                <p>
-                    Video URL:
-                </p>
-                <p>
-                    <input type='text' onChange={handleOnVideoUrlChanged} value={videoUrl} readOnly={opType != OP_NEW} />
-                </p>
-                <p>
-                    Sheet music pages (one URL per line):
-                </p>
-                <p>
-                    <textarea onChange={handleOnPagesChanged} value={pages}  readOnly={opType != OP_NEW} />
-                </p>
-            </td>
-        </tr><tr>
-            <td className='firstCol' onClick={handleOnSelect.bind(this, OP_LOAD_OLD)}>
-                <input type='radio' name='operation' onChange={handleOnSelect.bind(this, OP_LOAD_OLD)} checked={opType == OP_LOAD_OLD} />&nbsp;
-                Load old
-            </td>
-            <td className='secondCol'>
-                <p>
-                    Old sections content (paste here)
-                </p>
-                <p>
-                    <textarea onChange={handleOldStateChanged} value={oldState} readOnly={opType != OP_LOAD_OLD} />
-                </p>
-            </td>
-        </tr>{lastStateFromLocalStorage
-            ? <tr>
-                <td className='firstCol' onClick={handleOnSelect.bind(this, OP_RESTORE)}>
-                    <input type='radio' name='operation' onChange={handleOnSelect.bind(this, OP_RESTORE)} checked={opType == OP_RESTORE}  />&nbsp;
-                    Restore from local storage
+    return <table className='editorDataProvider'><tbody>
+            <tr>
+                <td className='firstCol' onClick={handleOnSelect.bind(this, OP_NEW)}>
+                    <input type='radio' name='operation' onChange={handleOnSelect.bind(this, OP_NEW)} checked={opType == OP_NEW} />&nbsp;
+                    Create new
                 </td>
                 <td className='secondCol'>
-                    <a href={JSON.parse(lastStateFromLocalStorage).videoUrl} target='_blank'>{JSON.parse(lastStateFromLocalStorage).videoUrl}</a>
+                    <p>
+                        Video URL:
+                    </p>
+                    <p>
+                        <input type='text' onChange={handleOnVideoUrlChanged} value={videoUrl} readOnly={opType != OP_NEW} />
+                    </p>
+                    <p>
+                        Sheet music pages (one URL per line):
+                    </p>
+                    <p>
+                        <textarea onChange={handleOnPagesChanged} value={pages}  readOnly={opType != OP_NEW} />
+                    </p>
                 </td>
             </tr>
-            : ''
-        }{opType ? <tr>
-            <td className='lastRow'>
+            <tr>
+                <td className='firstCol' onClick={handleOnSelect.bind(this, OP_LOAD_OLD)}>
+                    <input type='radio' name='operation' onChange={handleOnSelect.bind(this, OP_LOAD_OLD)} checked={opType == OP_LOAD_OLD} />&nbsp;
+                    Load old
+                </td>
+                <td className='secondCol'>
+                    <p>
+                        Old sections content (paste here)
+                    </p>
+                    <p>
+                        <textarea onChange={handleOldStateChanged} value={oldState} readOnly={opType != OP_LOAD_OLD} />
+                    </p>
+                </td>
+            </tr>
+            {lastStateFromLocalStorage ? <tr>
+                    <td className='firstCol' onClick={handleOnSelect.bind(this, OP_RESTORE)}>
+                        <input type='radio' name='operation' onChange={handleOnSelect.bind(this, OP_RESTORE)} checked={opType == OP_RESTORE}  />&nbsp;
+                        Restore from local storage
+                    </td>
+                    <td className='secondCol'>
+                        <a href={JSON.parse(lastStateFromLocalStorage).videoUrl} target='_blank'>{JSON.parse(lastStateFromLocalStorage).videoUrl}</a>
+                    </td>
+                </tr>
+            : null
+            }{opType ? <tr><td className='lastRow'>
                 <button onClick={handleOnSubmit}>Submit</button>
-            </td>
-            <td className='lastRow'></td>
-        </tr> : ''}</tbody></table>;
+            </td><td className='lastRow'></td></tr> : null}
+        </tbody>
+    </table>;
 
 };

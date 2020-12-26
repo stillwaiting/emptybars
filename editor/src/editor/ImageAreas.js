@@ -112,6 +112,7 @@ function ImageAreas({ title, imgUrl, width, areas, onNewAreaAdded, onDeleteArea 
                 {areas.map((area, idx) => {
                     return (
                         <div className='item'
+                                 key={'image-area-idx' + idx}
                                  onMouseOver={(() => handleMouseOverArea(idx)).bind(this)}
                                  onMouseOut={(() => handleMouseOutArea(idx)).bind(this)}
                                 >
