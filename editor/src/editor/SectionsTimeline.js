@@ -3,7 +3,7 @@ import {secsToString} from "emptybars-common/utils";
 
 import './Sections.scss';
 
-function Sections({sections, videoDuration, videoPlayerPosSecs, currentSectionIdx, onSectionSelected, onSectionsChanged}) {
+function SectionsTimeline({sections, videoDuration, videoPlayerPosSecs, currentSectionIdx, onSectionSelected, onSectionsChanged}) {
     const lastCreatedSectionRef = useRef(null);
 
     const handleClickSection = (sectionIdx, section) => {
@@ -72,4 +72,4 @@ function Sections({sections, videoDuration, videoPlayerPosSecs, currentSectionId
         </div>);
 }
 
-export default Sections;
+export default SectionsTimeline;

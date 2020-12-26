@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import PlayerWithNavButtons from './PlayerWithNavButtons';
 import SectionPosition from './SectionPosition';
-import Sections from './Sections';
+import SectionsTimeline from './SectionsTimeline';
 
 import Pages from "./Pages";
 import SectionPages from "./SectionPages";
@@ -68,7 +68,7 @@ function Editor({ sections, pages, videoUrl, onDataUpdated }) {
 
     return (
                 <div>
-                    <Sections
+                    <SectionsTimeline
                         sections={sections}
                         currentSectionIdx={currentSectionIdx}
                         videoDuratio={videoDuration}
