@@ -40,8 +40,14 @@ function SectionsTimeline({sections, videoDuration, videoPlayerPosSecs, currentS
                     </div>
                 </div>
 
-            <div style={{height: '50px', overflow: 'hidden', margin: '10px', width:'500px'}}>
-                <div style={{height: '50px', width: (videoDuration * 10) + 'px', marginLeft: '-' + Math.max(0, (parseInt(videoPlayerPosSecs * 10) - 100  ))  + 'px', position: 'relative'}}
+            <div style={{height: '100px', overflow: 'hidden', margin: '10px', width:'500px'}}>
+                <div style={{
+                    height: '100px',
+                    width: (videoDuration * 10) + 'px',
+                    marginLeft: '-' + Math.max(0, (parseInt(videoPlayerPosSecs * 10) - 100  ))  + 'px',
+                    position: 'relative',
+                    backgroundColor: '#eee'
+                }}
                     onClick={handleTimelineClick}
                 >
                     {sections.map((section, idx) =>
@@ -49,14 +55,14 @@ function SectionsTimeline({sections, videoDuration, videoPlayerPosSecs, currentS
                             border: '1px solid #aaa',
                             height: '25px',
                             position:'absolute',
-                            backgroundColor: (idx == currentSectionIdx) ? '#ccffcc' : '#eeeeee',
+                            backgroundColor: (idx == currentSectionIdx) ? '#ccffcc' : '#fff',
                             width: parseInt((section.endSec - section.startSec) * 10) + 'px',
                             cursor: 'pointer',
                             textAlign:"center",
                             overflow: 'hidden',
                             lineHeight: '25px',
                             left: (parseInt(section.startSec*10) + 'px'),
-                            top: '10px'
+                            top: '38px'
                         }}
                              onClick={handleClickSection.bind(null, idx, sections[idx])}
                              data-tip
@@ -67,7 +73,7 @@ function SectionsTimeline({sections, videoDuration, videoPlayerPosSecs, currentS
                         </div>
                     )}
                     <div style={{
-                        height: '50px',
+                        height: '100px',
                         position:'absolute',
                         backgroundColor: '#0000ff',
                         width: 2,
