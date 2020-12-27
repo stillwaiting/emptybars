@@ -2,11 +2,9 @@ import React, {useState, useRef, useEffect} from 'react';
 import {secsToString} from "emptybars-common/utils";
 import ReactTooltip from 'react-tooltip';
 
-import './Sections.scss';
+import './SectionsTimeline.scss';
 
 function SectionsTimeline({sections, videoDuration, videoPlayerPosSecs, currentSectionIdx, onSectionSelected, onSectionsChanged, onGotoSec}) {
-    const lastCreatedSectionRef = useRef(null);
-
     const handleClickSection = (e, sectionIdx, section) => {
         e.stopPropagation();
         onSectionSelected(sectionIdx, section);

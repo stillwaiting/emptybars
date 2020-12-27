@@ -3,7 +3,7 @@ import { secsToString } from "emptybars-common/utils";
 
 import './SectionPosition.scss';
 
-function SectionPosition({ section, sectionIdx, videoPlayerPosSecs, onSectionChanged: onSectionChanged, getPrevSectionEndSec: getPrevSectionEndSec}) {
+function SectionPosition({ section, sectionIdx, videoPlayerPosSecs, onSectionChanged: onSectionChanged, getPrevSectionEndSec: getPrevSectionEndSec, onDeleteSection}) {
     const hanleSetCurrentTimeAsSectionStart = () => {
         const newSection = JSON.parse(JSON.stringify(section));
         newSection.startSec = parseFloat(videoPlayerPosSecs.toFixed(1));
@@ -73,6 +73,10 @@ function SectionPosition({ section, sectionIdx, videoPlayerPosSecs, onSectionCha
                         Split section at {secsToString(videoPlayerPosSecs)}
                     </div>
                     :'' }
+
+                <div className='button'  onClick={onDeleteSection}>
+                    Delete section
+                </div>
 
             </div>
         </div>

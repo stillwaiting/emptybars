@@ -59,6 +59,13 @@ function Editor({ sections, pages, videoUrl, onDataUpdated }) {
         onDataUpdated({ sections: newSections, pages, videoUrl }, message);
     };
 
+    const onDeleteSection = () => {
+        setCurrentSectionIdx(-1);
+        const newSections = JSON.parse(JSON.stringify(sections));
+        newSections.splice(currentSectionIdx, 1);
+        onDataUpdated({ sections: newSections, pages, videoUrl }, 'section deleted');
+    }
+
     const getPrevSectionEndSec = () => {
         if (currentSectionIdx == 0) {
             return 0;
@@ -90,6 +97,7 @@ function Editor({ sections, pages, videoUrl, onDataUpdated }) {
                                 onSectionChanged={onSectionChanged}
                                 videoPlayerPosSecs={videoPlayerPosSecs}
                                 getPrevSectionEndSec={getPrevSectionEndSec}
+                                onDeleteSection={onDeleteSection}
                             />
                             <SectionPages
                                 pages={pages || []}
