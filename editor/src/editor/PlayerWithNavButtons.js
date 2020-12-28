@@ -165,9 +165,6 @@ class PlayerWithNavButtons extends React.Component {
                                 <div className='gotoButton' onClick={this.handlePlayOneSecBefore.bind(this)} >Play 1 sec before</div>
                             </td>
                             <td valign='top'>
-                                <div style={{marginTop:'10px'}}>
-                                    Current position: <span className='position'>{secsToString(this.state.progress)}</span>
-                                </div>
                                 <SectionsTimeline
                                     sections={this.props.sections}
                                     currentSectionIdx={this.props.currentSectionIdx}

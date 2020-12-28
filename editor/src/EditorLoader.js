@@ -11,6 +11,7 @@ function EditorLoader(initialData) {
     var [data, setData] = useState(transformFromHumanReadable(initialData));
     var [history, setHistory] = useState([]);
     var [redo, setRedo] = useState([]);
+    var [showCookies, setShowCookies] = useState(true);
     const textareaRef = useRef(null);
 
     const doSetData = (newData) => {
@@ -64,7 +65,21 @@ function EditorLoader(initialData) {
         setRedo(redo);
     }
 
-    return <div>{data.videoUrl ?
+    const closeCookies = (e) => {
+        e.stopPropagation();
+        setShowCookies(false);
+    }
+
+    return <div >
+        { showCookies ?
+            <div style={{border: '1px solid #999', display: 'table', padding: '10px', margin: '10px'}}>
+                By using the editor, you agree and accept the website's <a href='/cookies'>cookies policy</a>.<br /><br />
+                <strong><a href='#' onClick={closeCookies}>Close</a> <br /></strong>
+                <a href='https://www.youtube.com/watch?v=9E6b3swbnWg&list=PLz9q8tuDHcRfQ--1tUrZj4xC1pShtz9cD'>Let me out!</a>
+            </div>
+            : null }
+
+        {data.videoUrl ?
         <div className="editorLoader">
             <div className="editorLoaderWrapper">
 
@@ -89,6 +104,12 @@ function EditorLoader(initialData) {
                     </div>
                     : ''
                 }
+
+                <div style={{width: '1px', height: '1px', overflow: 'hidden'}}>
+                    {data.pages.map((page, idx) =>
+                        <img src={page.url} key={idx} />
+                    )}
+                </div>
             </div>
 
         </div>

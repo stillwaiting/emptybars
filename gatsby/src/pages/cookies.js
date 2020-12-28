@@ -11,7 +11,7 @@ const NotFoundPage = () => (
     </p>
         <p>
             EmptyBars.org does not knowingly use cookies neither to track or to identify you. The only information that we save
-            in your browser is the state of the last edited video (see <a href="/editor-how-to">Editor - how to use</a> section about more details), which is
+            in your browser is the state of the last edited video (see <a href="/editor-how-to">Editor - how to use</a> page about more details), which is
             exactly the information provided by you.
         </p>
 

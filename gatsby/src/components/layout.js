@@ -59,6 +59,7 @@ const Layout = ({ composition, composer, performer, children }) => {
                 </div>
                 <div>
                     <ul>
+                        <li><a href='/useful-resources'>Useful Resources</a></li>
                         <li><a href='/privacy'>Privacy Policy</a></li>
                         <li><a href='/ip'>Intellectual Property</a></li>
                         <li><a href='/cookies'>Cookies</a></li>

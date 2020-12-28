@@ -84,6 +84,14 @@ function SectionsTimeline({sections, videoDuration, videoPlayerPosSecs, currentS
                         top: '0px'
                     }}
                     />
+                    <div style={{
+                        height: '100px',
+                        position:'absolute',
+                        overflow: 'hidden',
+                        left: parseInt(videoPlayerPosSecs * 10 + 10) + 'px',
+                        top: '0px'
+                    }}
+                    >{secsToString(videoPlayerPosSecs)}</div>
                 </div>
             </div>
             {sections.map((item, idx) =>
