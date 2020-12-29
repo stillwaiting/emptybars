@@ -106,12 +106,31 @@ function Player({ sections, images, pages, videoUrl }) {
 
     const youtubeLink = `${videoUrl}?t=${sections.length > 0 ? sections[0].startSec : '0'}`;
 
+    // TODO: refactor
+    const pagesWithRectangles = () => {
+        if (!pages) {
+            return;
+        }
+        const newPages = JSON.parse(JSON.stringify(pages));
+        newPages.forEach(p => {
+            p.rectangles = [];
+            sections.forEach(section => {
+                if (section.pageAreas) {
+                    (section.pageAreas[p.id] || []).forEach(area => {
+                        p.rectangles.push(area);
+                    })
+                }
+            });
+        });
+        return newPages;
+    }
+
     return (
             <div className={initialised ? 'player' : 'player notInitialised'}>
                 <div className='sectionPagesWrapper'>
                     <SectionPages
                         images={images}
-                        pages={pages || []}
+                        pages={pagesWithRectangles()}
                         onPageClicked={onPageClicked}
                         skipScrollingFromTime={skipScrollingFromTime}
                         sectionPageAreas={getActivePageAreas()}

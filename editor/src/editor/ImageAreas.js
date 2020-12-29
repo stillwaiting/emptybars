@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 
 import './ImageAreas.scss';
 
-function ImageAreas({ title, imgUrl, width, areas, onNewAreaAdded, onDeleteArea }) {
+function ImageAreas({ title, imgUrl, width, areas, rectangles, onNewAreaAdded, onDeleteArea }) {
     // var [height, setHeight] = useState(100);
     var [image, setImage] = useState(null);
     var [imageLoaded, setImageLoaded] = useState(false);
@@ -36,6 +36,12 @@ function ImageAreas({ title, imgUrl, width, areas, onNewAreaAdded, onDeleteArea 
                 context.fillStyle = idx == highlightedArea ? 'rgba(255, 0, 0, 0.7)' : 'rgba(255, 255, 0, 0.5)';
                 context.fillRect(a.x*coeffOrigImageToScreenCoords, a.y*coeffOrigImageToScreenCoords, a.width*coeffOrigImageToScreenCoords, a.height*coeffOrigImageToScreenCoords);
             });
+
+            context.globalAlpha = 0.5;
+            rectangles.forEach((a, idx) => {
+                context.strokeRect(a.x*coeffOrigImageToScreenCoords, a.y*coeffOrigImageToScreenCoords, a.width*coeffOrigImageToScreenCoords, a.height*coeffOrigImageToScreenCoords);
+            });
+            context.globalAlpha = 1.0;
 
             if (isMouseDown) {
                 context.fillStyle = 'rgba(255, 0, 0, 0.5)';

@@ -39,7 +39,7 @@ function SectionPages({ images, pages, sectionPageAreas, skipScrollingFromTime, 
                 return sectionPagesRef.current.childNodes[i];
             }
         }
-        throw 'Cannot find scrollArea';
+        throw 'Cannot find scrollArea, should never happen';
     }
 
     const findPageNode = (selectedPageIdx) => {
@@ -53,7 +53,7 @@ function SectionPages({ images, pages, sectionPageAreas, skipScrollingFromTime, 
                 invariant ++;
             }
         }
-        throw "cannot find page " + selectedPageIdx;
+        throw "cannot find page " + selectedPageIdx + ", should never happen";
     }
 
     const onImageClicked = (imageIdx, imageX, imageY) => {
@@ -113,6 +113,7 @@ function SectionPages({ images, pages, sectionPageAreas, skipScrollingFromTime, 
                 return <div className='page' key={"sectionpage" + idx}>
                             <ImageAreas
                                 title={`Page #${idx+1}`}
+                                rectangles={p.rectangles || []}
                                 image={images[idx]}
                                 onImageClicked={((imageX, imageY) => onImageClicked(idx, imageX, imageY)).bind(this)}
                                 width = {parseInt(500 * zoom)} areas={sectionPageAreas[p.id] || [] }

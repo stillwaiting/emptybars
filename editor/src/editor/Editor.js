@@ -73,6 +73,25 @@ function Editor({ sections, pages, videoUrl, onDataUpdated }) {
         return sections[currentSectionIdx-1].endSec;
     }
 
+    // TODO: refactor
+    const pagesWithRectangles = () => {
+        if (!pages) {
+            return;
+        }
+        const newPages = JSON.parse(JSON.stringify(pages));
+        newPages.forEach(p => {
+            p.rectangles = [];
+            sections.forEach(section => {
+                if (section.pageAreas) {
+                    (section.pageAreas[p.id] || []).forEach(area => {
+                        p.rectangles.push(area);
+                    })
+                }
+            });
+        });
+        return newPages;
+    }
+
     return (
                 <div>
                     <PlayerWithNavButtons
@@ -100,7 +119,7 @@ function Editor({ sections, pages, videoUrl, onDataUpdated }) {
                                 onDeleteSection={onDeleteSection}
                             />
                             <SectionPages
-                                pages={pages || []}
+                                pages={pagesWithRectangles()}
                                 sectionPages={sections[currentSectionIdx].pages || []}
                                 sectionPageAreas={sections[currentSectionIdx].pageAreas || {}}
                                 onSectionPagesChanges={onSectionPagesChanged}

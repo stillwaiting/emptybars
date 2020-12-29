@@ -56,7 +56,10 @@ function SectionPages({ pages, sectionPages, sectionPageAreas, onSectionPagesCha
                     <div className='page' key={'page' + idx}>
                         <ImageAreas
                             title={`Page #${idx+1}`}
-                            imgUrl={p.url} width = {500} areas={sectionPageAreas[p.id] || [] }
+                            imgUrl={p.url}
+                            width = {500}
+                            areas={sectionPageAreas[p.id] || [] }
+                            rectangles={p.rectangles}
                             onNewAreaAdded={((area) => handleOnNewAreaAdded(p.id, area)).bind(this)}
                             onDeleteArea={((areaIdx) => handleOnDeleteArea(p.id, areaIdx)).bind(this)}
                         />
