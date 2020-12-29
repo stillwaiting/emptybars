@@ -38,9 +38,15 @@ function SectionPages({ pages, sectionPages, sectionPageAreas, onSectionPagesCha
                 return <div key={'input' + idx}>
                     <input
                         type="checkbox"
-                        checked={(sectionPages.indexOf(p.id)) >= 0 ? true : false}
+                        checked={(sectionPages.indexOf(p.id) >= 0) ? true : false}
                         onChange={((e) => handleOnChange(e, idx)).bind(this)}
-                    /> Page #{idx + 1}
+                    /> <span onClick={((e) =>
+                            handleOnChange({
+                                target: {
+                                    checked: (sectionPages.indexOf(p.id) < 0)
+                                }
+                            }, idx)).bind(this)
+                    }>Page #{idx + 1}</span>
                 </div>
             })}
         </div>

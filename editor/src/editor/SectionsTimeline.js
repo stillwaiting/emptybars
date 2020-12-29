@@ -6,16 +6,23 @@ import './SectionsTimeline.scss';
 
 function SectionsTimeline({sections, videoDuration, videoPlayerPosSecs, currentSectionIdx, onSectionSelected, onSectionsChanged, onGotoSec}) {
     const handleClickSection = (e, sectionIdx, section) => {
-        e.stopPropagation();
+        if (e) {
+            e.stopPropagation();
+        }
         onSectionSelected(sectionIdx, section);
     };
 
     const handleAddSectionClick = () => {
         const newSections = JSON.parse(JSON.stringify(sections));
+        var pages =[];
+        if (currentSectionIdx >= 0) {
+            pages = JSON.parse(JSON.stringify(sections[currentSectionIdx].pages));
+        }
         if (newSections.length > 0) {
             newSections.push({
                 startSec: sections[sections.length - 1].endSec,
-                endSec: sections[sections.length - 1].endSec + 10
+                endSec: sections[sections.length - 1].endSec + 10,
+                pages: pages
             });
         } else {
             newSections.push({
@@ -24,7 +31,7 @@ function SectionsTimeline({sections, videoDuration, videoPlayerPosSecs, currentS
             });
         }
         onSectionsChanged(newSections, "add section");
-        handleClickSection(newSections.length - 1, newSections[newSections.length - 1]);
+        handleClickSection(false, newSections.length - 1, newSections[newSections.length - 1]);
     }
 
     const handleTimelineClick = (e) => {
@@ -85,12 +92,13 @@ function SectionsTimeline({sections, videoDuration, videoPlayerPosSecs, currentS
                     }}
                     />
                     <div style={{
-                        height: '100px',
                         position:'absolute',
                         overflow: 'hidden',
+                        color: '#0000ff',
                         left: parseInt(videoPlayerPosSecs * 10 + 10) + 'px',
                         top: '0px'
                     }}
+                         onClick={(e) => e.stopPropagation()}
                     >{secsToString(videoPlayerPosSecs)}</div>
                 </div>
             </div>
