@@ -9,9 +9,9 @@ const NotFoundPage = () => (
     <h2>Information we collect</h2>
 
         <p>
-            We ("EmptyBars.org") knowingly are not collecting any information about you! However, to make the website work,
-            we use several 3rd party services that are beyond our control and that could be collecting information about you.
-            The complete list of these services is below.
+            We ("EmptyBars.org") do not collect any information about you! However, to make the website work,
+            we use several 3rd party services that are beyond our control and that could be collecting
+            information about you. The complete list of these services is below.
         </p>
             <ul>
                 <li><a href='https://youtube.com'>YouTube</a> - we use YouTube player to play segmented videos;</li>

@@ -1,5 +1,5 @@
-This is the "editor" component of the website that gives facilities to segment any YouTube
-video and bind the segments to the sheet music.
+This is the "editor" component of the website that gives facilities to section any YouTube video 
+and binds the sections to the sheet music.
 
 # Prerequisite
 

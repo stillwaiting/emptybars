@@ -1,5 +1,5 @@
-This is the "player" component of the website that allows to play segmented videos (created
-earlier by the editor).
+This is the "player" component of the website that allows one to play sectioned 
+videos (created earlier by the editor).
 
 # Prerequisite
 

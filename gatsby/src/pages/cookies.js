@@ -10,9 +10,10 @@ const NotFoundPage = () => (
         Cookies are small text files that websites place on the computers and mobile devices of people who visit those websites.
     </p>
         <p>
-            EmptyBars.org does not knowingly use cookies neither to track or to identify you. The only information that we save
-            in your browser is the state of the last edited video (see <a href="/editor-how-to">Editor - how to use</a> page about more details), which is
-            exactly the information provided by you.
+            EmptyBars.org neither uses cookies to track nor identify you. The only information we save in
+            your browser is the state of the last edited video
+            (see <a href="/editor-how-to">Editor - how to use</a> page for more details), which is exactly the
+            information provided by you.
         </p>
 
         <p>

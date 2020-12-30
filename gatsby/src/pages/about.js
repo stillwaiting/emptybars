@@ -14,9 +14,9 @@ const NotFoundPage = () => (
                 >here</a>.)
         </p>
         <p>
-            On this website you can find musical compositions performed
-            by wonderful musicians on YouTube. Each composition is split on sections and each section is binded to a particular place in
-            the sheet music for convenient studying. The student could hear
+            On this website you can find musical compositions performed by wonderful musicians
+            and uploaded on YouTube. Each composition is split on sections and each section is linked
+            to a particular place in the sheet music for convenient studying.
         </p>
         <p>
             You could also split any YouTube video on sections by yourself, see <a href="/editor-how-to">Editor - how to use</a> and <a href="/player-how-to">Player - how to use</a> for more details.
