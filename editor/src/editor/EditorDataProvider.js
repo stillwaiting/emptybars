@@ -57,7 +57,7 @@ export default function EditorDataProvider({ lastStateFromLocalStorage, onDataPr
             <tr>
                 <td className='firstCol' onClick={handleOnSelect.bind(this, OP_NEW)}>
                     <input type='radio' name='operation' onChange={handleOnSelect.bind(this, OP_NEW)} checked={opType == OP_NEW} />&nbsp;
-                    Create new
+                    Create a new
                 </td>
                 <td className='secondCol'>
                     <p>
@@ -99,7 +99,7 @@ export default function EditorDataProvider({ lastStateFromLocalStorage, onDataPr
                 </tr>
             : null
             }{opType ? <tr><td className='lastRow'>
-                <button onClick={handleOnSubmit}>Submit</button>
+                <button onClick={handleOnSubmit}>Continue</button>
             </td><td className='lastRow'></td></tr> : null}
         </tbody>
     </table>;

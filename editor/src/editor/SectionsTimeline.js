@@ -16,7 +16,7 @@ function SectionsTimeline({sections, videoDuration, videoPlayerPosSecs, currentS
         const newSections = JSON.parse(JSON.stringify(sections));
         var pages =[];
         if (currentSectionIdx >= 0) {
-            pages = JSON.parse(JSON.stringify(sections[currentSectionIdx].pages));
+            pages = JSON.parse(JSON.stringify(sections[currentSectionIdx].pages || []));
         }
         if (newSections.length > 0) {
             newSections.push({
