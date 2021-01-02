@@ -1,4 +1,3 @@
-
 {
   "header": {
     "reportVersion": 1,
@@ -239,9 +238,7 @@
   },
   "javascriptStack": {
     "message": "No stack.",
-    "stack": [
-      "Unavailable."
-    ]
+    "stack": ["Unavailable."]
   },
   "nativeStack": [
     {
@@ -376,8 +373,7 @@
       "writes": 6437
     }
   },
-  "libuv": [
-  ],
+  "libuv": [],
   "environmentVariables": {
     "TERM_PROGRAM": "iTerm.app",
     "NVM_CD_FLAGS": "",

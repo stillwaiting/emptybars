@@ -6,28 +6,28 @@
 
 1. **Fetch node modules**
 
-    ```shell script
-    cd gatsby
-    yarn
-    ```
+   ```shell script
+   cd gatsby
+   yarn
+   ```
 
-1.  **Start developing.**
+1. **Start developing.**
 
-    `./serve-develop.sh`
+   `./serve-develop.sh`
 
-1.  **Open the source code and start editing!**
+1. **Open the source code and start editing!**
 
-    Your site is now running at `http://localhost:8000`!
+   Your site is now running at `http://localhost:8000`!
 
-    _Note: You'll also see a second link: _`http://localhost:8000/___graphql`_. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.com/tutorial/part-five/#introducing-graphiql).
-    
+   _Note: You'll also see a second link: _`http://localhost:8000/___graphql`\_. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.com/tutorial/part-five/#introducing-graphiql).
+
 NOTE: if you have the editor or the player built and served locally (`./serve-build.sh` script in their directories)
 the local versions will be used; but to apply the changes both the player/editor AND the
 gatsby website must be restarted.
-    
+
 ## Known issues
 
-### error  Cannot query field "playerCss" on type "Query"  graphql/template-strings
+### error Cannot query field "playerCss" on type "Query" graphql/template-strings
 
 Solution: clean cache and try again (https://www.gatsbyjs.com/docs/debugging-cache-issues/)
 
@@ -77,13 +77,13 @@ A quick look at the top-level files and directories you'll see in a Gatsby proje
 
 1.  **`LICENSE`**: This Gatsby starter is licensed under the 0BSD license. This means that you can see this file as a placeholder and replace it with your own license.
 
-1. **`package-lock.json`** (See `package.json` below, first). This is an automatically generated file based on the exact versions of your npm dependencies that were installed for your project. **(You won’t change this file directly).**
+1.  **`package-lock.json`** (See `package.json` below, first). This is an automatically generated file based on the exact versions of your npm dependencies that were installed for your project. **(You won’t change this file directly).**
 
-1. **`package.json`**: A manifest file for Node.js projects, which includes things like metadata (the project’s name, author, etc). This manifest is how npm knows which packages to install for your project.
+1.  **`package.json`**: A manifest file for Node.js projects, which includes things like metadata (the project’s name, author, etc). This manifest is how npm knows which packages to install for your project.
 
-1. **`README.md`**: A text file containing useful reference information about your project.
+1.  **`README.md`**: A text file containing useful reference information about your project.
 
-1. **`serve-develop.sh`**: Launches the website on the local machine
+1.  **`serve-develop.sh`**: Launches the website on the local machine
 
 ## 🎓 Learning Gatsby
 
@@ -98,4 +98,3 @@ Looking for more guidance? Full documentation for Gatsby lives [on the website](
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-default)
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gatsbyjs/gatsby-starter-default)
-

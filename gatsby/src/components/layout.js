@@ -24,12 +24,17 @@ const Layout = ({ composition, composer, performer, children }) => {
   `)
 
   return (
-    <div style={{background: 'white'}}>
-      <Header composition={composition} composer={composer} performer={performer} siteTitle={data.site.siteMetadata?.title || `Title`} />
+    <div style={{ background: "white" }}>
+      <Header
+        composition={composition}
+        composer={composer}
+        performer={performer}
+        siteTitle={data.site.siteMetadata?.title || `Title`}
+      />
       <div
         style={{
           margin: `0 auto`,
-          background: 'white',
+          background: "white",
           maxWidth: 960,
           padding: `0 1.0875rem 1.45rem`,
         }}
@@ -37,42 +42,65 @@ const Layout = ({ composition, composer, performer, children }) => {
         <main>{children}</main>
       </div>
 
-    <footer style={{
-        background: "black",
-        marginTop: `2rem`,
-        color: "white",
-        paddingTop: '20px'
-    }}>
-        <div style={{
+      <footer
+        style={{
+          background: "black",
+          marginTop: `2rem`,
+          color: "white",
+          paddingTop: "20px",
+        }}
+      >
+        <div
+          style={{
             margin: `0 auto`,
             maxWidth: 960,
             padding: `0.5rem 0 0.5rem 0`,
-        }}>
-            <div style={{display:'flex'}} className='footerMenu'>
-                <div>
-                    <ul>
-                        <li><a href='/about'>About</a></li>
-                        <li><a href='/editor'>Editor</a> (<a href='/editor-how-to'>how to use</a>)</li>
-                        <li><a href='/player'>Player</a> (<a href='/player-how-to'>how to use</a>)</li>
-                        <li><a href='/contribute'>Contribute</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <ul>
-                        <li><a href='/useful-resources'>Useful Resources</a></li>
-                        <li><a href='/privacy'>Privacy Policy</a></li>
-                        <li><a href='/ip'>Intellectual Property</a></li>
-                        <li><a href='/cookies'>Cookies</a></li>
-                    </ul>
-                </div>
+          }}
+        >
+          <div style={{ display: "flex" }} className="footerMenu">
+            <div>
+              <ul>
+                <li>
+                  <a href="/about">About</a>
+                </li>
+                <li>
+                  <a href="/editor">Editor</a> (
+                  <a href="/editor-how-to">how to use</a>)
+                </li>
+                <li>
+                  <a href="/player">Player</a> (
+                  <a href="/player-how-to">how to use</a>)
+                </li>
+                <li>
+                  <a href="/contribute">Contribute</a>
+                </li>
+              </ul>
             </div>
-            <div style={{fontSize: '75%'}}>
-            © {new Date().getFullYear()},
-            Built with&nbsp;<a href="https://www.gatsbyjs.com" style={{color: 'white'}}>Gatsby</a>
+            <div>
+              <ul>
+                <li>
+                  <a href="/useful-resources">Useful Resources</a>
+                </li>
+                <li>
+                  <a href="/privacy">Privacy Policy</a>
+                </li>
+                <li>
+                  <a href="/ip">Intellectual Property</a>
+                </li>
+                <li>
+                  <a href="/cookies">Cookies</a>
+                </li>
+              </ul>
             </div>
+          </div>
+          <div style={{ fontSize: "75%" }}>
+            © {new Date().getFullYear()}, Built with&nbsp;
+            <a href="https://www.gatsbyjs.com" style={{ color: "white" }}>
+              Gatsby
+            </a>
+          </div>
         </div>
-
-    </footer>
+      </footer>
     </div>
   )
 }
