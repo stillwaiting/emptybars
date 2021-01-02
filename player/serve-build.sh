@@ -6,4 +6,4 @@ fi
 
 INLINE_RUNTIME_CHUNK=false yarn build prod
 
-cd build ; pwd;  http-server -p 8061
+cd build || exit ; pwd;  http-server -p 8061

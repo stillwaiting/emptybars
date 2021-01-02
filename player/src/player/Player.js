@@ -20,8 +20,8 @@ function Player({ sections, images, pages, videoUrl }) {
     };
 
     const updateActiveSections = (playedSeconds) => {
-        var newActiveSections = [];
-        for (var idx = 0; idx <sections.length; idx++ ) {
+        const newActiveSections = [];
+        for (let idx = 0; idx <sections.length; idx++ ) {
             const section = sections[idx];
             // The intervals often overlap and the videos are paused at the start of the interval. Without this
             // shortcut the paused video at the start of a segment usually shows 2 segments on the sheets, not good
@@ -64,7 +64,7 @@ function Player({ sections, images, pages, videoUrl }) {
     }
 
     const getActivePageAreas = () => {
-        var areas = {};
+        const areas = {};
         activeSections.forEach(sectionIdx => {
             for (const pageId in sections[sectionIdx].pageAreas) {
                 const pageAreas = sections[sectionIdx].pageAreas[pageId];
@@ -79,7 +79,7 @@ function Player({ sections, images, pages, videoUrl }) {
     }
 
     const sectionContainsPoint = (pageAreas, posX, posY) => {
-        for (var areaIdx = 0; areaIdx < pageAreas.length; areaIdx++) {
+        for (let areaIdx = 0; areaIdx < pageAreas.length; areaIdx++) {
             const {x, y, width, height} = pageAreas[areaIdx];
             const x2 = x + width;
             const y2 = y + height;
@@ -91,7 +91,7 @@ function Player({ sections, images, pages, videoUrl }) {
     }
 
     const onPageClicked = (pageUid, pageX, pageY) => {
-        for (var sectionIdx = 0 ; sectionIdx < sections.length; sectionIdx ++) {
+        for (let sectionIdx = 0 ; sectionIdx < sections.length; sectionIdx ++) {
             const section = sections[sectionIdx];
             if (sectionContainsPoint(section.pageAreas[pageUid] || [], pageX, pageY)) {
                 setPlayInput((sectionIdx + 1) + ':' + (sectionIdx + 1));
