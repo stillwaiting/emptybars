@@ -63,11 +63,11 @@ function Sections({ sections, playInterval, activeSections, playInput, setPlayIn
         }
         const fromSectionStr = split[0];
         const untilSectionStr = split[1];
-        var [fromSection, fromSectionDelta] = parseSectionPoint(fromSectionStr);
+        const [fromSection, fromSectionDelta] = parseSectionPoint(fromSectionStr);
         if (!fromSection) {
             return false;
         }
-        var [untilSection, untilSectionDelta] = parseSectionPoint(untilSectionStr);
+        const [untilSection, untilSectionDelta] = parseSectionPoint(untilSectionStr);
         if (!untilSection) {
             return false;
         }

@@ -9,7 +9,7 @@ export default ( { imageUrls, onImagesLoaded }) => {
 
         const interval = setInterval(() => {
             const delta = parseInt(Math.random() * 3);
-            for (var idx = 0; idx < progress.length; idx++) {
+            for (let idx = 0; idx < progress.length; idx++) {
                 progress[idx] += delta;
                 if (progress[idx] > 50) {
                     progress[idx] -= parseInt(delta/2);
@@ -21,7 +21,7 @@ export default ( { imageUrls, onImagesLoaded }) => {
             setProgress(JSON.parse(JSON.stringify(progress)));
         }, 500);
 
-        var totalLoaded = 0;
+        let totalLoaded = 0;
         const onImageLoaded = (idx) => {
             progress[idx] = 100;
             setProgress(JSON.parse(JSON.stringify(progress)));
@@ -45,7 +45,7 @@ export default ( { imageUrls, onImagesLoaded }) => {
     const renderProgress = () => {
         const percent = parseInt(progress.reduce((prevVal, currVal) => prevVal + currVal, 0) / Math.max(0, progress.length));
         return parseInt(progress.reduce((prevVal, currVal) => prevVal + currVal, 0) / Math.max(0, progress.length)) + "%" +
-            (percent == 100 ? '...' : '');
+            (percent === 100 ? '...' : '');
     }
 
     return <div>Loading {renderProgress()}</div>;

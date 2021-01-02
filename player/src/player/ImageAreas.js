@@ -4,9 +4,9 @@ import './ImageAreas.scss';
 
 function ImageAreas({ title, image, width, areas, rectangles, onImageClicked }) {
     // var [height, setHeight] = useState(100);
-    var canvasRef = useRef(null);
-    var coeffOrigImageToScreenCoords;
-    var height;
+    let canvasRef = useRef(null);
+    let coeffOrigImageToScreenCoords;
+    let height;
 
     if (image && image.width && image.height) {
         coeffOrigImageToScreenCoords = (width * 1.0 / image.width);
@@ -21,13 +21,13 @@ function ImageAreas({ title, image, width, areas, rectangles, onImageClicked }) 
             const context = canvasRef.current.getContext("2d");
             context.drawImage(image, 0, 0, image.width, image.height, 0, 0, width, height);
 
-            areas.forEach((a, idx) => {
+            areas.forEach((a) => {
                 context.fillStyle = 'rgba(255, 255, 0, 0.5)';
                 context.fillRect(a.x * coeffOrigImageToScreenCoords, a.y * coeffOrigImageToScreenCoords, a.width * coeffOrigImageToScreenCoords, a.height * coeffOrigImageToScreenCoords);
             });
 
             context.globalAlpha = 0.5;
-            rectangles.forEach((a, idx) => {
+            rectangles.forEach((a) => {
                 context.strokeRect(a.x*coeffOrigImageToScreenCoords, a.y*coeffOrigImageToScreenCoords, a.width*coeffOrigImageToScreenCoords, a.height*coeffOrigImageToScreenCoords);
             });
             context.globalAlpha = 1.0;

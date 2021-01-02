@@ -22,8 +22,8 @@ function SectionPages({ images, pages, sectionPageAreas, skipScrollingFromTime, 
     }
 
     const findFirstSelectedPageIdx = () => {
-        var selectedPageIdx = -1;
-        for (var idx = 0; idx < pages.length; idx++) {
+        let selectedPageIdx = -1;
+        for (let idx = 0; idx < pages.length; idx++) {
             const puid = pages[idx].id;
             if (sectionPageAreas[puid] && sectionPageAreas[puid].length) {
                 selectedPageIdx = idx;
@@ -34,7 +34,7 @@ function SectionPages({ images, pages, sectionPageAreas, skipScrollingFromTime, 
     }
 
     const findScrollareaNode = () => {
-        for (var i = 0; i < sectionPagesRef.current.childNodes.length; i++) {
+        for (let i = 0; i < sectionPagesRef.current.childNodes.length; i++) {
             if (sectionPagesRef.current.childNodes[i].className == 'scrollArea') {
                 return sectionPagesRef.current.childNodes[i];
             }
@@ -43,11 +43,11 @@ function SectionPages({ images, pages, sectionPageAreas, skipScrollingFromTime, 
     }
 
     const findPageNode = (selectedPageIdx) => {
-        var container = findScrollareaNode();
-        var invariant = 0;
-        for (var i = 0; i < container.childNodes.length; i++) {
-            if (container.childNodes[i].className == "page") {
-                if (invariant == selectedPageIdx) {
+        const container = findScrollareaNode();
+        let invariant = 0;
+        for (let i = 0; i < container.childNodes.length; i++) {
+            if (container.childNodes[i].className === "page") {
+                if (invariant === selectedPageIdx) {
                     return container.childNodes[i];
                 }
                 invariant ++;
@@ -72,11 +72,11 @@ function SectionPages({ images, pages, sectionPageAreas, skipScrollingFromTime, 
 
     const handleScrolling = () => {
         const hash = JSON.stringify(sectionPageAreas);
-        if (lastScrollHash != hash && sectionPagesRef.current) {
-            var updateHash = true;
+        if (lastScrollHash !== hash && sectionPagesRef.current) {
+            let updateHash = true;
             const selectedPageIdx = findFirstSelectedPageIdx();
             if (selectedPageIdx >= 0) {
-                var page = findPageNode(selectedPageIdx);
+                const page = findPageNode(selectedPageIdx);
                 if (!shouldSkipScrolling()) {
                     sectionPagesRef.current.scrollTop = page.offsetTop - findScrollareaNode().offsetTop;
                 }
@@ -104,9 +104,9 @@ function SectionPages({ images, pages, sectionPageAreas, skipScrollingFromTime, 
     return <div>
         <div className='sectionPages' ref={sectionPagesRef} style={sectionPagesStyles}>
             <div className='zoom'>
-                <img src='https://images2.imgbox.com/22/21/4gO3I6ii_o.png?download=true' width='32' onClick={handleZoomIn} />
-                <img src='https://images2.imgbox.com/1b/b2/L4tgMq2a_o.png?download=true' width='32' onClick={handleZoomOut} />
-                <img src='https://images2.imgbox.com/f3/d5/paRxNKm0_o.png?download=true' width='32' onClick={handleReset} />
+                <img src='https://images2.imgbox.com/22/21/4gO3I6ii_o.png?download=true' width='32' onClick={handleZoomIn} alt={"ZoomIn"} />
+                <img src='https://images2.imgbox.com/1b/b2/L4tgMq2a_o.png?download=true' width='32' onClick={handleZoomOut} alt={"ZoomOut"}/>
+                <img src='https://images2.imgbox.com/f3/d5/paRxNKm0_o.png?download=true' width='32' onClick={handleReset}  alt={"Reset"}/>
             </div>
             <div className='scrollArea'>
             {pages.map((p, idx) => {
