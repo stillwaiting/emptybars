@@ -20,8 +20,8 @@ const NotFoundPage = () => (
             convenient studying.
         </p>
         <p>
-            You could also split any YouTube video into sections by yourself, see
-            <a href="/editor-how-to">Editor - how to use</a> and <a href="/player-how-to">Player - how to use</a> for more details.
+            You could also split any YouTube video into sections by yourself,
+            see <a href="/editor-how-to">Editor - how to use</a> and <a href="/player-how-to">Player - how to use</a> for more details.
         </p>
         <p>
             You are welcome to contribute your works to the website. Please see <a href="/contribute">Contribute</a> for more details.

@@ -85,7 +85,7 @@ function Sections({ sections, playInterval, activeSections, playInput, setPlayIn
 
     return (
         <div className='sections'>
-            <div>Choose a section to play:</div>
+            <div>Click a section to play: </div>
             <div className='scrolling'>
 
                 {sections.map(({ startSec, endSec }, key) => (
@@ -102,7 +102,7 @@ function Sections({ sections, playInterval, activeSections, playInput, setPlayIn
                 ))}
             </div>
             <div className='playSectionsSection'>
-                Sections to play: <input onChange={onPlayInputChange} value={playInput} className={parsedPlayInput() ? '' : 'errorInput'}/>
+                ... or enter a range manually: <input onChange={onPlayInputChange} value={playInput} className={parsedPlayInput() ? '' : 'errorInput'}/>
                 <ReactTooltip id='formats'>
                     <div>
                         <div>Allowed formats:
@@ -119,7 +119,7 @@ function Sections({ sections, playInterval, activeSections, playInput, setPlayIn
             </div>
             {!parsedPlayInput()
                 ? ''
-                : <button onClick={handlePlayClick}>Play</button>
+                : <button onClick={handlePlayClick}>Play range</button>
             }
          </div>);
 }
