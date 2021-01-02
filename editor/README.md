@@ -5,6 +5,8 @@ and binds the sections to the sheet music.
 
 1. Go to `../common` dir and run `./install.sh`
 
+1. Run `yarn add file:../common/emptybars-common-1.0.7.tgz --update-checksums`
+
 1. Run `yarn` to install all required npm packages.
 
 # Start development server (singleton mode)
@@ -17,7 +19,7 @@ This mode starts the editor in singleton mode.
  
 3. copy to clipboard the content of any "sections.json" file from composers dir (e.g. `composers/ravel/pavane/thiollier/sections.json`),
 
-and click `Submit` button
+and click `Continue` button
 
 NOTE: this mode supports hot-reloading; each change will be visible in the browser.
 
