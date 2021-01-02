@@ -37,7 +37,9 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
-    "start:develop": "concurrently \" ./serve-develop.sh \" \"../editor/serve-develop.sh \" \"../player/serve-develop.sh\" "
+    "start:develop": "concurrently \" ./serve-develop.sh \" \"../editor/serve-develop.sh \" \"../player/serve-develop.sh\" ",
+    "build:develop": "concurrently  \"../editor/serve-build.sh \" \"../player/serve-build.sh\" "
+
   },
   "repository": {
     "type": "git",
