@@ -33,11 +33,7 @@ class PlayerWithNavButtons extends React.Component {
 
     stopAndReturn() {
         const gotoAfterStopSec = this.state.gotoAfterStopSec;
-        this.setState({
-            endSec: -1,
-            gotoAfterStopSec: -1,
-            playing: false
-        });
+        this.handleStop();
         this.$player.current.seekTo(gotoAfterStopSec, 'seconds');
     }
 
@@ -58,7 +54,11 @@ class PlayerWithNavButtons extends React.Component {
     }
 
     handleStop() {
-        this.setState({playing: false});
+        this.setState({
+            endSec: -1,
+            gotoAfterStopSec: -1,
+            playing: false
+        });
     }
 
     handlePlayCurrentSection() {
