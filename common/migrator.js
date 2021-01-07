@@ -34,8 +34,8 @@ export default class Migrator {
   applyMigrationsToDirSync(dirPath, fileName, migrations) {
     fs.readdirSync(dirPath).forEach(file => {
       if (file === fileName) {
-        let targetFile = fs.readFileSync(path.join(dirPath, file))
-        let targetObject = JSON.parse(targetFile)
+        let targetFile = fs.readFileSync(path.join(dirPath, file));
+        let targetObject = JSON.parse(targetFile);
         let resultingObject = this.applyMigrationsToObj(targetObject, migrations);
         fs.writeFileSync(path.join(dirPath, file), resultingObject);
       }
