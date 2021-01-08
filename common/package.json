@@ -1,6 +1,6 @@
 {
   "name": "emptybars-common",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "",
   "main": "utils.js",
   "scripts": {
@@ -8,7 +8,5 @@
   },
   "author": "",
   "license": "ISC",
-  "scripts": {
-    "migrate": "node migrator.js migrate-composers"
-  }
+  "type": "module"
 }

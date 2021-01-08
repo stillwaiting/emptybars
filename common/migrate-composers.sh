@@ -1,0 +1,1 @@
+node --experimental-modules migrate-composers.mjs
