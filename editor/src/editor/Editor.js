@@ -1,14 +1,12 @@
 import React, { useState, useRef } from 'react';
 import PlayerWithNavButtons from './PlayerWithNavButtons';
 import SectionPosition from './SectionPosition';
-import SectionsTimeline from './SectionsTimeline';
 
-import Pages from "./Pages";
 import SectionPages from "./SectionPages";
 
 import './Editor.css';
 
-function Editor({ sections, pages, videoUrl, onDataUpdated }) {
+function Editor({ sections, pageUrls, videoUrl, onDataUpdated }) {
     var [currentSectionIdx, setCurrentSectionIdx] = useState(-1);
     const [videoPlayerPosSecs, setVideoPlayerPosSecs] = useState(0);
     const [videoDuration, setVideoDuration] = useState(0);
@@ -25,10 +23,6 @@ function Editor({ sections, pages, videoUrl, onDataUpdated }) {
         $player.current.seekToAndStop(section.startSec)
     };
 
-    const handleOnPagesUpdated = (pages, message) => {
-        onDataUpdated({ sections, pages, videoUrl }, message);
-    }
-
     const onProgressUpdate = (playedSeconds, duration) => {
         setVideoPlayerPosSecs(parseFloat(playedSeconds.toFixed(1)));
         setVideoDuration(duration);
@@ -40,30 +34,30 @@ function Editor({ sections, pages, videoUrl, onDataUpdated }) {
         if (newSection) {
             newSections.splice(currentSectionIdx + 1, 0, newSection);
         }
-        onDataUpdated({ sections: newSections, pages, videoUrl }, message);
+        onDataUpdated({ sections: newSections, pageUrls, videoUrl }, message);
     };
 
     const onSectionsChanged = (newSections, message) => {
-        onDataUpdated({ sections: newSections, pages, videoUrl }, message);
+        onDataUpdated({ sections: newSections, pageUrls, videoUrl }, message);
     }
 
     const onSectionPagesChanged = (currentSectionSelectedPages, message) => {
         const newSections = JSON.parse(JSON.stringify(sections));
         newSections[currentSectionIdx].pages = currentSectionSelectedPages;
-        onDataUpdated({ sections: newSections, pages, videoUrl }, message);
+        onDataUpdated({ sections: newSections, pageUrls, videoUrl }, message);
     };
 
     const onSectionPageAreasChanged = (currentSectionPageAreas, message) => {
         const newSections = JSON.parse(JSON.stringify(sections));
         newSections[currentSectionIdx].pageAreas = currentSectionPageAreas;
-        onDataUpdated({ sections: newSections, pages, videoUrl }, message);
+        onDataUpdated({ sections: newSections, pageUrls, videoUrl }, message);
     };
 
     const onDeleteSection = () => {
         setCurrentSectionIdx(-1);
         const newSections = JSON.parse(JSON.stringify(sections));
         newSections.splice(currentSectionIdx, 1);
-        onDataUpdated({ sections: newSections, pages, videoUrl }, 'section deleted');
+        onDataUpdated({ sections: newSections, pageUrls, videoUrl }, 'section deleted');
     }
 
     const getPrevSectionEndSec = () => {
@@ -73,20 +67,15 @@ function Editor({ sections, pages, videoUrl, onDataUpdated }) {
         return sections[currentSectionIdx-1].endSec;
     }
 
-    // TODO: refactor
-    const pagesWithRectangles = () => {
-        if (!pages) {
+    const pageUrlsToPageObjectsWithRectangles = () => {
+        if (!pageUrls) {
             return;
         }
-        const newPages = JSON.parse(JSON.stringify(pages));
-        newPages.forEach(p => {
-            p.rectangles = [];
-            sections.forEach(section => {
-                if (section.pageAreas) {
-                    (section.pageAreas[p.id] || []).forEach(area => {
-                        p.rectangles.push(area);
-                    })
-                }
+        const newPages = pageUrls.map(pageUrl => ({url: pageUrl, rectangles: []}));
+
+        sections.forEach(section => {
+            (section.pageAreas || []).forEach((pageAreas) => {
+                newPages[pageAreas.pageIdx].rectangles.push(...pageAreas.areas);
             });
         });
         return newPages;
@@ -95,7 +84,6 @@ function Editor({ sections, pages, videoUrl, onDataUpdated }) {
     return (
                 <div>
                     <PlayerWithNavButtons
-
                         videoUrl={videoUrl}
                         onProgressUpdate={onProgressUpdate}
                         ref={$player}
@@ -119,19 +107,15 @@ function Editor({ sections, pages, videoUrl, onDataUpdated }) {
                                 onDeleteSection={onDeleteSection}
                             />
                             <SectionPages
-                                pages={pagesWithRectangles()}
+                                pages={pageUrlsToPageObjectsWithRectangles()}
                                 sectionPages={sections[currentSectionIdx].pages || []}
-                                sectionPageAreas={sections[currentSectionIdx].pageAreas || {}}
+                                sectionPageAreas={sections[currentSectionIdx].pageAreas || []}
                                 onSectionPagesChanges={onSectionPagesChanged}
                                 onSectionPageAreasChanged={onSectionPageAreasChanged}
                             />
                         </div>
                         : ''
                     }
-
-
-                {/*<Pages pages={pages || []} onPagesUpdated={handleOnPagesUpdated} />*/}
-
             </div>
     );
 }

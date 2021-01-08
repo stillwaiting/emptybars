@@ -1,8 +1,18 @@
 import fs from 'fs';
 import path from 'path';
 
-export default class Migrator {
+import m1 from './sections-migrations/m0001'
 
+//
+// Add more migrations here!
+//
+const ALL_MIGRATIONS  = [m1]
+
+//
+//
+//
+
+export default class Migrator {
   /**
    * Apply migrations to object
    * 
@@ -10,7 +20,7 @@ export default class Migrator {
    * @param {Array<Object>} migrations
    * @returns {Object} resultingObject
    */
-  applyMigrationsToObj(targetObject, migrations) {
+  _applyMigrationsToObj(targetObject, migrations) {
     if (! targetObject.hasOwnProperty('version')) targetObject.version = 0;
 
     for (let migration of migrations) {
@@ -31,15 +41,26 @@ export default class Migrator {
    * @param {String} fileName 
    * @param {Array<Migration>} migrations
    */
-  applyMigrationsToDirSync(dirPath, fileName, migrations) {
+  _applyMigrationsToDirSync(dirPath, fileName, migrations) {
     fs.readdirSync(dirPath).forEach(file => {
       if (file === fileName) {
         let targetFile = fs.readFileSync(path.join(dirPath, file));
         let targetObject = JSON.parse(targetFile);
-        let resultingObject = this.applyMigrationsToObj(targetObject, migrations);
+        let resultingObject = this._applyMigrationsToObj(targetObject, migrations);
         fs.writeFileSync(path.join(dirPath, file), resultingObject);
       }
     });
   }
 
+  applyAllMigrationsToComposers(dirPath, fileName) {
+    return this._applyMigrationsToDirSync('../composers', 'sections.json', ALL_MIGRATIONS)
+  }
+
+  applyAllMigrationsToObject(targetObj) {
+    return this._applyMigrationsToObj(targetObj, ALL_MIGRATIONS)
+  }
+
+  getLastVersion() {
+    return ALL_MIGRATIONS[ALL_MIGRATIONS.length - 1].version;
+  }
 }

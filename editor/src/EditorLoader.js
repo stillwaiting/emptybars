@@ -8,6 +8,9 @@ import {
 import "./EditorLoader.scss";
 import EditorDataProvider from "./editor/EditorDataProvider";
 
+import Migrator from 'emptybars-common/migrator'
+const migrator = new Migrator()
+
 const LOCAL_STORAGE_KEY = "emptybarsEditorData";
 
 function EditorLoader(initialData) {
@@ -41,7 +44,7 @@ function EditorLoader(initialData) {
   };
 
   const handleOnDataProvided = (providedData) => {
-    doSetData(transformFromHumanReadable(providedData));
+    doSetData(transformFromHumanReadable(migrator.applyAllMigrationsToObject(providedData)));
   };
 
   const handleCopyClick = () => {
@@ -74,6 +77,10 @@ function EditorLoader(initialData) {
     e.stopPropagation();
     setShowCookies(false);
   };
+
+  if (data.videoUrl) {
+    data.version = migrator.getLastVersion()
+  }
 
   return (
     <div>
@@ -138,8 +145,8 @@ function EditorLoader(initialData) {
             )}
 
             <div style={{ width: "1px", height: "1px", overflow: "hidden" }}>
-              {data.pages.map((page, idx) => (
-                <img src={page.url} key={idx} />
+              {data.pageUrls.map((pageUrl, idx) => (
+                <img src={pageUrl} key={idx} />
               ))}
             </div>
           </div>

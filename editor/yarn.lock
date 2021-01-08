@@ -4053,9 +4053,9 @@ emojis-list@^3.0.0:
   resolved "https://packages.atlassian.com/api/npm/npm-remote/emojis-list/-/emojis-list-3.0.0.tgz#5570662046ad29e2e916e71aae260abdff4f6a78"
   integrity sha1-VXBmIEatKeLpFucariYKvf9Pang=
 
-"emptybars-common@file:../common/emptybars-common-1.0.7.tgz":
-  version "1.0.7"
-  resolved "file:../common/emptybars-common-1.0.7.tgz#3e3e177c80bc170f7cb3ef737de128b3a04b3ba1"
+"emptybars-common@file:../common/emptybars-common-1.0.14.tgz":
+  version "1.0.14"
+  resolved "file:../common/emptybars-common-1.0.14.tgz#e83a0e325062ab40f8c21e4e21da1cd8f38f83fa"
 
 encodeurl@~1.0.2:
   version "1.0.2"

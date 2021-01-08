@@ -6,7 +6,7 @@ import SectionPages from "./SectionPages";
 
 import './Player.scss';
 
-function Player({ sections, images, pages, videoUrl }) {
+function Player({ sections, images, pageUrls, videoUrl }) {
     const [activeSections, setActiveSections] = useState([]);
     const [initialised, setInitialised] = useState(0)
     const [skipScrollingFromTime, setSkipScrollingFromTime] = useState(false)
@@ -66,14 +66,13 @@ function Player({ sections, images, pages, videoUrl }) {
     const getActivePageAreas = () => {
         var areas = {};
         activeSections.forEach(sectionIdx => {
-            for (const pageId in sections[sectionIdx].pageAreas) {
-                const pageAreas = sections[sectionIdx].pageAreas[pageId];
-                if (areas[pageId]) {
-                    areas[pageId] = areas[pageId].concat(pageAreas)
+            sections[sectionIdx].pageAreas.forEach(pageAreas => {
+                if (areas[pageAreas.pageIdx]) {
+                    areas[pageAreas.pageIdx] = areas[pageAreas.pageIdx].concat(pageAreas.areas)
                 } else {
-                    areas[pageId] = pageAreas;
+                    areas[pageAreas.pageIdx] = pageAreas.areas;
                 }
-            }
+            });
         });
         return areas;
     }
@@ -90,10 +89,11 @@ function Player({ sections, images, pages, videoUrl }) {
         return false;
     }
 
-    const onPageClicked = (pageUid, pageX, pageY) => {
+    const onPageClicked = (pageIdx, pageX, pageY) => {
         for (var sectionIdx = 0 ; sectionIdx < sections.length; sectionIdx ++) {
             const section = sections[sectionIdx];
-            if (sectionContainsPoint(section.pageAreas[pageUid] || [], pageX, pageY)) {
+            const sectionPageAreas = section.pageAreas.find(pageArea => pageArea.pageIdx == pageIdx);
+            if (sectionContainsPoint((sectionPageAreas || {areas: []}).areas, pageX, pageY)) {
                 setPlayInput((sectionIdx + 1) + ':' + (sectionIdx + 1));
                 setRefreshSkipScrollingOnPlaying(true);
                 setSkipScrollingFromTime(new Date().getTime());
@@ -106,20 +106,15 @@ function Player({ sections, images, pages, videoUrl }) {
 
     const youtubeLink = `${videoUrl}?t=${sections.length > 0 ? sections[0].startSec : '0'}`;
 
-    // TODO: refactor
-    const pagesWithRectangles = () => {
-        if (!pages) {
+    const pageUrlsToPageObjectsWithRectangles = () => {
+        if (!pageUrls) {
             return;
         }
-        const newPages = JSON.parse(JSON.stringify(pages));
-        newPages.forEach(p => {
-            p.rectangles = [];
-            sections.forEach(section => {
-                if (section.pageAreas) {
-                    (section.pageAreas[p.id] || []).forEach(area => {
-                        p.rectangles.push(area);
-                    })
-                }
+        const newPages = pageUrls.map(pageUrl => ({url: pageUrl, rectangles: []}));
+
+        sections.forEach(section => {
+            (section.pageAreas || []).forEach((pageAreas) => {
+                newPages[pageAreas.pageIdx].rectangles.push(...pageAreas.areas);
             });
         });
         return newPages;
@@ -130,7 +125,7 @@ function Player({ sections, images, pages, videoUrl }) {
                 <div className='sectionPagesWrapper'>
                     <SectionPages
                         images={images}
-                        pages={pagesWithRectangles()}
+                        pages={pageUrlsToPageObjectsWithRectangles()}
                         onPageClicked={onPageClicked}
                         skipScrollingFromTime={skipScrollingFromTime}
                         sectionPageAreas={getActivePageAreas()}

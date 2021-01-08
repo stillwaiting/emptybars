@@ -10,7 +10,7 @@ export default function EditorDataProvider({ lastStateFromLocalStorage, onDataPr
     const [oldState, setOldState] = useState('');
     const [opType, setOpType] = useState('');
     const [videoUrl, setVideoUrl] = useState('');
-    const [pages, setPages] = useState('');
+    const [pageUrls, setPageUrls] = useState('');
 
     const handleOnSelect = (opType) => {
         setOpType(opType);
@@ -24,8 +24,8 @@ export default function EditorDataProvider({ lastStateFromLocalStorage, onDataPr
         setVideoUrl(e.target.value);
     }
 
-    const handleOnPagesChanged = (e) => {
-        setPages(e.target.value);
+    const handleOnPageUrlsChanged = (e) => {
+        setPageUrls(e.target.value);
     }
 
     const handleOnSubmit = () => {
@@ -40,10 +40,7 @@ export default function EditorDataProvider({ lastStateFromLocalStorage, onDataPr
                 onDataProvided({
                     videoUrl,
                     sections: [],
-                    pages: pages.trim().split("\n").map(p => p.trim()).filter(p => p).map(pageUrl => ({
-                        url: pageUrl,
-                        id: '' + (new Date().getTime()) + Math.random()
-                    }))
+                    pageUrls: pageUrls.trim().split("\n").map(p => p.trim()).filter(p => p)
                 });
                 return
             }
@@ -70,7 +67,7 @@ export default function EditorDataProvider({ lastStateFromLocalStorage, onDataPr
                         Sheet music pages (one URL per line):
                     </p>
                     <p>
-                        <textarea onChange={handleOnPagesChanged} value={pages}  readOnly={opType != OP_NEW} />
+                        <textarea onChange={handleOnPageUrlsChanged} value={pageUrls}  readOnly={opType != OP_NEW} />
                     </p>
                 </td>
             </tr>

@@ -4,30 +4,46 @@ import ImageAreas from "./ImageAreas";
 import './SectionPages.scss';
 
 function SectionPages({ pages, sectionPages, sectionPageAreas, onSectionPagesChanges, onSectionPageAreasChanged }) {
-    const handleOnChange = (e, pageIdx) => {
+    const handleOnPageSelected = (e, pageIdx) => {
         var newSectionPages = JSON.parse(JSON.stringify(sectionPages));
-        const page = pages[pageIdx];
         if (e.target.checked) {
-            newSectionPages.push(page.id);
+            newSectionPages.push(pageIdx);
         } else {
-            newSectionPages = newSectionPages.filter(it => it != page.id);
+            newSectionPages = newSectionPages.filter(it => it != pageIdx);
         }
         onSectionPagesChanges(newSectionPages, 'list of section pages updated');
     }
 
-    const handleOnNewAreaAdded = (pageId, newArea) => {
+    const handleOnNewAreaAdded = (pageIdx, newArea) => {
         const newSectionPageAreas = JSON.parse(JSON.stringify(sectionPageAreas));
-        if (!newSectionPageAreas[pageId]) {
-            newSectionPageAreas[pageId] = [newArea];
+        const pageAreas = findPageAreas(newSectionPageAreas, pageIdx)
+        if (!pageAreas) {
+            newSectionPageAreas.push({
+                pageIdx: pageIdx,
+                areas: [newArea]
+            });
         } else {
-            newSectionPageAreas[pageId].push(newArea);
+            pageAreas.push(newArea);
         }
         onSectionPageAreasChanged(newSectionPageAreas, 'page area added');
     }
 
-    const handleOnDeleteArea = (pageId, areaIdx) => {
-        const newSectionPageAreas = JSON.parse(JSON.stringify(sectionPageAreas));
-        newSectionPageAreas[pageId].splice(areaIdx, 1);
+    const findPageAreas = (sectionPageAreas, pageIdx) => {
+        const pageAreasObj = sectionPageAreas.find(it => it.pageIdx == pageIdx)
+        if (!pageAreasObj) {
+            return undefined;
+        }
+        return pageAreasObj.areas;
+    }
+
+    const removeEmptyPageAreas = (sectionPageAreas) =>
+        sectionPageAreas.filter(it => it.areas.length > 0);
+
+    const handleOnDeleteArea = (pageIdx, areaIdx) => {
+        var newSectionPageAreas = JSON.parse(JSON.stringify(sectionPageAreas));
+        const pageAreas = findPageAreas(newSectionPageAreas, pageIdx)
+        pageAreas.splice(areaIdx, 1);
+        newSectionPageAreas = removeEmptyPageAreas(newSectionPageAreas);
         onSectionPageAreasChanged(newSectionPageAreas, 'page area deleted');
     }
 
@@ -38,12 +54,12 @@ function SectionPages({ pages, sectionPages, sectionPageAreas, onSectionPagesCha
                 return <div key={'input' + idx}>
                     <input
                         type="checkbox"
-                        checked={(sectionPages.indexOf(p.id) >= 0) ? true : false}
-                        onChange={((e) => handleOnChange(e, idx)).bind(this)}
+                        checked={(sectionPages.indexOf(idx) >= 0) ? true : false}
+                        onChange={((e) => handleOnPageSelected(e, idx)).bind(this)}
                     /> <span onClick={((e) =>
-                            handleOnChange({
+                            handleOnPageSelected({
                                 target: {
-                                    checked: (sectionPages.indexOf(p.id) < 0)
+                                    checked: (sectionPages.indexOf(idx) < 0)
                                 }
                             }, idx)).bind(this)
                     }>Page #{idx + 1}</span>
@@ -52,16 +68,16 @@ function SectionPages({ pages, sectionPages, sectionPageAreas, onSectionPagesCha
         </div>
 
         {pages.map((p, idx) => {
-            return (sectionPages.indexOf(p.id) >= 0) ?
+            return (sectionPages.indexOf(idx) >= 0) ?
                     <div className='page' key={'page' + idx}>
                         <ImageAreas
                             title={`Page #${idx+1}`}
                             imgUrl={p.url}
                             width = {500}
-                            areas={sectionPageAreas[p.id] || [] }
+                            areas={findPageAreas(sectionPageAreas, idx) || []}
                             rectangles={p.rectangles}
-                            onNewAreaAdded={((area) => handleOnNewAreaAdded(p.id, area)).bind(this)}
-                            onDeleteArea={((areaIdx) => handleOnDeleteArea(p.id, areaIdx)).bind(this)}
+                            onNewAreaAdded={((area) => handleOnNewAreaAdded(idx, area)).bind(this)}
+                            onDeleteArea={((areaIdx) => handleOnDeleteArea(idx, areaIdx)).bind(this)}
                         />
                     </div>
                     : '';

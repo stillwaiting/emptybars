@@ -24,8 +24,7 @@ function SectionPages({ images, pages, sectionPageAreas, skipScrollingFromTime, 
     const findFirstSelectedPageIdx = () => {
         var selectedPageIdx = -1;
         for (var idx = 0; idx < pages.length; idx++) {
-            const puid = pages[idx].id;
-            if (sectionPageAreas[puid] && sectionPageAreas[puid].length) {
+            if (sectionPageAreas[idx] && sectionPageAreas[idx].length) {
                 selectedPageIdx = idx;
                 break;
             }
@@ -56,9 +55,8 @@ function SectionPages({ images, pages, sectionPageAreas, skipScrollingFromTime, 
         throw "cannot find page " + selectedPageIdx + ", should never happen";
     }
 
-    const onImageClicked = (imageIdx, imageX, imageY) => {
-        const pageId = pages[imageIdx].id;
-        onPageClicked(pageId, imageX, imageY);
+    const onImageClicked = (pageIdx, imageX, imageY) => {
+        onPageClicked(pageIdx, imageX, imageY);
     }
 
     const calculatePageHeight = () =>
@@ -116,7 +114,7 @@ function SectionPages({ images, pages, sectionPageAreas, skipScrollingFromTime, 
                                 rectangles={p.rectangles || []}
                                 image={images[idx]}
                                 onImageClicked={((imageX, imageY) => onImageClicked(idx, imageX, imageY)).bind(this)}
-                                width = {parseInt(500 * zoom)} areas={sectionPageAreas[p.id] || [] }
+                                width = {parseInt(500 * zoom)} areas={sectionPageAreas[idx] || [] }
                             />
                         </div>;
             })}
