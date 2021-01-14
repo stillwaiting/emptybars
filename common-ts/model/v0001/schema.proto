@@ -1,0 +1,25 @@
+message Root {
+    required string videoUrl = 1;
+    repeated string pageUrls = 2;
+    required int32 version = 3;
+    repeated Section sections = 4 [packed=true];
+}
+
+message Section {
+    repeated int32 pages = 1;
+    repeated SectionPageAreas pageAreas = 2 [packed=true];
+    required int32 startSecsMultiply10 = 3;
+    required int32 endSecsMultiply10 = 4;
+}
+
+message SectionPageAreas {
+    required int32 pageIdx = 1;
+    repeated Area areas = 2 [packed=true];
+}
+
+message Area {
+    required sint32 x = 1;
+    required sint32 y = 2;
+    required sint32 width = 3;
+    required sint32 height = 4;
+}
