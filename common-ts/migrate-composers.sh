@@ -1,0 +1,1 @@
+npx ts-node migrate-composers.ts

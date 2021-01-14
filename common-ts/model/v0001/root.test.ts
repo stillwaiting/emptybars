@@ -1,6 +1,6 @@
 import {Root, rootFromObj, rootToObj} from "./root";
 
-const testOldObj: any = {
+const TEST_OBJ_V0: any = {
     sections: [
         {
             pages: [
@@ -62,11 +62,11 @@ const testOldObj: any = {
     videoUrl: "https://www.youtube.com/watch?v=aTopxwu1KUE"
 };
 
-const testv1Obj: any = {
+const TEST_OBJ_V1: any = {
     version: 1,
     sections: [
         {
-            pageIdxs: [0],
+            pages: [0],
             pageAreas: [
                 {
                     pageIdx: 0,
@@ -88,7 +88,7 @@ const testv1Obj: any = {
             end: "04:07.9"
         },
         {
-            pageIdxs: [0],
+            pages: [0],
             pageAreas: [
                 {
                     pageIdx: 0,
@@ -116,11 +116,11 @@ const testv1Obj: any = {
     videoUrl: "https://www.youtube.com/watch?v=aTopxwu1KUE"
 };
 
-const expectedRoot: Root = {
+const TEST_ROOT: Root = {
     version: 1,
     sections: [
         {
-            pageIdxs: [0],
+            pages: [0],
             pageAreas: [
                 {
                     pageIdx: 0,
@@ -142,7 +142,7 @@ const expectedRoot: Root = {
             endSec: 247.9
         },
         {
-            pageIdxs: [0],
+            pages: [0],
             pageAreas: [
                 {
                     pageIdx: 0,
@@ -171,68 +171,13 @@ const expectedRoot: Root = {
 };
 
 test('rootFromObj understands v0 objects', () => {
-    const expectedObj: Root = {
-        version: 1,
-        sections: [
-            {
-                pageIdxs: [0],
-                pageAreas: [
-                    {
-                        pageIdx: 0,
-                        areas: [{
-                            x: 753,
-                            y: 169,
-                            width: -724,
-                            height: -171
-                        },
-                        {
-                            x: 14,
-                            y: 209,
-                            width: 234,
-                            height: 176
-                        }]
-                    }
-                ],
-                startSec: 240.3,
-                endSec: 247.9
-            },
-            {
-                pageIdxs: [0],
-                pageAreas: [
-                    {
-                        pageIdx: 0,
-                        areas: [
-                            {
-                                x: 250,
-                                y: 208,
-                                width: 509,
-                                height: 164
-                            },
-                            {
-                                x: 25,
-                                y: 387,
-                                width: 285,
-                                height: 173
-                            }
-                        ]
-                    }
-                ],
-                startSec: 247.9,
-                endSec: 254.4
-            }
-        ],
-        pageUrls: ["https://images2.imgbox.com/f8/2b/l64abGMR_o.jpg?download=true", "https://images2.imgbox.com/3b/1c/UsutTWGB_o.jpg?download=true"],
-        videoUrl: "https://www.youtube.com/watch?v=aTopxwu1KUE"
-    };
-
-
-    expect(rootFromObj(testOldObj)).toEqual(expectedObj)
+    expect(rootFromObj(TEST_OBJ_V0)).toEqual(TEST_ROOT)
 });
 
 test('rootFromObj understands v1 objects', () => {
-    expect(rootFromObj(testv1Obj)).toEqual(expectedRoot)
+    expect(rootFromObj(TEST_OBJ_V1)).toEqual(TEST_ROOT)
 });
 
 test('rootToObj converts root to obj', () => {
-    expect(rootToObj(expectedRoot)).toEqual(testv1Obj);
+    expect(rootToObj(TEST_ROOT)).toEqual(TEST_OBJ_V1);
 });

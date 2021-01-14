@@ -19,7 +19,7 @@ function sectionFromOldSection(oldSection: V0Section, pages: ReadonlyArray<V0Pag
             pageIdx: pages.findIndex(oldPage => oldPage.id === pageId),
             areas: oldSection.pageAreas[pageId]
         })),
-        pageIdxs: Object.keys(oldSection.pageAreas).map(pageId => pages.findIndex(oldPage => oldPage.id === pageId))
+        pages: Object.keys(oldSection.pageAreas).map(pageId => pages.findIndex(oldPage => oldPage.id === pageId))
     };
 }
 
@@ -53,7 +53,7 @@ export function rootToObj(root: Root): any {
         start: secsToString(section.startSec),
         end: secsToString(section.endSec),
         pageAreas: section.pageAreas,
-        pageIdxs: section.pageIdxs
+        pages: section.pages
     }));
     // @ts-ignore
     clone.sections = newSections;

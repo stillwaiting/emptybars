@@ -1,3 +1,3 @@
-import { Root } from './v0001/root';
+import { Root, rootFromObj, rootToObj } from './v0001/root';
 
-export { Root }
+export { Root, rootFromObj, rootToObj }

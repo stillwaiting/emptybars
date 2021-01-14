@@ -34,32 +34,6 @@ export default class Migrator {
     return targetObject;
   }
 
-  /**
-   * Scan all files in dirPath to apply migrations and overwrite the files
-   * 
-   * @param {String} dirPath 
-   * @param {String} fileName 
-   * @param {Array<Migration>} migrations
-   */
-  _applyMigrationsToDirSync(dirPath, fileName, migrations) {
-    fs.readdirSync(dirPath).forEach(file => {
-      if (fs.lstatSync(dirPath + "/" + file).isDirectory()) {
-        return this._applyMigrationsToDirSync(dirPath + "/" + file, fileName, migrations);
-      }
-      if (file === fileName) {
-        console.log(`Migrating ${dirPath}/${file}`)
-        let targetFile = fs.readFileSync(path.join(dirPath, file));
-        let targetObject = JSON.parse(targetFile);
-        let resultingObject = this._applyMigrationsToObj(targetObject, migrations);
-        fs.writeFileSync(path.join(dirPath, file), JSON.stringify(resultingObject, null, 2));
-      }
-    });
-  }
-
-  applyAllMigrationsToComposers() {
-    return this._applyMigrationsToDirSync('../composers', 'sections.json', ALL_MIGRATIONS)
-  }
-
   applyAllMigrationsToObject(targetObj) {
     return this._applyMigrationsToObj(targetObj, ALL_MIGRATIONS)
   }
