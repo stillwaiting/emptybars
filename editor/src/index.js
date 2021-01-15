@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import EditorLoader from './EditorLoader';
 
-import {initSectionsPlayer} from "emptybars-common/initialiser";
+import {initSectionsPlayer} from "emptybars-common-ts/lib/initialiser";
 
 initSectionsPlayer(($element, data) => {
 

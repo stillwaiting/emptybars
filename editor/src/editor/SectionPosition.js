@@ -1,5 +1,5 @@
 import React from 'react';
-import { secsToString } from "emptybars-common/utils";
+import { secsToString } from "emptybars-common-ts/lib/utils";
 
 import './SectionPosition.scss';
 

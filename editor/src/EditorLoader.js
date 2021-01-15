@@ -1,20 +1,15 @@
 import React, { useState, useRef } from "react";
 import Editor from "./editor/Editor";
-import {
-  transformFromHumanReadable,
-  transformToHumanReadable,
-} from "emptybars-common/utils";
 
 import "./EditorLoader.scss";
 import EditorDataProvider from "./editor/EditorDataProvider";
 
-import Migrator from 'emptybars-common/migrator'
-const migrator = new Migrator()
+import {rootFromObj,rootToObj} from 'emptybars-common-ts/lib/model/current'
 
 const LOCAL_STORAGE_KEY = "emptybarsEditorData";
 
 function EditorLoader(initialData) {
-  var [data, setData] = useState(transformFromHumanReadable(initialData));
+  var [data, setData] = useState(rootFromObj(initialData));
   var [history, setHistory] = useState([]);
   var [redo, setRedo] = useState([]);
   var [showCookies, setShowCookies] = useState(true);
@@ -24,7 +19,7 @@ function EditorLoader(initialData) {
     setData(newData);
     window.localStorage.setItem(
       LOCAL_STORAGE_KEY,
-      JSON.stringify(transformToHumanReadable(newData))
+      JSON.stringify(rootToObj(newData))
     );
   };
 
@@ -44,7 +39,7 @@ function EditorLoader(initialData) {
   };
 
   const handleOnDataProvided = (providedData) => {
-    doSetData(transformFromHumanReadable(migrator.applyAllMigrationsToObject(providedData)));
+    doSetData(rootFromObj(providedData));
   };
 
   const handleCopyClick = () => {
@@ -77,10 +72,6 @@ function EditorLoader(initialData) {
     e.stopPropagation();
     setShowCookies(false);
   };
-
-  if (data.videoUrl) {
-    data.version = migrator.getLastVersion()
-  }
 
   return (
     <div>
@@ -116,7 +107,7 @@ function EditorLoader(initialData) {
             <div className="jsonData">
               <textarea
                 readOnly={true}
-                value={JSON.stringify(transformToHumanReadable(data), null, 2)}
+                value={JSON.stringify(rootToObj(data), null, 2)}
                 ref={textareaRef}
               />
               <div className="copyButton" onClick={handleCopyClick}>
