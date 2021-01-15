@@ -1,5 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react';
-import { secsToString } from "emptybars-common/utils";
+import React from 'react'
 import ReactTooltip from 'react-tooltip';
 import './Sections.scss';
 
