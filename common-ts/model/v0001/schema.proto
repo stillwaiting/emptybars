@@ -1,20 +1,22 @@
+syntax = "proto2";
+
 message Root {
     required string videoUrl = 1;
     repeated string pageUrls = 2;
     required int32 version = 3;
-    repeated Section sections = 4 [packed=true];
+    repeated Section sections = 4;
 }
 
 message Section {
     repeated int32 pages = 1;
-    repeated SectionPageAreas pageAreas = 2 [packed=true];
+    repeated SectionPageAreas pageAreas = 2;
     required int32 startSecsMultiply10 = 3;
     required int32 endSecsMultiply10 = 4;
 }
 
 message SectionPageAreas {
     required int32 pageIdx = 1;
-    repeated Area areas = 2 [packed=true];
+    repeated Area areas = 2;
 }
 
 message Area {

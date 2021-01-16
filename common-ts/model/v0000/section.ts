@@ -8,12 +8,21 @@ export interface Section {
     readonly endSec: number,
 }
 
+function removeEmpty(obj: any): any {
+    Object.keys(obj).forEach(key => {
+        if (!obj[key]) {
+            delete obj[key];
+        }
+    });
+    return obj;
+}
+
 export function sectionFromObj(obj: any): Section {
     const pageAreas: {[key:string]: Area} = {};
     return {
-        pages: <ReadonlyArray<string>> obj.pages,
-        pageAreas: <{[key:string]: ReadonlyArray<Area>}> obj.pageAreas,
-        startSec: stringToSecs(obj.start),
-        endSec: stringToSecs(obj.end)
+        pages: <ReadonlyArray<string>> obj.pages || [],
+        pageAreas: <{[key:string]: ReadonlyArray<Area>}> (removeEmpty(obj.pageAreas || {})),
+        startSec: obj.startSec || stringToSecs(obj.start),
+        endSec: obj.endSec || stringToSecs(obj.end)
     }
 }

@@ -1559,6 +1559,11 @@
     "@types/minimatch" "*"
     "@types/node" "*"
 
+"@types/google-protobuf@^3.7.4":
+  version "3.7.4"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/@types/google-protobuf/-/google-protobuf-3.7.4.tgz#1621c50ceaf5aefa699851da8e0ea606a2943a39"
+  integrity sha1-FiHFDOr1rvppmFHajg6mBqKUOjk=
+
 "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0":
   version "2.0.3"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/@types/istanbul-lib-coverage/-/istanbul-lib-coverage-2.0.3.tgz#4ba8ddb720221f432e443bd5f9117fd22cfd4762"
@@ -4053,13 +4058,13 @@ emojis-list@^3.0.0:
   resolved "https://packages.atlassian.com/api/npm/npm-remote/emojis-list/-/emojis-list-3.0.0.tgz#5570662046ad29e2e916e71aae260abdff4f6a78"
   integrity sha1-VXBmIEatKeLpFucariYKvf9Pang=
 
-"emptybars-common-ts@file:../common-ts/common-ts-1.0.1.tgz":
-  version "1.0.1"
-  resolved "file:../common-ts/common-ts-1.0.1.tgz#862928c6579a6021c69c3eb9cb15310d39323872"
-
-"emptybars-common@file:../common/emptybars-common-1.0.14.tgz":
-  version "1.0.14"
-  resolved "file:../common/emptybars-common-1.0.14.tgz#e83a0e325062ab40f8c21e4e21da1cd8f38f83fa"
+"emptybars-common-ts@file:../common-ts/common-ts-1.0.17.tgz":
+  version "1.0.17"
+  resolved "file:../common-ts/common-ts-1.0.17.tgz#28b4ffaca90670265c19382c67675fbf125f0f82"
+  dependencies:
+    "@types/google-protobuf" "^3.7.4"
+    google-protobuf "^3.14.0"
+    lz4js "^0.2.0"
 
 encodeurl@~1.0.2:
   version "1.0.2"
@@ -5122,6 +5127,11 @@ globule@^1.0.0:
     glob "~7.1.1"
     lodash "~4.17.10"
     minimatch "~3.0.2"
+
+google-protobuf@^3.14.0:
+  version "3.14.0"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/google-protobuf/-/google-protobuf-3.14.0.tgz#20373d22046e63831a5110e11a84f713cc43651e"
+  integrity sha1-IDc9IgRuY4MaURDhGoT3E8xDZR4=
 
 graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.2.0, graceful-fs@^4.2.2:
   version "4.2.4"
@@ -6891,6 +6901,11 @@ lz-string@^1.4.4:
   version "1.4.4"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/lz-string/-/lz-string-1.4.4.tgz#c0d8eaf36059f705796e1e344811cf4c498d3a26"
   integrity sha1-wNjq82BZ9wV5bh40SBHPTEmNOiY=
+
+lz4js@^0.2.0:
+  version "0.2.0"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/lz4js/-/lz4js-0.2.0.tgz#09f1a397cb2158f675146c3351dde85058cb322f"
+  integrity sha1-CfGjl8shWPZ1FGwzUd3oUFjLMi8=
 
 make-dir@^2.0.0, make-dir@^2.1.0:
   version "2.1.0"

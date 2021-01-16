@@ -5,5 +5,8 @@ export interface Page {
 }
 
 export function pageFromObj(obj: any): Page {
-    return obj;
+    return {
+        id: obj.id,
+        url: obj.url
+    };
 }

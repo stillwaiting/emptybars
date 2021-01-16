@@ -1,3 +1,3 @@
-import { Root, rootFromObj, rootToObj } from './v0001/root';
+import { Root, rootFromObj, rootToObj, rootToBinaryString, rootFromBinaryString,rootCurrentVersion } from './v0001/root';
 
-export { Root, rootFromObj, rootToObj }
+export { Root, rootFromObj, rootToObj, rootToBinaryString, rootFromBinaryString, rootCurrentVersion }

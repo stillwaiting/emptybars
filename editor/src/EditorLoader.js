@@ -1,10 +1,13 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef,  useEffect } from "react";
 import Editor from "./editor/Editor";
 
 import "./EditorLoader.scss";
 import EditorDataProvider from "./editor/EditorDataProvider";
 
 import {rootFromObj,rootToObj} from 'emptybars-common-ts/lib/model/current'
+import {rootToBinaryString,rootCurrentVersion } from "emptybars-common-ts/lib/model/current";
+
+import {AnchorManager} from "emptybars-common-ts/lib/anchormanager";
 
 const LOCAL_STORAGE_KEY = "emptybarsEditorData";
 
@@ -14,8 +17,11 @@ function EditorLoader(initialData) {
   var [redo, setRedo] = useState([]);
   var [showCookies, setShowCookies] = useState(true);
   const textareaRef = useRef(null);
+  const [anchorManager, setAnchorManager] = useState(null);
 
   const doSetData = (newData) => {
+    // TODO: remove explicit version setup once  editor and  player are migrated to TypeScript
+    newData.version = rootCurrentVersion();
     setData(newData);
     window.localStorage.setItem(
       LOCAL_STORAGE_KEY,
@@ -23,7 +29,13 @@ function EditorLoader(initialData) {
     );
   };
 
+  useEffect(() => {
+    setAnchorManager(new AnchorManager());
+  }, []);
+
   const handleOnDataUpdated = (newData, operationName) => {
+    // TODO: remove explicit version setup once  editor and  player are migrated to TypeScript
+    newData.version = rootCurrentVersion();
     const historyChunk = {
       oldData: JSON.parse(JSON.stringify(data)),
       newData: JSON.parse(JSON.stringify(newData)),
@@ -36,10 +48,16 @@ function EditorLoader(initialData) {
 
     redo = [];
     setRedo(redo);
+    if (anchorManager) {
+      anchorManager.setAnchor('#' + rootToBinaryString(rootFromObj(newData)));
+    }
   };
 
   const handleOnDataProvided = (providedData) => {
     doSetData(rootFromObj(providedData));
+    if (anchorManager) {
+      anchorManager.setAnchor('#' + rootToBinaryString(rootFromObj(providedData)));
+    }
   };
 
   const handleCopyClick = () => {
@@ -70,6 +88,8 @@ function EditorLoader(initialData) {
 
   const closeCookies = (e) => {
     e.stopPropagation();
+    e.preventDefault();
+    e.nativeEvent.stopImmediatePropagation();
     setShowCookies(false);
   };
 
@@ -88,7 +108,7 @@ function EditorLoader(initialData) {
           <a href="/cookies">cookies policy</a>.<br />
           <br />
           <strong>
-            <a href="#" onClick={closeCookies}>
+            <a href="" onClick={closeCookies}>
               Close
             </a>{" "}
             <br />

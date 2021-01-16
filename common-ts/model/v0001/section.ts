@@ -1,4 +1,4 @@
-import PageAreas from './pageareas'
+import { PageAreas, pageAreasFromObj } from './pageareas'
 import {stringToSecs} from "../../utils";
 
 export interface Section {
@@ -8,12 +8,12 @@ export interface Section {
     readonly pageAreas: ReadonlyArray<PageAreas>
 }
 
-export function sectionFromJson(json: any): Section {
+export function sectionFromObj(obj: any): Section {
     return {
-        pages: json.pages,
-        startSec: stringToSecs(json.start),
-        endSec: stringToSecs(json.end),
-        pageAreas: <ReadonlyArray<PageAreas>>json.pageAreas
+        pages: obj.pages || [],
+        startSec: obj.startSec || stringToSecs(obj.start),
+        endSec: obj.endSec || stringToSecs(obj.end),
+        pageAreas: (obj.pageAreas || []).map((pa: any) => pageAreasFromObj(pa))
     }
 }
 
