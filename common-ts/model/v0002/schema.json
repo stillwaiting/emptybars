@@ -1,0 +1,204 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.com/object1610084225.json",
+  "title": "Root",
+  "type": "object",
+  "required": [
+    "sections",
+    "videoUrl",
+    "version",
+    "pageUrls",
+    "changeCounter",
+    "updatedAt"
+  ],
+  "properties": {
+    "sections": {
+      "$id": "#root/sections",
+      "title": "Sections",
+      "type": "array",
+      "default": [],
+      "items":{
+        "$id": "#root/sections/items",
+        "title": "Items",
+        "type": "object",
+        "required": [
+          "pageIdxs",
+          "pageAreas",
+          "start",
+          "end"
+        ],
+        "properties": {
+          "pageIdxs": {
+            "$id": "#root/sections/items/pageIdxs",
+            "title": "PageIdxs",
+            "type": "array",
+            "default": [],
+            "items":{
+              "$id": "#root/sections/items/pageIdxs/items",
+              "title": "Items",
+              "type": "integer",
+              "examples": [
+                0
+              ],
+              "default": 0
+            }
+          },
+          "pageAreas": {
+            "$id": "#root/sections/items/pageAreas",
+            "title": "Pageareas",
+            "type": "array",
+            "default": [],
+            "items":{
+              "$id": "#root/sections/items/pageAreas/items",
+              "title": "Items",
+              "type": "object",
+              "required": [
+                "pageIdx",
+                "areas"
+              ],
+              "properties": {
+                "pageIdx": {
+                  "$id": "#root/sections/items/pageAreas/items/pageIdx",
+                  "title": "Pageidx",
+                  "type": "integer",
+                  "examples": [
+                    0
+                  ],
+                  "default": 0
+                },
+                "areas": {
+                  "$id": "#root/sections/items/pageAreas/items/areas",
+                  "title": "Areas",
+                  "type": "array",
+                  "default": [],
+                  "items":{
+                    "$id": "#root/sections/items/pageAreas/items/areas/items",
+                    "title": "Items",
+                    "type": "object",
+                    "required": [
+                      "x",
+                      "y",
+                      "width",
+                      "height"
+                    ],
+                    "properties": {
+                      "x": {
+                        "$id": "#root/sections/items/pageAreas/items/areas/items/x",
+                        "title": "X",
+                        "type": "integer",
+                        "examples": [
+                          753
+                        ],
+                        "default": 0
+                      },
+                      "y": {
+                        "$id": "#root/sections/items/pageAreas/items/areas/items/y",
+                        "title": "Y",
+                        "type": "integer",
+                        "examples": [
+                          169
+                        ],
+                        "default": 0
+                      },
+                      "width": {
+                        "$id": "#root/sections/items/pageAreas/items/areas/items/width",
+                        "title": "Width",
+                        "type": "integer",
+                        "examples": [
+                          -724
+                        ],
+                        "default": 0
+                      },
+                      "height": {
+                        "$id": "#root/sections/items/pageAreas/items/areas/items/height",
+                        "title": "Height",
+                        "type": "integer",
+                        "examples": [
+                          -171
+                        ],
+                        "default": 0
+                      }
+                    }
+                  }
+
+                }
+              }
+            }
+
+          },
+          "start": {
+            "$id": "#root/sections/items/start",
+            "title": "Start",
+            "type": "string",
+            "default": "",
+            "examples": [
+              "04:00.3"
+            ],
+            "pattern": "^[0-9]{2,}:[0-9]{2}\\.?[0-9]?$"
+          },
+          "end": {
+            "$id": "#root/sections/items/end",
+            "title": "End",
+            "type": "string",
+            "default": "",
+            "examples": [
+              "04:07.9"
+            ],
+            "pattern": "^[0-9]{2,}:[0-9]{2}\\.?[0-9]?$"
+          }
+        }
+      }
+
+    },
+    "videoUrl": {
+      "$id": "#root/videoUrl",
+      "title": "Videourl",
+      "type": "string",
+      "default": "",
+      "examples": [
+        "https://www.youtube.com/watch?v=aTopxwu1KUE"
+      ],
+      "pattern": "^https?://.*$"
+    },
+    "version": {
+      "$id": "#root/version",
+      "title": "Version",
+      "type": "integer",
+      "examples": [
+        1
+      ],
+      "default": 0
+    },
+    "version": {
+      "$id": "#root/changeCounter",
+      "title": "ChangeCounter",
+      "type": "integer",
+      "examples": [
+        1
+      ],
+      "default": 0
+    },
+    "updatedAt": {
+      "$id": "#root/updatedAt",
+      "title": "UpdatedAt",
+      "type": "date-time"
+    },
+    "pageUrls": {
+      "$id": "#root/pageUrls",
+      "title": "Pageurls",
+      "type": "array",
+      "default": [],
+      "items":{
+        "$id": "#root/pageUrls/items",
+        "title": "Items",
+        "type": "string",
+        "default": "",
+        "examples": [
+          "https://images2.imgbox.com/f8/2b/l64abGMR_o.jpg?download=true"
+        ],
+        "pattern": "^https?://.*$"
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+syntax = "proto2";
+
+message Root {
+    required string videoUrl = 1;
+    repeated string pageUrls = 2;
+    required int32 version = 3;
+    required int64 updatedAtTimestamp=4;
+    required int32 changeCounter=5;
+    repeated Section sections = 6;
+}
+
+message Section {
+    repeated int32 pageIdxs = 1;
+    repeated SectionPageAreas pageAreas = 2;
+    required int32 startSecsMultiply10 = 3;
+    required int32 endSecsMultiply10 = 4;
+}
+
+message SectionPageAreas {
+    required int32 pageIdx = 1;
+    repeated Area areas = 2;
+}
+
+message Area {
+    required sint32 x = 1;
+    required sint32 y = 2;
+    required sint32 width = 3;
+    required sint32 height = 4;
+}

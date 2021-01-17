@@ -16,4 +16,28 @@ is coming from JavaScript without type checking
 is coming from TypeSecript with necessary type checking
 
 `root` -> `root` (when  `root` is  passed  as an object) should also work!  (`obj` is a loose
-superset  of `root`) 
+superset  of `root`
+
+# Changelog
+
+v0000 -> v0001:
+ - `root.sections[].pages` now stores integers (pageIdx), not pageId
+ - `root.sections[].pageAreas` now an array, not an object
+ - `root.sections[].pageAreas[]` now contains `pageIdx` (integer) and `areas` (list of areas) 
+ - `root.pages` changed to `root.pageUrls`
+  
+  
+v0001 -> v0002:
+ - `root.sections[].pages` is renamed to `root.sections[].pageIdxs`
+ - added `root.changeCounter`
+ - added `root.updatedAt`
+ 
+ 
+# How to create a nbew version of the model
+
+1. Create the next `V???` directory
+1. Copy the content of the previous directory there; introduce your changes
+ - don't forget to update schema.proto and regenerate protobuf boilerplate by runnint
+   `protoc.sh`
+1. Modify tests; make sure previous version objects can be parsed
+1. Retarget `current.ts` to the new version
