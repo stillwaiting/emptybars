@@ -142,6 +142,10 @@ function EditorLoader(initialData) {
       {data.videoUrl ? (
         <div className="editorLoader">
           <div className="editorLoaderWrapper">
+            <div>
+              <a href={"/player#" + rootToBinaryString(rootFromObj(data))} target="_blank">Open in player (new tab)</a>
+            </div>
+
             <Editor {...data} onDataUpdated={handleOnDataUpdated} />
 
             <div className="jsonData">
