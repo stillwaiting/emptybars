@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import './EditorDataProvider.scss';
-import {rootCurrentVersion, rootFromBinaryString, rootToObj} from "emptybars-common-ts/lib/model/current";
+import {rootCurrentVersion, rootFromBinaryString, rootToObj} from "../model";
 
 const OP_NEW = 'new';
 const OP_LOAD_OLD = 'loadOld';
@@ -14,9 +14,10 @@ export default function EditorDataProvider({ lastStateFromLocalStorage, onDataPr
     const [pageUrls, setPageUrls] = useState('');
 
     useEffect(() => {
-        if (window.location.hash.indexOf(`#${rootCurrentVersion()}-`) === 0)  {
+        if (window.location.hash.match(/^#[0-9]+\-.*$/))  {
             const binaryData = window.location.hash.substr(1);
             onDataProvided(rootToObj(rootFromBinaryString(binaryData)));
+            return;
         }
     }, []);
 

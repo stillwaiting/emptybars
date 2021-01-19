@@ -4058,9 +4058,9 @@ emojis-list@^3.0.0:
   resolved "https://packages.atlassian.com/api/npm/npm-remote/emojis-list/-/emojis-list-3.0.0.tgz#5570662046ad29e2e916e71aae260abdff4f6a78"
   integrity sha1-VXBmIEatKeLpFucariYKvf9Pang=
 
-"emptybars-common-ts@file:../common-ts/common-ts-1.0.17.tgz":
-  version "1.0.17"
-  resolved "file:../common-ts/common-ts-1.0.17.tgz#28b4ffaca90670265c19382c67675fbf125f0f82"
+"emptybars-common-ts@file:../common-ts/common-ts-1.0.19.tgz":
+  version "1.0.19"
+  resolved "file:../common-ts/common-ts-1.0.19.tgz#393cef3cb88f49d0c8308b48a243adfe95410dcb"
   dependencies:
     "@types/google-protobuf" "^3.7.4"
     google-protobuf "^3.14.0"

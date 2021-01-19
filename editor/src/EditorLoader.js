@@ -4,12 +4,18 @@ import Editor from "./editor/Editor";
 import "./EditorLoader.scss";
 import EditorDataProvider from "./editor/EditorDataProvider";
 
-import {rootFromObj,rootToObj} from 'emptybars-common-ts/lib/model/current'
-import {rootToBinaryString,rootCurrentVersion } from "emptybars-common-ts/lib/model/current";
+import {rootFromObj,rootToObj} from './model'
+import {rootToBinaryString,rootCurrentVersion } from "./model";
 
 import {AnchorManager} from "emptybars-common-ts/lib/anchormanager";
 
 const LOCAL_STORAGE_KEY = "emptybarsEditorData";
+
+function pad(n, width, z) {
+  z = z || '0';
+  n = n + '';
+  return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+}
 
 function EditorLoader(initialData) {
   var [data, setData] = useState(rootFromObj(initialData));
@@ -18,15 +24,36 @@ function EditorLoader(initialData) {
   var [showCookies, setShowCookies] = useState(true);
   const textareaRef = useRef(null);
   const [anchorManager, setAnchorManager] = useState(null);
+  var [originalTitle, setOriginalTitle] = useState(false);
+  if (!originalTitle) {
+    originalTitle = document.title;
+    setOriginalTitle(document.title);
+  }
 
   const doSetData = (newData) => {
     // TODO: remove explicit version setup once  editor and  player are migrated to TypeScript
     newData.version = rootCurrentVersion();
+    newData.changeCounter = newData.changeCounter || (
+        (data && data.changeCounter)
+              ? (data.changeCounter + 1) : 1
+    );
+    newData.updatedAt = newData.updatedAt || new Date();
+
     setData(newData);
     window.localStorage.setItem(
       LOCAL_STORAGE_KEY,
       JSON.stringify(rootToObj(newData))
     );
+
+    document.title =
+        pad(parseInt(newData.changeCounter/1000), 3) + "." +
+        pad(newData.changeCounter % 1000, 3) +  " | "  +
+        newData.updatedAt.toLocaleString() + " | " +
+        originalTitle;
+
+    if (anchorManager) {
+      anchorManager.setAnchor('#' + rootToBinaryString(rootFromObj(newData)));
+    }
   };
 
   useEffect(() => {
@@ -35,7 +62,6 @@ function EditorLoader(initialData) {
 
   const handleOnDataUpdated = (newData, operationName) => {
     // TODO: remove explicit version setup once  editor and  player are migrated to TypeScript
-    newData.version = rootCurrentVersion();
     const historyChunk = {
       oldData: JSON.parse(JSON.stringify(data)),
       newData: JSON.parse(JSON.stringify(newData)),
@@ -48,16 +74,10 @@ function EditorLoader(initialData) {
 
     redo = [];
     setRedo(redo);
-    if (anchorManager) {
-      anchorManager.setAnchor('#' + rootToBinaryString(rootFromObj(newData)));
-    }
   };
 
   const handleOnDataProvided = (providedData) => {
     doSetData(rootFromObj(providedData));
-    if (anchorManager) {
-      anchorManager.setAnchor('#' + rootToBinaryString(rootFromObj(providedData)));
-    }
   };
 
   const handleCopyClick = () => {

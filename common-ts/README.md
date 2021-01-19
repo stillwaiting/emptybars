@@ -16,3 +16,4 @@ When test throws `Emit skipped for language service`, delete  `lib` directory an
 1. build & package
 1. in `editor(/player)/package.json`, bump emptybars-common-ts version
 1. in editor/player, execute `yarn`
+1. in editor/player, update `model.js` to target to the new version

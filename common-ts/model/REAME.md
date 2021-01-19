@@ -33,11 +33,11 @@ v0001 -> v0002:
  - added `root.updatedAt`
  
  
-# How to create a nbew version of the model
+# How to create a new version of the model
 
 1. Create the next `V???` directory
 1. Copy the content of the previous directory there; introduce your changes
  - don't forget to update schema.proto and regenerate protobuf boilerplate by runnint
    `protoc.sh`
 1. Modify tests; make sure previous version objects can be parsed
-1. Retarget `current.ts` to the new version
+1. Follow "Promote change to editor/player" in `../README.md`

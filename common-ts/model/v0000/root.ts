@@ -11,6 +11,6 @@ export function rootFromObj(obj: any): Root {
     return {
         pages: (obj.pages || []).map(pageFromObj),
         sections: (obj.sections || []).map(sectionFromObj),
-        videoUrl: obj.videoUrl
+        videoUrl: obj.videoUrl || '',
     }
 }

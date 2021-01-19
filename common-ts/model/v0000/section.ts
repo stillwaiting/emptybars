@@ -22,7 +22,7 @@ export function sectionFromObj(obj: any): Section {
     return {
         pages: <ReadonlyArray<string>> obj.pages || [],
         pageAreas: <{[key:string]: ReadonlyArray<Area>}> (removeEmpty(obj.pageAreas || {})),
-        startSec: obj.startSec || stringToSecs(obj.start),
-        endSec: obj.endSec || stringToSecs(obj.end)
+        startSec: obj.start ? stringToSecs(obj.start) : obj.startSec,
+        endSec: obj.end ? stringToSecs(obj.end) : obj.endSec
     }
 }

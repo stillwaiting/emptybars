@@ -319,3 +319,15 @@ test('rootToBinaryString understands v1 strings', () => {
     const newRoot = rootFromBinaryString("1-BCJNGEBw38sAAAD0IAoraHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1hVG9weHd1MUtVRRI9LQDhaW1hZ2VzMi5pbWdib3gwAP8TZjgvMmIvbDY0YWJHTVJfby5qcGc/ZG93bmxvYWQ9dHJ1ZT8ACu8zYi8xYy9Vc3V0VFdHQj8AAfccGAEiJwgAEh0IABIMCOILENICGKcLINUCEgsIHBCiAxjUAyDgAhjjEiCvEykAoPQDEKADGPoHIMgpAPABMhCGBhi6BCDaAhivEyDwEwAAAAA=");
     expect(newRoot).toEqual(TEST_ROOT);
 })
+
+test('rootFromObj tolerates empty startSec and endSec', () => {
+    expect(rootFromObj({
+        version: 2,
+        sections: [
+            {
+                start: 0,
+                end: 0
+            }
+        ]
+    })).toBeTruthy();
+});

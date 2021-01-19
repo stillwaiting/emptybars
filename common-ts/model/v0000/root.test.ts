@@ -129,3 +129,18 @@ test('rootFromObj converts JSON to model root correctly', () => {
     const root: Root = rootFromObj(TEST_OBJ);
     expect(root).toEqual(TEST_ROOT);
 });
+
+test('rootFromObj converts root to root', () => {
+    expect(rootFromObj(TEST_ROOT)).toEqual(TEST_ROOT);
+});
+
+test('rootFromObj tolerates empty startSec and endSec', () => {
+    expect(rootFromObj({
+        sections: [
+            {
+                start: 0,
+                end: 0
+            }
+        ]
+    })).toBeTruthy();
+});

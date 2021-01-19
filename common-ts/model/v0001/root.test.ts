@@ -242,3 +242,15 @@ test('rootToBinaryString converts root to base64-encoded string and back', () =>
     const newRoot = rootFromBinaryString(rootToBinaryString(TEST_ROOT));
     expect(newRoot).toEqual(TEST_ROOT);
 })
+
+test('rootFromObj tolerates empty startSec and endSec', () => {
+    expect(rootFromObj({
+        version: 1,
+        sections: [
+            {
+                start: 0,
+                end: 0
+            }
+        ]
+    })).toBeTruthy();
+});
