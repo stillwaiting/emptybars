@@ -3,6 +3,7 @@ import ReactPlayerWrapper from '../ReactPlayerWrapper';
 import Sections from './Sections';
 
 import SectionPages from "./SectionPages";
+import { AnchorManager } from 'emptybars-common-ts/lib/anchormanager'
 
 import './Player.scss';
 
@@ -12,6 +13,9 @@ function Player({ sections, images, pageUrls, videoUrl }) {
     const [skipScrollingFromTime, setSkipScrollingFromTime] = useState(false)
     const [refreshSkipScrollingOnPlay, setRefreshSkipScrollingOnPlaying] = useState(false)
     const [playInput, setPlayInput] = useState("");
+
+    const [anchorManager] = useState(new AnchorManager());
+
 
     const $player = useRef(null);
 

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Player from './player/Player';
-import { rootFromObj } from "emptybars-common-ts/lib/model/current";
+import { rootFromObj, rootToObj, rootFromBinaryString } from "./model";
 import { initSectionsPlayer } from "emptybars-common-ts/lib/initialiser";
 
 import ImagesLoader from './ImagesLoader';
@@ -34,12 +34,17 @@ initSectionsPlayer(($element, data) => {
     if (data.videoUrl) {
         doInit($element, data);
     } else {
-        ReactDOM.render(
-            <React.StrictMode>
-                <DataProvider onDataProvided={(data) => doInit($element, data)} />
-            </React.StrictMode>,
-            $element
-        );
+        if (window.location.hash.match(/^#[0-9]+\-.*$/))  {
+            const binaryData = window.location.hash.substr(1);
+            doInit($element, rootToObj(rootFromBinaryString(binaryData)));
+        } else {
+            ReactDOM.render(
+                <React.StrictMode>
+                    <DataProvider onDataProvided={(data) => doInit($element, data)}/>
+                </React.StrictMode>,
+                $element
+            );
+        }
     }
 });
 

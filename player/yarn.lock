@@ -1909,6 +1909,11 @@
     "@types/minimatch" "*"
     "@types/node" "*"
 
+"@types/google-protobuf@^3.7.4":
+  version "3.7.4"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/@types/google-protobuf/-/google-protobuf-3.7.4.tgz#1621c50ceaf5aefa699851da8e0ea606a2943a39"
+  integrity sha1-FiHFDOr1rvppmFHajg6mBqKUOjk=
+
 "@types/graceful-fs@^4.1.2":
   version "4.1.4"
   resolved "https://registry.yarnpkg.com/@types/graceful-fs/-/graceful-fs-4.1.4.tgz#4ff9f641a7c6d1a3508ff88bc3141b152772e753"
@@ -4650,9 +4655,13 @@ emojis-list@^3.0.0:
   resolved "https://registry.yarnpkg.com/emojis-list/-/emojis-list-3.0.0.tgz#5570662046ad29e2e916e71aae260abdff4f6a78"
   integrity sha512-/kyM18EfinwXZbno9FyUGeFh87KC8HRQBQGildHZbEuRyWFOmv1U10o9BBp8XVZDVNNuQKyIGIu5ZYAAXJ0V2Q==
 
-"emptybars-common-ts@file:../common-ts/common-ts-1.0.2.tgz":
-  version "1.0.2"
-  resolved "file:../common-ts/common-ts-1.0.2.tgz#b90d139dd3776f6c1454037daa2d967e1bfdd3f3"
+"emptybars-common-ts@file:../common-ts/common-ts-1.0.19.tgz":
+  version "1.0.19"
+  resolved "file:../common-ts/common-ts-1.0.19.tgz#393cef3cb88f49d0c8308b48a243adfe95410dcb"
+  dependencies:
+    "@types/google-protobuf" "^3.7.4"
+    google-protobuf "^3.14.0"
+    lz4js "^0.2.0"
 
 encodeurl@~1.0.2:
   version "1.0.2"
@@ -5810,6 +5819,11 @@ globule@^1.0.0:
     glob "~7.1.1"
     lodash "~4.17.10"
     minimatch "~3.0.2"
+
+google-protobuf@^3.14.0:
+  version "3.14.0"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/google-protobuf/-/google-protobuf-3.14.0.tgz#20373d22046e63831a5110e11a84f713cc43651e"
+  integrity sha1-IDc9IgRuY4MaURDhGoT3E8xDZR4=
 
 graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.2.0:
   version "4.2.3"
@@ -7665,6 +7679,11 @@ lru-cache@^6.0.0:
   integrity sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==
   dependencies:
     yallist "^4.0.0"
+
+lz4js@^0.2.0:
+  version "0.2.0"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/lz4js/-/lz4js-0.2.0.tgz#09f1a397cb2158f675146c3351dde85058cb322f"
+  integrity sha1-CfGjl8shWPZ1FGwzUd3oUFjLMi8=
 
 magic-string@^0.25.0, magic-string@^0.25.5:
   version "0.25.7"
