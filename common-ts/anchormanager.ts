@@ -14,7 +14,11 @@ export class AnchorManager {
     }
 
     setAnchor(anchor: string) {
-        window.location.replace(anchor);
+        if (window.location.hash.trim() == '' || window.location.hash == '#') {
+            window.location.hash = anchor;
+        } else {
+            window.location.replace(anchor);
+        }
         this._currentAnchor = window.location.hash;
     }
 }

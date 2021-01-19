@@ -77,7 +77,7 @@ function EditorLoader(initialData) {
   };
 
   const handleOnDataProvided = (providedData) => {
-    doSetData(rootFromObj(providedData));
+    doSetData(providedData);
   };
 
   const handleCopyClick = () => {

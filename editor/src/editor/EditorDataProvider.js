@@ -46,6 +46,25 @@ export default function EditorDataProvider({ lastStateFromLocalStorage, onDataPr
                 onDataProvided(JSON.parse(lastStateFromLocalStorage));
                 return;
             case OP_NEW: {
+                if (pageUrls.trim().toLocaleLowerCase().indexOf('<a') >= 0) {
+                    const parsedUrls = [];
+                    const regexpUrls = pageUrls.matchAll(/src=["']([^\s"']*)/g)
+                    console.log('at 1', regexpUrls);
+                    while (true) {
+                        const maybeParsedUrl = regexpUrls.next();
+                        if (maybeParsedUrl.done) {
+                            break;
+                        }
+                        parsedUrls.push(maybeParsedUrl.value[1])
+                    }
+                    console.log('at 2', parsedUrls)
+                    onDataProvided({
+                        videoUrl,
+                        sections: [],
+                        pageUrls: parsedUrls
+                    });
+                    return;
+                }
                 onDataProvided({
                     videoUrl,
                     sections: [],
