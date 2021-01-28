@@ -80,7 +80,7 @@ function EditorLoader(initialData) {
     setRedo(redo);
   };
 
-  const handleOnDataProvided = (providedData) => {
+  const handleOnDataObjProvided = (providedData) => {
     doSetData(rootFromObj(providedData));
   };
 
@@ -195,7 +195,7 @@ function EditorLoader(initialData) {
           lastStateFromLocalStorage={window.localStorage.getItem(
             LOCAL_STORAGE_KEY
           )}
-          onDataProvided={handleOnDataProvided}
+          onDataObjProvided={handleOnDataObjProvided}
         />
       )}
     </div>

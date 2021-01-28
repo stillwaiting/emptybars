@@ -9,7 +9,7 @@ const ResourcesPage = () => (
     <ul>
         <li><a href='https://www.musictheory.net/exercises/note' target='_blank'>Note identification exercise</a></li>
         <li><a href='https://imgbox.com/' target='_blank'>imgbox - free image hosting</a></li>
-        <li><a href='https://pdftoimage.com/' target='_blank'>PDFtoImage - online PDF to jpeg converter</a></li>
+        <li><a href='https://www.freepdfconvert.com/pdf-to-jpg' target='_blank'>Free PDF to image converter</a></li>
     </ul>
     </Layout>
 )

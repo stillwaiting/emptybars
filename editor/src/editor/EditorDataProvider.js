@@ -7,7 +7,7 @@ const OP_NEW = 'new';
 const OP_LOAD_OLD = 'loadOld';
 const OP_RESTORE = 'restore';
 
-export default function EditorDataProvider({ lastStateFromLocalStorage, onDataProvided}) {
+export default function EditorDataProvider({ lastStateFromLocalStorage, onDataObjProvided}) {
     const [oldState, setOldState] = useState('');
     const [opType, setOpType] = useState('');
     const [videoUrl, setVideoUrl] = useState('');
@@ -16,7 +16,7 @@ export default function EditorDataProvider({ lastStateFromLocalStorage, onDataPr
     useEffect(() => {
         if (window.location.hash.match(/^#[0-9]+\-.*$/))  {
             const binaryData = window.location.hash.substr(1);
-            onDataProvided(rootToObj(rootFromBinaryString(binaryData)));
+            onDataObjProvided(rootToObj(rootFromBinaryString(binaryData)));
             return;
         }
     }, []);
@@ -40,15 +40,15 @@ export default function EditorDataProvider({ lastStateFromLocalStorage, onDataPr
     const handleOnSubmit = () => {
         switch (opType) {
             case OP_LOAD_OLD:
-                onDataProvided(JSON.parse(oldState));
+                onDataObjProvided(JSON.parse(oldState));
                 return;
             case OP_RESTORE:
-                onDataProvided(JSON.parse(lastStateFromLocalStorage));
+                onDataObjProvided(JSON.parse(lastStateFromLocalStorage));
                 return;
             case OP_NEW: {
-                if (pageUrls.trim().toLocaleLowerCase().indexOf('<a') >= 0) {
+                if (pageUrls.trim().toLocaleLowerCase().indexOf('<img') >= 0) {
                     const parsedUrls = [];
-                    const regexpUrls = pageUrls.matchAll(/src=["']([^\s"']*)/g)
+                    const regexpUrls = pageUrls.matchAll(/src\s*=\s*["']([^"']*)/g)
                     while (true) {
                         const maybeParsedUrl = regexpUrls.next();
                         if (maybeParsedUrl.done) {
@@ -56,14 +56,20 @@ export default function EditorDataProvider({ lastStateFromLocalStorage, onDataPr
                         }
                         parsedUrls.push(maybeParsedUrl.value[1])
                     }
-                    onDataProvided({
+                    onDataObjProvided({
+                        version: rootCurrentVersion(),
+                        changeCounter: 0,
+                        updatedAt: new Date().getTime(),
                         videoUrl,
                         sections: [],
                         pageUrls: parsedUrls
                     });
                     return;
                 }
-                onDataProvided({
+                onDataObjProvided({
+                    version: rootCurrentVersion(),
+                    changeCounter: 0,
+                    updatedAt: new Date().getTime(),
                     videoUrl,
                     sections: [],
                     pageUrls: pageUrls.trim().split("\n").map(p => p.trim()).filter(p => p)
