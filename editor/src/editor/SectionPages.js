@@ -3,15 +3,15 @@ import ImageAreas from "./ImageAreas";
 
 import './SectionPages.scss';
 
-function SectionPages({ pages, sectionPages, sectionPageAreas, onSectionPagesChanges, onSectionPageAreasChanged }) {
+function SectionPages({ pageUrlsWithRectangles, sectionPageIdx, sectionPageAreas, onSectionPageIdxsChanges, onSectionPageAreasChanged }) {
     const handleOnPageSelected = (e, pageIdx) => {
-        var newSectionPages = JSON.parse(JSON.stringify(sectionPages));
+        var newSectionPages = JSON.parse(JSON.stringify(sectionPageIdx));
         if (e.target.checked) {
             newSectionPages.push(pageIdx);
         } else {
             newSectionPages = newSectionPages.filter(it => it != pageIdx);
         }
-        onSectionPagesChanges(newSectionPages, 'list of section pages updated');
+        onSectionPageIdxsChanges(newSectionPages, 'list of section pages updated');
     }
 
     const handleOnNewAreaAdded = (pageIdx, newArea) => {
@@ -50,16 +50,16 @@ function SectionPages({ pages, sectionPages, sectionPageAreas, onSectionPagesCha
     return <div className='sectionPages'>
 
         <div className='pageCheckboxWrapper'>
-            {pages.map((p, idx) => {
+            {pageUrlsWithRectangles.map((_, idx) => {
                 return <div key={'input' + idx}>
                     <input
                         type="checkbox"
-                        checked={(sectionPages.indexOf(idx) >= 0) ? true : false}
+                        checked={(sectionPageIdx.indexOf(idx) >= 0) ? true : false}
                         onChange={((e) => handleOnPageSelected(e, idx)).bind(this)}
                     /> <span onClick={((e) =>
                             handleOnPageSelected({
                                 target: {
-                                    checked: (sectionPages.indexOf(idx) < 0)
+                                    checked: (sectionPageIdx.indexOf(idx) < 0)
                                 }
                             }, idx)).bind(this)
                     }>Page #{idx + 1}</span>
@@ -67,15 +67,15 @@ function SectionPages({ pages, sectionPages, sectionPageAreas, onSectionPagesCha
             })}
         </div>
 
-        {pages.map((p, idx) => {
-            return (sectionPages.indexOf(idx) >= 0) ?
+        {pageUrlsWithRectangles.map((pageUrlWithRects, idx) => {
+            return (sectionPageIdx.indexOf(idx) >= 0) ?
                     <div className='page' key={'page' + idx}>
                         <ImageAreas
                             title={`Page #${idx+1}`}
-                            imgUrl={p.url}
+                            imgUrl={pageUrlWithRects.url}
                             width = {500}
                             areas={findPageAreas(sectionPageAreas, idx) || []}
-                            rectangles={p.rectangles}
+                            rectangles={pageUrlWithRects.rectangles}
                             onNewAreaAdded={((area) => handleOnNewAreaAdded(idx, area)).bind(this)}
                             onDeleteArea={((areaIdx) => handleOnDeleteArea(idx, areaIdx)).bind(this)}
                         />

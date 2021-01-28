@@ -20,7 +20,7 @@ function Editor({ sections, pageUrls, videoUrl, onDataUpdated }) {
 
     const handleSectionSelected = (sectionIdx, section) => {
         setCurrentSectionIdx(sectionIdx);
-        $player.current.seekToAndStop(section.startSec)
+        // $player.current.seekToAndStop(section.startSec)
     };
 
     const onProgressUpdate = (playedSeconds, duration) => {
@@ -41,9 +41,9 @@ function Editor({ sections, pageUrls, videoUrl, onDataUpdated }) {
         onDataUpdated({ sections: newSections, pageUrls, videoUrl }, message);
     }
 
-    const onSectionPagesChanged = (currentSectionSelectedPages, message) => {
+    const onSectionPageIdxsChanged = (currentSectionSelectedPageIdxs, message) => {
         const newSections = JSON.parse(JSON.stringify(sections));
-        newSections[currentSectionIdx].pages = currentSectionSelectedPages;
+        newSections[currentSectionIdx].pageIdxs = currentSectionSelectedPageIdxs;
         onDataUpdated({ sections: newSections, pageUrls, videoUrl }, message);
     };
 
@@ -107,10 +107,10 @@ function Editor({ sections, pageUrls, videoUrl, onDataUpdated }) {
                                 onDeleteSection={onDeleteSection}
                             />
                             <SectionPages
-                                pages={pageUrlsToPageObjectsWithRectangles()}
-                                sectionPages={sections[currentSectionIdx].pages || []}
+                                pageUrlsWithRectangles={pageUrlsToPageObjectsWithRectangles()}
+                                sectionPageIdx={sections[currentSectionIdx].pageIdxs || []}
                                 sectionPageAreas={sections[currentSectionIdx].pageAreas || []}
-                                onSectionPagesChanges={onSectionPagesChanged}
+                                onSectionPageIdxsChanges={onSectionPageIdxsChanged}
                                 onSectionPageAreasChanged={onSectionPageAreasChanged}
                             />
                         </div>

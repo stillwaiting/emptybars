@@ -59,9 +59,9 @@ function SectionPosition({ section, sectionIdx, videoPlayerPosSecs, onSectionCha
                         <div className='button'  onClick={hanleSetCurrentTimeAsSectionStart}>
                             Set as section's start time
                         </div>
-                        <div className='button'  onClick={handleSetSectionStartToLastSectionEnd}>
+                        {/* <div className='button'  onClick={handleSetSectionStartToLastSectionEnd}>
                             Set section start at prev. section's end
-                        </div>
+                        </div> */}
                     </div>
                     <div className='button'  onClick={hanleSetCurrentTimeAsSectionEnd}>
                         Set as section's end time
