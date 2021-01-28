@@ -5,7 +5,7 @@ videos (created earlier by the editor).
 
 1. Go to `../common` dir and run `./install.sh`
 
-1. Run `yarn add file:../common/emptybars-common-1.0.7.tgz --update-checksums`
+1. Run `yarn add file:../common/emptybars-common-XXX.tgz --update-checksums`
 
 1. Run `yarn` to install all required npm packages.
 

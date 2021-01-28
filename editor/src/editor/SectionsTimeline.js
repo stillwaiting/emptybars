@@ -26,8 +26,8 @@ function SectionsTimeline({sections, videoDuration, videoPlayerPosSecs, currentS
             });
         } else {
             newSections.push({
-                startSec: 0,
-                endSec: 10
+                startSec: parseFloat(videoPlayerPosSecs).toFixed(1),
+                endSec: parseFloat(videoPlayerPosSecs + 10).toFixed(1)
             });
         }
         onSectionsChanged(newSections, "add section");

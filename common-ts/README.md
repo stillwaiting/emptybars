@@ -1,6 +1,6 @@
 # Build & package
 
-`npm install`
+`yarn`
 
 `npx jst`
 

@@ -30,6 +30,10 @@ function EditorLoader(initialData) {
     setOriginalTitle(document.title);
   }
 
+  /**
+   * 
+   * @param {import("./model").Root or Object} newData 
+   */
   const doSetData = (newData) => {
     // TODO: remove explicit version setup once  editor and  player are migrated to TypeScript
     newData.version = rootCurrentVersion();
@@ -77,7 +81,7 @@ function EditorLoader(initialData) {
   };
 
   const handleOnDataProvided = (providedData) => {
-    doSetData(providedData);
+    doSetData(rootFromObj(providedData));
   };
 
   const handleCopyClick = () => {
