@@ -1,16 +1,4 @@
 {
-  "videoUrl": "https://www.youtube.com/watch?v=O0GuQ1CNFa8",
-  "version": 2,
-  "pageUrls": [
-    "https://images2.imgbox.com/cc/88/lLDEAH06_o.jpg",
-    "https://images2.imgbox.com/f2/c8/O6a5rdGR_o.jpg",
-    "https://images2.imgbox.com/88/2d/xDMGOGrW_o.jpg",
-    "https://images2.imgbox.com/63/69/h9oWKTh6_o.jpg",
-    "https://images2.imgbox.com/41/7d/zOdcb26c_o.jpg",
-    "https://images2.imgbox.com/5e/ba/7DjfqKva_o.jpg",
-    "https://images2.imgbox.com/40/cf/FopPCxIf_o.jpg",
-    "https://images2.imgbox.com/28/86/fhHIJx0P_o.jpg"
-  ],
   "sections": [
     {
       "start": "00:00.0",
@@ -40,7 +28,7 @@
     },
     {
       "start": "00:07.4",
-      "end": "00:12.8",
+      "end": "00:11.7",
       "pageAreas": [
         {
           "pageIdx": 0,
@@ -52,10 +40,10 @@
               "height": 693
             },
             {
-              "x": 72,
-              "y": 1998,
-              "width": 2317,
-              "height": 784
+              "x": 93,
+              "y": 1911,
+              "width": 1846,
+              "height": 862
             }
           ]
         }
@@ -65,7 +53,7 @@
       ]
     },
     {
-      "start": "00:12.8",
+      "start": "00:11.7",
       "end": "00:18.0",
       "pageAreas": [
         {
@@ -78,10 +66,10 @@
               "height": 712
             },
             {
-              "x": 2377,
-              "y": 2022,
-              "width": 518,
-              "height": 742
+              "x": 1939,
+              "y": 2061,
+              "width": 1019,
+              "height": 663
             }
           ]
         }
@@ -300,7 +288,7 @@
     },
     {
       "start": "01:05.8",
-      "end": "01:15.4",
+      "end": "01:12.1",
       "pageAreas": [
         {
           "pageIdx": 2,
@@ -312,16 +300,10 @@
               "height": 597
             },
             {
-              "x": 90,
-              "y": 2305,
-              "width": 2835,
-              "height": 615
-            },
-            {
-              "x": 72,
-              "y": 2939,
-              "width": 941,
-              "height": 615
+              "x": 2205,
+              "y": 2279,
+              "width": -2099,
+              "height": 621
             }
           ]
         }
@@ -331,20 +313,41 @@
       ]
     },
     {
-      "start": "01:15.4",
-      "end": "01:24.8",
+      "start": "01:12.1",
+      "end": "01:18.4",
       "pageAreas": [
         {
           "pageIdx": 2,
           "areas": [
             {
-              "x": 1002,
-              "y": 2939,
-              "width": 1930,
+              "x": 2193,
+              "y": 2255,
+              "width": 705,
               "height": 609
+            },
+            {
+              "x": 117,
+              "y": 2894,
+              "width": 886,
+              "height": 657
+            },
+            {
+              "x": 1010,
+              "y": 2930,
+              "width": 1212,
+              "height": 603
             }
           ]
-        },
+        }
+      ],
+      "pageIdxs": [
+        2
+      ]
+    },
+    {
+      "start": "01:18.4",
+      "end": "01:24.8",
+      "pageAreas": [
         {
           "pageIdx": 3,
           "areas": [
@@ -353,6 +356,17 @@
               "y": 193,
               "width": 2214,
               "height": 712
+            }
+          ]
+        },
+        {
+          "pageIdx": 2,
+          "areas": [
+            {
+              "x": 2235,
+              "y": 3015,
+              "width": 657,
+              "height": 555
             }
           ]
         }
@@ -693,7 +707,7 @@
     },
     {
       "start": "02:38.3",
-      "end": "02:43.5",
+      "end": "02:42.3",
       "pageAreas": [
         {
           "pageIdx": 5,
@@ -705,10 +719,10 @@
               "height": 597
             },
             {
-              "x": 90,
-              "y": 2963,
-              "width": 1695,
-              "height": 615
+              "x": 105,
+              "y": 2924,
+              "width": 1224,
+              "height": 651
             }
           ]
         }
@@ -718,20 +732,9 @@
       ]
     },
     {
-      "start": "02:43.5",
+      "start": "02:42.3",
       "end": "02:48.8",
       "pageAreas": [
-        {
-          "pageIdx": 5,
-          "areas": [
-            {
-              "x": 1774,
-              "y": 2957,
-              "width": 1128,
-              "height": 627
-            }
-          ]
-        },
         {
           "pageIdx": 6,
           "areas": [
@@ -740,6 +743,17 @@
               "y": 139,
               "width": 1822,
               "height": 639
+            }
+          ]
+        },
+        {
+          "pageIdx": 5,
+          "areas": [
+            {
+              "x": 1348,
+              "y": 2960,
+              "width": 1550,
+              "height": 645
             }
           ]
         }
@@ -984,6 +998,18 @@
       ]
     }
   ],
-  "changeCounter": 349,
-  "updatedAt": "2021-06-06T00:39:22.949Z"
+  "pageUrls": [
+    "https://images2.imgbox.com/cc/88/lLDEAH06_o.jpg",
+    "https://images2.imgbox.com/f2/c8/O6a5rdGR_o.jpg",
+    "https://images2.imgbox.com/88/2d/xDMGOGrW_o.jpg",
+    "https://images2.imgbox.com/63/69/h9oWKTh6_o.jpg",
+    "https://images2.imgbox.com/41/7d/zOdcb26c_o.jpg",
+    "https://images2.imgbox.com/5e/ba/7DjfqKva_o.jpg",
+    "https://images2.imgbox.com/40/cf/FopPCxIf_o.jpg",
+    "https://images2.imgbox.com/28/86/fhHIJx0P_o.jpg"
+  ],
+  "videoUrl": "https://www.youtube.com/watch?v=O0GuQ1CNFa8",
+  "version": 2,
+  "changeCounter": 374,
+  "updatedAt": "2021-06-06T01:51:08.349Z"
 }

@@ -15,4 +15,4 @@ fi
 rm -rf .cache
 
 env | grep EMPTYBARS
-gatsby develop
+yarn develop
