@@ -54,11 +54,22 @@ function Player({ sections, images, pageUrls, videoUrl }) {
             setRefreshSkipScrollingOnPlaying(false);
         }
         updateActiveSections(playedSeconds);
-        if (playedSeconds < sections[0].startSec) {
-            $player.current.stop(sections[0].startSec);
+
+        const startSecsSorted = sections.map(section => parseFloat(section.startSec));
+        startSecsSorted.sort(function(a, b) {
+            return a - b;
+          });
+
+        const endSecsSorted = sections.map(section => parseFloat(section.endSec));
+        endSecsSorted.sort(function(a, b) {
+            return a - b;
+          });
+
+        if (playedSeconds < startSecsSorted[0]) {
+            $player.current.stop(startSecsSorted[0]);
         }
-        if (playedSeconds > sections[sections.length - 1].endSec) {
-            $player.current.stop(sections[sections.length - 1].endSec);
+        if (playedSeconds > endSecsSorted[endSecsSorted.length - 1]) {
+            $player.current.stop(endSecsSorted[endSecsSorted.length - 1]);
         }
     };
 
@@ -111,8 +122,8 @@ function Player({ sections, images, pageUrls, videoUrl }) {
     const youtubeLink = `${videoUrl}?t=${sections.length > 0 ? sections[0].startSec : '0'}`;
 
     const pageUrlsToPageObjectsWithRectangles = () => {
-        if (!pageUrls) {
-            return;
+        if (!pageUrls || pageUrls.length == 0) {
+            return [];
         }
         const newPages = pageUrls.map(pageUrl => ({url: pageUrl, rectangles: []}));
 

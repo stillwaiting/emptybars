@@ -5,6 +5,9 @@ export default ( { imageUrls, onImagesLoaded }) => {
     const [progress, setProgress] = useState(new Array(imageUrls.length).fill(0));
 
     useEffect(() => {
+		if (!imageUrls || imageUrls.length == 0) {
+			onImagesLoaded([]);
+		}
         const progress = new Array(imageUrls.length).fill(0);
 
         const interval = setInterval(() => {

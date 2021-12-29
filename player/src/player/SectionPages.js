@@ -5,9 +5,12 @@ import ImageAreas from "./ImageAreas";
 import './SectionPages.scss';
 
 function SectionPages({ images, pages, sectionPageAreas, skipScrollingFromTime, onPageClicked }) {
+	
     const [zoom, setZoom] = useState(1);
     const [lastScrollHash, setLastScrollHash] = useState("");
     const sectionPagesRef = useRef();
+    
+    
 
     const handleZoomIn = () => {
         setZoom(zoom + 0.1);
@@ -98,7 +101,11 @@ function SectionPages({ images, pages, sectionPageAreas, skipScrollingFromTime, 
         height: calculatePageHeight() + "px",
         width: calculatePageWidth() + "px"
     }
-
+    
+	if (!images || images.length == 0) {
+		return <div className='sectionPages'></div>;
+	}
+	
     return <div>
         <div className='sectionPages' ref={sectionPagesRef} style={sectionPagesStyles}>
             <div className='zoom'>
