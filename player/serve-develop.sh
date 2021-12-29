@@ -1,1 +1,1 @@
-yarn develop
+yarn start
